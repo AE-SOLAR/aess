@@ -1,0 +1,14 @@
+FROM node:18-alpine as production
+
+WORKDIR /usr/src/app
+COPY ./app/package.json .
+COPY ./app/yarn.lock .
+RUN yarn install
+
+COPY ./app .
+
+EXPOSE 3000
+
+RUN yarn build
+
+CMD ["yarn", "start"]
