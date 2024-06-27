@@ -3,7 +3,7 @@
 .dockerignore
 .gitignore
 .env
-node_modules
+**/node_modules
 config
 build
 docker-compose.dev.yml

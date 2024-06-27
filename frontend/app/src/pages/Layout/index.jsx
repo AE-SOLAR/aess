@@ -2,11 +2,13 @@ import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import style from "./index.module.css";
 import Footer from "../../components/Footer";
+import { Header } from "../../components/Header";
 
 export const Layout = () => {
   return (
     <div>
       <header className={`${style.header}`}>
+        <Header />
         <div className={`${style.menu}`}>
           <ul>
             <li>
