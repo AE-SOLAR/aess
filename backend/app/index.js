@@ -3,6 +3,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
 
+const {products} = require("./mock/products");
+
+
 const app = express();
 const PORT = 3037;
 const SECRET_KEY = "24eAc/xCzqCNvEIJyUMhJI+Ic51h7b3/D2c7QvkV96A=";
@@ -22,12 +25,6 @@ const users = [
     password: "password2",
     profile: { name: "User Two", email: "user2@example.com" },
   },
-];
-
-const products = [
-  { id: 1, name: "Product 1", price: 100 },
-  { id: 2, name: "Product 2", price: 200 },
-  { id: 3, name: "Product 3", price: 300 },
 ];
 
 app.post("/auth/login", (req, res) => {
