@@ -28,7 +28,9 @@ services:
     restart: always
     depends_on:
       - ae_shop_backend
-    profiles: ["dev", "prod"]
+    profiles:
+      - dev
+      - prod
     build:
       context: frontend
       dockerfile: ${DOCKERFILE}

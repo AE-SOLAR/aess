@@ -1,27 +1,88 @@
+// Fake API Server
 const express = require("express");
 const bodyParser = require("body-parser");
-const cors = require("cors");
+const jwt = require("jsonwebtoken");
+
 const app = express();
-
-const port = process.env.SERVER_PORT || 3000;
-
-const { rootRouter, authRouter } = require("./router");
-
-app.use("/api/v1", rootRouter);
-app.use("/api/v1/auth", authRouter);
+const PORT = 3037;
+const SECRET_KEY = "24eAc/xCzqCNvEIJyUMhJI+Ic51h7b3/D2c7QvkV96A=";
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.json());
 
-app.use(
-  cors({
-    origin: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: false,
-  })
-);
+const users = [
+  {
+    id: 1,
+    username: "user1",
+    password: "password1",
+    profile: { name: "User One", email: "user1@example.com" },
+  },
+  {
+    id: 2,
+    username: "user2",
+    password: "password2",
+    profile: { name: "User Two", email: "user2@example.com" },
+  },
+];
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+const products = [
+  { id: 1, name: "Product 1", price: 100 },
+  { id: 2, name: "Product 2", price: 200 },
+  { id: 3, name: "Product 3", price: 300 },
+];
+
+app.post("/auth/login", (req, res) => {
+  const { username, password } = req.body;
+
+  const user = users.find(
+    (u) => u.username === username && u.password === password
+  );
+  if (user) {
+    const token = jwt.sign({ id: user.id }, SECRET_KEY, { expiresIn: "1h" });
+    res.json({ token });
+  } else {
+    res.status(401).json({ message: "Invalid credentials" });
+  }
+});
+
+function authenticateToken(req, res, next) {
+  const token = req.headers["authorization"];
+  if (!token) return res.sendStatus(403);
+
+  jwt.verify(token, SECRET_KEY, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    next();
+  });
+}
+
+app.get("/products", (req, res) => {
+  res.json(products);
+});
+
+app.get("/products/:id", (req, res) => {
+  const productId = parseInt(req.params.id, 10);
+  const product = products.find((p) => p.id === productId);
+
+  if (product) {
+    res.json(product);
+  } else {
+    res.status(404).json({ message: "Product not found" });
+  }
+});
+
+app.get("/profile", authenticateToken, (req, res) => {
+  const user = users.find((u) => u.id === req.user.id);
+  if (user) {
+    res.json(user.profile);
+  } else {
+    res.status(404).json({ message: "User not found" });
+  }
+});
+
+app.get("/", (req, res) => {
+  res.send("Fake API Server");
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
