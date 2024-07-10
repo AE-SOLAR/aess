@@ -1,0 +1,96 @@
+.account-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff0000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .account-menu {
+    position: fixed; /* Fixed to always stay in the viewport */
+    top: 10px;
+    right: 10px;
+    width: 425px;
+    height: 561px;
+    background-color: #000;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    z-index: 1000; /* Ensure it's above other elements */
+  }
+  
+  .login-box {
+    margin-bottom: 20px;
+  }
+  
+  .login-box h2 {
+    margin-bottom: 20px;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .password-container {
+    position: relative;
+  }
+  
+  .show-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .forgot-password {
+    display: block;
+    margin-bottom: 20px;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .login-button {
+    background-color: #ff0000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .register-box {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .register-box p {
+    margin-bottom: 20px;
+  }
+  
+  .register-button {
+    background-color: #ff0000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
