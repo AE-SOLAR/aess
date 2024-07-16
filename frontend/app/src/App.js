@@ -6,7 +6,8 @@ import './static/styles/App.css';
 
 function App() {
   return (
-    <RouterProvider router={router} />
+    // <RouterProvider router={router} />
+    <p>Welcome to AE Solar Shop</p>
   );
 }
 

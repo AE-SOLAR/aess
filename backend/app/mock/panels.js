@@ -1,4 +1,4 @@
-const products = {
+const panels = {
   Aurora: {
     modules: [
       {
@@ -1280,5 +1280,5 @@ const products = {
 };
 
 module.exports = {
-  products,
+  panels,
 };

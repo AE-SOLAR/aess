@@ -1,18 +1,11 @@
 #!/bin/bash
 
-CLEAN_VOLUMES() {
-  docker volume prune --force
-}
-
-CLEAN_CONTAINERS() {
-  docker container prune --force
-}
-
 CLEAN_DOCKER() {
   echo "Cleaning Docker containers, images, and volumes"
-  CLEAN_CONTAINERS
-  CLEAN_VOLUMES
+  docker compose down
+  docker container prune --filter "label=prog=aeshop" --force
   docker image prune --all --force
+  docker volume prune --all --filter "label=prog=aeshop" --force
 }
 
 if [[ $1 == "clean" || $1 == "clear" ]]; then
@@ -42,7 +35,7 @@ else
       echo "  -d, --demonize      Run Docker in the background"
       echo "  -c, --clean         Clean Docker containers, images, and volumes before running"
       echo "  -p, --production    Run Docker in production mode"
-      echo "  -d, --development   Run Docker in development mode"
+      echo "  -t, --development   Run Docker in development mode"
       exit 0
       ;;
     -d | --demonize)
@@ -57,7 +50,7 @@ else
       COMPOSE_PROFILES="prod"
       shift
       ;;
-    -d | --development | --dev)
+    -t | --development | --dev)
       COMPOSE_PROFILES="dev"
       shift
       ;;
@@ -69,13 +62,19 @@ else
   done
 
   ENV_FILE="./config/.env.$COMPOSE_PROFILES"
+  NGINX_CONFIG_FILE="./config/nginx/nginx.$COMPOSE_PROFILES.conf"
+  DOCKERFILE="./config/docker/Dockerfile.$COMPOSE_PROFILES"
+
+  export NGINX_CONFIG_FILE
+  export DOCKERFILE
   export ENV_FILE
 
   docker compose --env-file $ENV_FILE down
 
+  docker network create ae_shop_network >/dev/null 2>&1
+
   if [[ $CLEAN == true ]]; then
-    CLEAN_VOLUMES
-    CLEAN_CONTAINERS
+    CLEAN_DOCKER
   fi
 
   if [[ $ACTION == "up" ]]; then

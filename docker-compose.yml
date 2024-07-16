@@ -4,6 +4,9 @@ services:
     container_name: ae_shop_nginx
     hostname: ae_shop
     restart: always
+    labels:
+      prog: "aeshop"
+      type: "nginx"
     depends_on:
       - ae_shop_backend
       - ae_shop_frontend
@@ -26,6 +29,9 @@ services:
     container_name: ae_shop_frontend
     hostname: ae_shop_frontend
     restart: always
+    labels:
+      prog: "aeshop"
+      type: "frontend"
     depends_on:
       - ae_shop_backend
     profiles:
@@ -33,7 +39,6 @@ services:
       - prod
     build:
       context: frontend
-      dockerfile: ${DOCKERFILE}
     ports:
       - "3000:3000"
     env_file:
@@ -48,8 +53,13 @@ services:
     container_name: ae_shop_backend
     hostname: ae_shop_backend
     restart: always
+    labels:
+      prog: "aeshop"
+      type: "backend"
     build:
       context: ./backend
+    ports:
+      - "3037:3037"
     env_file:
       - ${ENV_FILE}
     volumes:
@@ -64,8 +74,11 @@ services:
   ae_shop_mariadb:
     container_name: ae_shop_mariadb
     hostname: ae_shop_mariadb
-    restart: always
+    restart: unless-stopped
     image: mariadb:11.4.2-noble
+    labels:
+      prog: "aeshop"
+      type: "database"
     logging:
       driver: none
     env_file:
@@ -82,7 +95,14 @@ services:
     image: phpmyadmin:5.2
     container_name: ae_shop_phpmyadmin
     hostname: ae_shop_pma
+    labels:
+      prog: "aeshop"
+      type: "database"
     restart: unless-stopped
+    logging:
+      driver: none
+    volumes:
+      - ./config/mysql/custom-phpmyadmin.conf:/etc/apache2/conf-enabled/custom-phpmyadmin.conf:ro
     ports:
       - 8080:80
     env_file:
@@ -111,7 +131,19 @@ services:
 networks:
   ae_shop_network:
     external: true
+    labels:
+      prog: "aeshop"
 
 volumes:
+  frontend_build_volume:
+    labels:
+      build: "yes"
+      prog: "aeshop"
   frontend_node_modules_volume:
+    labels:
+      build: "yes"
+      prog: "aeshop"
   backend_node_modules_volume:
+    labels:
+      build: "yes"
+      prog: "aeshop"
