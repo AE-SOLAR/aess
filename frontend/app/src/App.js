@@ -18,7 +18,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header/header';
 import Footer from './components/Footer/footer';
 import Sale from './pages/Sale/Sale.jsx';
-import './App.css';
+// import './App.css';
 import Solar_panels from './pages/Solar_panels/Solar_panels.jsx';
 import Invertors from './pages/Solar_panels/Solar_panels.jsx';
 import Home_storage from './pages/Home/Home.jsx';

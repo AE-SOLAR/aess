@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './header.css';
-import logo from '../media/header_icons/aesolar_logo.svg';
-import searchIcon from '../media/header_icons/search_icon.svg';
-import favoritesIcon from '../media/header_icons/favorit.svg';
+import logo from '../../static/header_icons/aesolar_logo.svg';
+import searchIcon from '../../static/header_icons/search_icon.svg';
+import favoritesIcon from '../../static/header_icons/favorit.svg';
 import sccount from '../../static/header_icons/sccount.svg';
 import bag from '../../static/header_icons/bag.svg';
 import AccountMenu from '../AccountMenu/AccountMenu';

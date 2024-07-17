@@ -1,4 +1,74 @@
-.Blog {
+.sidebar {
+    background-color: #000000;
+    color: #fff;
     padding: 20px;
+    width: 250px;
+    font-family: Arial, sans-serif;
+}
+
+h2, h3 {
+    margin-top: 0;
+    text-align: left;
+}
+
+.mainTittle {
+    font-weight: 700;
+    font-size: 32px;
+}
+
+.popular-posts ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.post-item {
+    padding: 10px;
+    background-color: #121212;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    text-align: left;
+}
+
+.subscribe-section {
+    background-color: #121212;
+    padding: 20px;
+    border-radius: 5px;
     text-align: center;
+    margin-top: 20px;
+}
+
+.subscribe-section p {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.subscribe-button {
+    background-color: #F60109;
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.tags-section {
+    margin-top: 20px;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background-color: #121212;
+    color: #fff;
+    padding: 10px 20px;
+    border: 1px solid white;
+    border-radius: 20px;
+    margin-right: 5px;
+    margin-bottom: 5px;
 }
