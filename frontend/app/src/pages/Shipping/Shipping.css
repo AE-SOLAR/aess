@@ -1,4 +1,14 @@
 .Shipping{
     padding: 20px;
-    text-align: center;
+    text-align: left;
+}
+
+.Shipping h1 {
+    font-weight: 700;
+    font-size: 36px;
+}
+
+.Shipping h2 {
+    font-weight: 600;
+    font-weight: 24px;
 }

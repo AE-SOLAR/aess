@@ -1,8 +1,8 @@
 import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import style from "./index.module.css";
-import Footer from "../../components/Footer";
-import { Header } from "../../components/Header";
+import Footer from "../../components/Footer/footer.jsx";
+import Header from "../../components/Header/header.jsx";
 
 export const Layout = () => {
   return (

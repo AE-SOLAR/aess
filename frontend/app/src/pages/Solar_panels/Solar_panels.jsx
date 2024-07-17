@@ -6,6 +6,7 @@ const Solar_panels = () => {
         <div className="solar_panels">
             <h1>Solar Panels</h1>
             <p>=/</p>
+            
         </div>
     )
 }

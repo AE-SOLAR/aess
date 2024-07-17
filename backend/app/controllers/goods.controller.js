@@ -36,8 +36,8 @@ exports.panelsList = async (req, res) => {
   }
   const panels = await db.panel.findAll({
     include: [
-      { model: db.series, as: "series", attributes: ["type"] },
-      { model: db.cellType, as: "cell_type", attributes: ["type"] },
+      { model: db.series, as: "series", attributes: ["name"] },
+      { model: db.cellType, as: "cell_type", attributes: ["name"] },
       { model: db.moduleDesign, as: "module_design", attributes: ["name"] },
       { model: db.color, as: "module_color", attributes: ["name"] },
       { model: db.color, as: "frame_color", attributes: ["name"] },
