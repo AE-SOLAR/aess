@@ -2,6 +2,11 @@ module.exports = (sequelize, Sequelize) => {
   const Panel = sequelize.define(
     "panel",
     {
+      uuid: {
+        type: Sequelize.UUID,
+        primaryKey: true,
+        defaultValue: Sequelize.UUIDV4,
+      },
       model: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -27,9 +32,36 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      applications: {
+      weee: {
         type: Sequelize.STRING,
+        allowNull: true,
+      },
+      unitsPerPallet: {
+        type: Sequelize.SMALLINT,
         allowNull: false,
+        defaultValue: 1,
+        field: "units_per_pallet",
+      },
+      unitsPerContainer: {
+        type: Sequelize.SMALLINT,
+        allowNull: false,
+        defaultValue: 1,
+        field: "units_per_container",
+      },
+      onStock: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+        field: "stock",
+      },
+      advantages: {
+        type: Sequelize.JSON,
+        allowNull: false,
+        defaultValue: { advantages: [], features: [], applications: [] },
+      },
+      description: {
+        type: Sequelize.TEXT,
+        allowNull: true,
       },
     },
     {

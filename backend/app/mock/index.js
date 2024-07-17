@@ -56,7 +56,7 @@ module.exports = (db, sequelize) => {
       for (const linkData of panelData.links) {
         const link = await db.link.create(linkData, { transaction });
         await db.linkPanel.create(
-          { panel_id: panel.id, link_id: link.id },
+          { panel_id: panel.uuid, link_id: link.id },
           { transaction }
         );
       }

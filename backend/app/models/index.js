@@ -15,8 +15,8 @@ const sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
   },
   logging: false,
   retry: {
-    max: 10,
-    timeout: 1000,
+    max: 50,
+    timeout: 3000,
   },
 });
 
