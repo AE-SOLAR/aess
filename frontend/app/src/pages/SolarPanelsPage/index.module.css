@@ -1,0 +1,17 @@
+.solarPanelsContainer {
+  display: flex;
+}
+
+.solarPanelsCardsContainer {
+  padding: 20px;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 892px;
+  width: 100%;
+}
+
+.loader { 
+  margin: 0 auto;
+}

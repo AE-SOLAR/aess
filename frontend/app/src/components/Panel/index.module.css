@@ -1,0 +1,56 @@
+.panelContainer {
+    background-color: rgb(20, 20, 20);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    max-width: 284px;
+}
+
+.panelTextContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+}
+
+.panelTextContainer p {
+    margin: 0;
+}
+
+.panelImg {
+    width: 195px;
+    height: 234px;
+    object-fit: cover;
+}
+
+.redButton {
+    background-color: #F60109;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 30px;
+}
+
+.seeDetails {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 30px;
+}
+
+.panelInfoTechnology {
+    display: flex;
+}
+
+.panelInfoTechnologyValue {
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 11px;
+}

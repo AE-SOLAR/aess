@@ -1,9 +1,7 @@
-import { Layout, HomePage, PageNotFound, AdminPage } from "../pages";
+import { Layout, HomePage, PageNotFound, AdminPage, Sale, SolarPanelsPage } from "../pages";
 import { PrivateRoute } from "./PrivateRoute";
 import fakeAuthProvider from "../tools/fakeAuthProvider";
 import { LoginPage } from "../pages/LoginPage";
-import Sale from "../pages/Sale/Sale";
-import Solar_panels from "../pages/Solar_panels/Solar_panels";
 import Blog from "../pages/Blog/Blog";
 import News from "../pages/News/News";
 import Shipping from "../pages/Shipping/Shipping";
@@ -71,7 +69,7 @@ const RootRoutes = [
       {
         id: "solar-panels",
         path: "solar-panels",
-        element: <Solar_panels />,
+        element: <SolarPanelsPage />,
       },
       {
         id: "invertors",
