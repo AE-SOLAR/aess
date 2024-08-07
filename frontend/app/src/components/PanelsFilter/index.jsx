@@ -1,77 +1,212 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import style from "./index.module.css";
 
-export const PanelsFilter = (props) => {
-    return (
-        <div className={style.filterContainer}>
-            <h2>Filter</h2>
-            <hr className={style.hr} />
+export const PanelsFilter = ({
+  technologyNames,
+  technologyFilter,
+  setTechnologyFilter,
+  seriesNames,
+  seriesFilter,
+  setSeriesFilter,
+  panelColors,
+  colorsFilter,
+  setColorsFilter,
+  panelDesigns,
+  designsFilter,
+  setDesignsFilter,
+  frameColor,
+  frameColorFilter,
+  setFrameColorFilter,
+  lowerPowerFilter,
+  setLowerPowerFilter,
+  highestPowerFilter,
+  setHighestPowerFilter,
+}) => {
+  const handleTechnologyChange = ({ target }) => {
+    setTechnologyFilter(
+      target.checked
+        ? [...new Set([...technologyFilter, target.value])]
+        : technologyFilter.filter((e) => e != target.value)
+    );
+  };
 
-            <div className={style.filterSection}>
-                <h3>Technology</h3>
-                <ul>
-                    <li><input type="checkbox" id={style.perc} /><label htmlFor="perc">PERC Technology</label></li>
-                    <li><input type="checkbox" id={style.hjt} /><label htmlFor="hjt">HJT Technology</label></li>
-                    <li><input type="checkbox" id={style.topcon} /><label htmlFor="topcon">TOPCon Technology</label></li>
-                    <li><input type="checkbox" id={style.windSnow} /><label htmlFor="windSnow">Wind/Snow Resistant Technology</label></li>
-                    <li><input type="checkbox" id={style.pvThermal} /><label htmlFor="pvThermal">PV-Thermal Technology</label></li>
-                    <li><input type="checkbox" id={style.shedeResident} /><label htmlFor="shedeResident">Shede Resident Technology</label></li>
-                </ul>
-            </div>
+  const handleSeriesChange = ({ target }) => {
+    setSeriesFilter(
+      target.checked
+        ? [...new Set([...seriesFilter, target.value])]
+        : seriesFilter.filter((e) => e != target.value)
+    );
+  };
 
-            <hr className={style.hr} />
+  const handleColorsChange = ({ target }) => {
+    setColorsFilter(
+      target.checked
+        ? [...new Set([...colorsFilter, target.value])]
+        : colorsFilter.filter((e) => e != target.value)
+    );
+  };
 
-            <div className={style.filterSection}>
-                <h3>Technical Name</h3>
-                <ul>
-                    <li><input type="checkbox" id={style.aurora} /><label htmlFor="aurora">Aurora</label></li>
-                    <li><input type="checkbox" id={style.meteor} /><label htmlFor="meteor">Meteor</label></li>
-                    <li><input type="checkbox" id={style.comet} /><label htmlFor="comet">Comet</label></li>
-                    <li><input type="checkbox" id={style.terra} /><label htmlFor="terra">Terra</label></li>
-                    <li><input type="checkbox" id={style.shadesta} /><label htmlFor="shadestar">Shadestar</label></li>
-                    <li><input type="checkbox" id={style.neptune} /><label htmlFor="neptune">Neptune</label></li>
-                </ul>
-            </div>
+  const handleDesignsChange = ({ target }) => {
+    setDesignsFilter(
+      target.checked
+        ? [...new Set([...designsFilter, target.value])]
+        : designsFilter.filter((e) => e != target.value)
+    );
+  };
 
-            <hr className={style.hr} />
-
-            <div className={style.filterSection}>
-                <h3>Customize</h3>
-                <div className={style.customizeOptions}>
-                    <div>
-                        <h4>Module Design</h4>
-                        <ul>
-                            <li><input type="checkbox" id={style.monoFacial} /><label htmlFor="monoFacial">Mono-Facial</label></li>
-                            <li><input type="checkbox" id={style.bifacial} /><label htmlFor="bifacial">Bifacial</label></li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h4>Module Color</h4>
-                        <ul>
-                            <li><input type="radio" name="moduleColor" id={style.transparent} /><label htmlFor="transparent">Transparent</label></li>
-                            <li><input type="radio" name="moduleColor" id={style.black} /><label htmlFor="black">Black</label></li>
-                            <li><input type="radio" name="moduleColor" id={style.white} /><label htmlFor="white">White</label></li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        Frame Color
-                        <ul>
-                            <li><input type="radio" name="frameColor" id={style.blackFrame} /><label htmlFor="blackFrame">Black</label></li>
-                            <li><input type="radio" name="frameColor" id={style.silverFrame} /><label htmlFor="silverFrame">Silver</label></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div className={style.powerRange}>
-                    <h4>Power Range</h4>
-                    <input type="range" min="0" max="60000" />
-                </div>
-            </div>
-
-            <button className={style.filterButton}>Filter Modules</button>
-            <button className={style.resetButton}>Reset</button>
-        </div>
+  const handleFrameColorChange = ({ target }) => {
+    setFrameColorFilter(
+      target.checked
+        ? [...new Set([...frameColorFilter, target.value])]
+        : frameColorFilter.filter((e) => e != target.value)
     )
-}
+  }
+
+  const handleLowerPowerChange = ({ target }) => {
+    setLowerPowerFilter(target.value);
+  }
+
+  const handleHighestPowerChange = ({ target }) => {
+    setHighestPowerFilter(target.value);
+  }
+
+  const [triggerEffect, setTriggerEffect] = useState(false);
+
+  const handleResetButtonClick = () => {
+    setTechnologyFilter([]);
+    setSeriesFilter([]);
+    setColorsFilter([]);
+    setDesignsFilter([]);
+    setFrameColorFilter([]);
+    setLowerPowerFilter('');
+    setHighestPowerFilter('');
+    setTriggerEffect(prev => !prev);
+  }
+
+
+
+  return (
+    <div className={style.filterContainer}>
+      <h2>Filter</h2>
+      <hr className={style.hr} />
+
+      <div className={style.filterSection}>
+        <h3>Technology</h3>
+        <ul>
+          {technologyNames.map((e) => (
+            <li key={e}>
+              <input
+                type="checkbox"
+                checked={technologyFilter.includes(e)}
+                onChange={handleTechnologyChange}
+                id={e}
+                value={e}
+              />
+              <label>{e}</label>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <hr className={style.hr} />
+
+      <div className={style.filterSection}>
+        <h3>Series Name</h3>
+        <ul>
+          {seriesNames.map((e) => (
+            <li key={e}>
+              <input
+                type="checkbox"
+                checked={seriesFilter.includes(e)}
+                onChange={handleSeriesChange}
+                value={e}
+                id={e}
+              />
+              <label>{e}</label>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <hr className={style.hr} />
+
+      <div className={style.filterSection}>
+        <h3>Customize</h3>
+        <div className={style.customizeOptions}>
+          <div>
+            <h4>Module Design</h4>
+            <ul>
+              {panelDesigns.map((e) => (
+                <li key={e}>
+                  <input
+                    type="checkbox"
+                    checked={designsFilter.includes(e)}
+                    onChange={handleDesignsChange}
+                    value={e}
+                    id={e}
+                  />
+                  <label>{e}</label>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4>Module Color</h4>
+            <ul>
+              {panelColors.map((e) => (
+                <li key={e}>
+                  <input
+                    type="checkbox"
+                    checked={colorsFilter.includes(e)}
+                    onChange={handleColorsChange}
+                    id={e}
+                    value={e}
+                  />
+                  <label>{e}</label>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4>Frame Color</h4>
+            <ul>
+              {frameColor.map((e) => (
+                <li key={e}>
+                  <input
+                    type="checkbox"
+                    checked={frameColorFilter.includes(e)}
+                    onChange={handleFrameColorChange}
+                    value={e}
+                    id={e}
+                  />
+                  <label>{e}</label>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <hr className={style.hr} />
+              
+        <div className={style.powerRange}>
+          <h4>Power Range</h4>
+          <div className={style.powerRangeInputsFlex}>
+            <div className={style.powerRangeInputDiv}>
+              <input value={lowerPowerFilter} onChange={handleLowerPowerChange} className={style.powerRangeInput} placeholder={0} ></input>
+              <p>from</p>
+            </div>
+            <div className={style.powerRangeInputDiv}>
+              <input type="number" value={highestPowerFilter} onChange={handleHighestPowerChange} className={style.powerRangeInput} placeholder={60000} ></input>
+              <p>up to</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button className={style.filterButton}>Filter Modules</button>
+      <button onClick={handleResetButtonClick} className={style.resetButton}>Reset</button>
+    </div>
+  );
+};

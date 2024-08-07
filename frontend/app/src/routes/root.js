@@ -1,4 +1,4 @@
-import { Layout, HomePage, PageNotFound, AdminPage, Sale, SolarPanelsPage } from "../pages";
+import { Layout, HomePage, PageNotFound, AdminPage, Sale, SolarPanelsPage, ProductPage } from "../pages";
 import { PrivateRoute } from "./PrivateRoute";
 import fakeAuthProvider from "../tools/fakeAuthProvider";
 import { LoginPage } from "../pages/LoginPage";
@@ -65,6 +65,11 @@ const RootRoutes = [
         id: "sale",
         path: "sale",
         element: <Sale />,
+      },
+      {
+        id: "product",
+        path: "product/:uuid",
+        element: <ProductPage />
       },
       {
         id: "solar-panels",

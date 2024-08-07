@@ -49,8 +49,19 @@
 
 .panelInfoTechnologyValue {
     margin-top: 4px;
+    padding-left: 4px;
     display: flex;
     flex-direction: column;
     gap: 6px;
     font-size: 11px;
+}
+
+.panelInfoId {
+    display: flex;
+    justify-content: space-between;
+}
+
+.favoriteIcon {
+    width: 25px;
+    height: 25px;
 }
