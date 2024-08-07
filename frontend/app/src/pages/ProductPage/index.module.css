@@ -1,0 +1,121 @@
+.productPageContainer {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.imgAndMainInfoContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.panelImage {
+  height: 400px;
+}
+
+.mainInfoContainer {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mainInfoContainer p {
+  margin: 8px;
+}
+
+.mainInfoTitleAndFavIcon {
+  display: flex;
+  gap: 50px;
+}
+
+.mainInfoPriceContainer {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.mainInfoPriceDesciption {
+  width: 322px;
+  font-size: 10px;
+  width: 600;
+}
+
+.detailInfoChangeButtons {
+  display: flex;
+  gap: 25px;
+}
+
+.detailInfoButton {
+  background-color: black;
+  color: white;
+  border: 2px solid black;
+  padding: 16px 30px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s; 
+}
+
+.detailInfoButton:before {
+  content: ''; /* Псевдо-элемент для создания внутренней тени */
+  border-radius: 5px; /* Закругленные углы для внутренней тени */
+  box-shadow: inset 0 0 14px rgba(246, 1, 9, 0.4); /* Внутренний теневой эффект */
+  opacity: 0; /* Начальная прозрачность */
+  transition: opacity 0.3s; /* Плавный переход для прозрачности */
+}
+
+.detailInfoButton:hover,
+.detailInfoButton:focus {
+    outline: none; /* Убирает стандартный outline при фокусе */
+    border-color: transparent; /* Прозрачный бордер, чтобы он не мешал shadow */
+    box-shadow: 0 0 14px 0 rgba(246, 1, 9, 0.4); /* Внутренний теневой эффект */
+    position: relative; 
+}
+
+.detailInfoButton.active {
+  border-color: transparent; /* Прозрачный бордер, чтобы он не мешал shadow */
+  box-shadow: 0 0 14px 0 rgba(246, 1, 9, 0.4); /* Внутренний теневой эффект */
+}
+
+
+
+
+.detailInfoContainer {
+}
+
+.detailInfoDescription {
+  width: 780px;
+}
+
+.detailInfoParamsList p {
+  margin: 8px 0;
+}
+
+.detailInfoUl {
+  list-style: none;
+}
+
+.detailInfoLi {
+  position: relative;
+  padding: 5px 0;
+  padding-left: 25px; 
+}
+
+.detailInfoLi::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg); /* Поворот на 45 градусов */
+  width: 10px; /* Ширина квадрата */
+  height: 10px; /* Высота квадрата */
+  background: linear-gradient(45deg, #F7000C, #5D0003);
+  background-size: contain; /* Масштабирование иконки */
+  background-repeat: no-repeat;
+}
