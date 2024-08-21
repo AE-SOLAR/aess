@@ -2,10 +2,12 @@
 
 CLEAN_DOCKER() {
   echo "Cleaning Docker containers, images, and volumes"
+  export ENV_FILE="./config/.env.dev"
+  export $(grep -v '^#' $ENV_FILE | xargs)
   docker compose down
   docker container prune --filter "label=prog=aeshop" --force
-  docker image prune --all --force
-  docker volume prune --all --filter "label=prog=aeshop" --force
+  docker image prune --filter "label=prog=aeshop" --force
+  docker volume prune --filter "label=prog=aeshop" --force
 }
 
 if [[ $1 == "clean" || $1 == "clear" ]]; then
@@ -36,6 +38,7 @@ else
       echo "  -c, --clean         Clean Docker containers, images, and volumes before running"
       echo "  -p, --production    Run Docker in production mode"
       echo "  -t, --development   Run Docker in development mode"
+      echo "  -b, --build         Build Docker images before running"
       exit 0
       ;;
     -d | --demonize)
@@ -52,6 +55,10 @@ else
       ;;
     -t | --development | --dev)
       COMPOSE_PROFILES="dev"
+      shift
+      ;;
+    -b | --build)
+      BUILD="--build"
       shift
       ;;
     *)
@@ -79,6 +86,6 @@ else
 
   if [[ $ACTION == "up" ]]; then
     echo "$ACTION Docker for $COMPOSE_PROFILES with ENV file $ENV_FILE"
-    docker compose --env-file $ENV_FILE --profile $COMPOSE_PROFILES up $DEMONIZE
+    docker compose --env-file $ENV_FILE --profile $COMPOSE_PROFILES up $BUILD $DEMONIZE
   fi
 fi
