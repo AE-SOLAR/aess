@@ -76,18 +76,15 @@ db.ROLES = ["user", "admin", "moderator"];
 // Create data
 // const createMockData = require("../mock")(db, sequelize);
 // createMockData();
-// db.role.findOrCreate({
-//   where: { id: 1 },
+// db.role.create({
 //   id: 1,
 //   name: "user",
 // });
-// db.role.findOrCreate({
-//   where: { id: 2 },
+// db.role.create({
 //   id: 2,
 //   name: "moderator",
 // });
-// db.role.findOrCreate({
-//   where: { id: 3 },
+// db.role.create({
 //   id: 3,
 //   name: "admin",
 // });
