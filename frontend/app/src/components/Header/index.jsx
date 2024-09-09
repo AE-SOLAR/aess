@@ -5,6 +5,7 @@ import logo from '../../static/header_icons/aesolar_logo.svg';
 import searchIcon from '../../static/header_icons/search_icon.svg';
 import favoritesIcon from '../../static/header_icons/favorit.svg';
 import bag from '../../static/header_icons/bag.svg';
+import account_menu from '../../static/header_icons/account_menu.svg'
 
 const Header = () => {
   return (
@@ -19,7 +20,7 @@ const Header = () => {
         </div>
         <div className={style["nav-icons"]}>
           <Link to="/favorites"><img src={favoritesIcon} alt="Favorites" /></Link>
-          {/* <AccountMenu /> */}
+          <Link to="/account_menu"><img src={account_menu} alt="AccountMenu" /></Link>
           <Link to="/cart"><img src={bag} alt="Cart" /></Link>
         </div>
       </div>
