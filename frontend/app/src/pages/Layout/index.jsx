@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import style from "./index.module.css";
-import Footer from "../../components/Footer/footer.jsx";
+import Footer2 from "../../components/Footer/index.jsx";
 import Header from "../../components/Header/index.jsx";
 
 export const Layout = () => {
@@ -12,7 +12,7 @@ export const Layout = () => {
       </header>
 
       <Outlet />
-      <Footer />
+      <Footer2 />
     </div>
   );
 };
