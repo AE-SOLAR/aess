@@ -5,6 +5,7 @@ const app = express();
 
 var allowlist = [
   "http://localhost:3000",
+  "http://localhost/",
   "http://devshop.ae-solar.com:3000",
   "shop.ae-solar.com",
 ];
