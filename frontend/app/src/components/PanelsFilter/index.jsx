@@ -26,7 +26,7 @@ export const PanelsFilter = ({
     setTechnologyFilter(
       target.checked
         ? [...new Set([...technologyFilter, target.value])]
-        : technologyFilter.filter((e) => e != target.value)
+        : technologyFilter.filter((e) => e !== target.value)
     );
   };
 
@@ -34,7 +34,7 @@ export const PanelsFilter = ({
     setSeriesFilter(
       target.checked
         ? [...new Set([...seriesFilter, target.value])]
-        : seriesFilter.filter((e) => e != target.value)
+        : seriesFilter.filter((e) => e !== target.value)
     );
   };
 
@@ -42,7 +42,7 @@ export const PanelsFilter = ({
     setColorsFilter(
       target.checked
         ? [...new Set([...colorsFilter, target.value])]
-        : colorsFilter.filter((e) => e != target.value)
+        : colorsFilter.filter((e) => e !== target.value)
     );
   };
 
@@ -50,7 +50,7 @@ export const PanelsFilter = ({
     setDesignsFilter(
       target.checked
         ? [...new Set([...designsFilter, target.value])]
-        : designsFilter.filter((e) => e != target.value)
+        : designsFilter.filter((e) => e !== target.value)
     );
   };
 
@@ -58,17 +58,17 @@ export const PanelsFilter = ({
     setFrameColorFilter(
       target.checked
         ? [...new Set([...frameColorFilter, target.value])]
-        : frameColorFilter.filter((e) => e != target.value)
-    )
-  }
+        : frameColorFilter.filter((e) => e !== target.value)
+    );
+  };
 
   const handleLowerPowerChange = ({ target }) => {
     setLowerPowerFilter(target.value);
-  }
+  };
 
   const handleHighestPowerChange = ({ target }) => {
     setHighestPowerFilter(target.value);
-  }
+  };
 
   const [triggerEffect, setTriggerEffect] = useState(false);
 
@@ -78,12 +78,10 @@ export const PanelsFilter = ({
     setColorsFilter([]);
     setDesignsFilter([]);
     setFrameColorFilter([]);
-    setLowerPowerFilter('');
-    setHighestPowerFilter('');
-    setTriggerEffect(prev => !prev);
-  }
-
-
+    setLowerPowerFilter("");
+    setHighestPowerFilter("");
+    setTriggerEffect((prev) => !prev);
+  };
 
   return (
     <div className={style.filterContainer}>
@@ -189,16 +187,27 @@ export const PanelsFilter = ({
         </div>
 
         <hr className={style.hr} />
-              
+
         <div className={style.powerRange}>
           <h4>Power Range</h4>
           <div className={style.powerRangeInputsFlex}>
             <div className={style.powerRangeInputDiv}>
-              <input value={lowerPowerFilter} onChange={handleLowerPowerChange} className={style.powerRangeInput} placeholder={0} ></input>
+              <input
+                value={lowerPowerFilter}
+                onChange={handleLowerPowerChange}
+                className={style.powerRangeInput}
+                placeholder={0}
+              ></input>
               <p>from</p>
             </div>
             <div className={style.powerRangeInputDiv}>
-              <input type="number" value={highestPowerFilter} onChange={handleHighestPowerChange} className={style.powerRangeInput} placeholder={60000} ></input>
+              <input
+                type="number"
+                value={highestPowerFilter}
+                onChange={handleHighestPowerChange}
+                className={style.powerRangeInput}
+                placeholder={60000}
+              ></input>
               <p>up to</p>
             </div>
           </div>
@@ -206,7 +215,9 @@ export const PanelsFilter = ({
       </div>
 
       <button className={style.filterButton}>Filter Modules</button>
-      <button onClick={handleResetButtonClick} className={style.resetButton}>Reset</button>
+      <button onClick={handleResetButtonClick} className={style.resetButton}>
+        Reset
+      </button>
     </div>
   );
 };

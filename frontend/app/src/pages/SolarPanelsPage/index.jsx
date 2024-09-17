@@ -82,17 +82,17 @@ const SolarPanelsPage = () => {
             .filter(
               (e) =>
                 technologyFilter.includes(e.cell_type.name) ||
-                technologyFilter.length == 0
+                technologyFilter.length === 0
             )
             .filter(
               (e) =>
                 colorsFilter.includes(e.module_color.name) ||
-                colorsFilter.length == 0
+                colorsFilter.length === 0
             )
             .filter(
               (e) =>
                 designsFilter.includes(e.module_design.name) ||
-                designsFilter.length == 0
+                designsFilter.length === 0
             )
             .filter((e) => !onStock || e.onStock > 0)
             .filter(
@@ -102,19 +102,17 @@ const SolarPanelsPage = () => {
             .filter(
               (e) =>
                 frameColorFilter.includes(e.frame_color.name) ||
-                frameColorFilter.length == 0
+                frameColorFilter.length === 0
             )
-            .filter(
-              (e) =>
-                lowerPowerFilter 
-                  ? (parseInt(e.powerRange.split('-')[0], 10)) >= lowerPowerFilter
-                  : true
+            .filter((e) =>
+              lowerPowerFilter
+                ? parseInt(e.powerRange.split("-")[0], 10) >= lowerPowerFilter
+                : true
             )
-            .filter(
-              (e) =>
-                highestPowerFilter
-                 ? (parseInt(e.powerRange.split('-')[1], 10)) <= highestPowerFilter
-                 : true
+            .filter((e) =>
+              highestPowerFilter
+                ? parseInt(e.powerRange.split("-")[1], 10) <= highestPowerFilter
+                : true
             )
             .map((panel) => <Panel panel={panel} key={panel.uuid} />)
         ) : (

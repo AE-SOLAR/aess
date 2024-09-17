@@ -1,67 +1,77 @@
 .panelContainer {
-    background-color: rgb(20, 20, 20);
-    border-radius: 20px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-    max-width: 284px;
+  background-color: rgba(50, 50, 50, 0.5);
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  max-width: 284px;
+  scale: 1;
+  transition: 0.3s;
+  cursor: pointer;
+  z-index: 50;
+  border: 1px solid transparent;
+}
+
+.panelContainer:hover {
+  scale: 1.03;
+  border: 2px solid rgba(255, 0, 0, 0.3);
 }
 
 .panelTextContainer {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    text-align: left;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
 }
 
 .panelTextContainer p {
-    margin: 0;
+  margin: 0;
 }
 
 .panelImg {
-    width: 195px;
-    height: 234px;
-    object-fit: cover;
+  width: 195px;
+  height: 234px;
+  object-fit: cover;
 }
 
 .redButton {
-    background-color: #F60109;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    padding: 10px 30px;
+  background-color: #f60109;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 30px;
 }
 
 .seeDetails {
-    background-color: black;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    padding: 10px 30px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 30px;
 }
 
 .panelInfoTechnology {
-    display: flex;
+  display: flex;
 }
 
 .panelInfoTechnologyValue {
-    margin-top: 4px;
-    padding-left: 4px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    font-size: 11px;
+  margin-top: 4px;
+  padding-left: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.8rem;
 }
 
 .panelInfoId {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .favoriteIcon {
-    width: 25px;
-    height: 25px;
+  width: 25px;
+  height: 25px;
 }

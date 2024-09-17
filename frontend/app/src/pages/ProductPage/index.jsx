@@ -37,7 +37,11 @@ export const ProductPage = () => {
   return (
     <div className={style.productPageContainer}>
       <div className={style.imgAndMainInfoContainer}>
-        <img className={style.panelImage} src={"/static/panelImg.png"}></img>
+        <img
+          className={style.panelImage}
+          src={"/static/panelImg.png"}
+          alt="Panel"
+        />
         <div className={style.mainInfoContainer}>
           <div className={style.mainInfoTitleAndFavIcon}>
             <h2> Solar panel AZ3y48273847432 </h2>

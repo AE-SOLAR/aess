@@ -1,8 +1,7 @@
 import React from "react";
 import style from "./index.module.css";
 import { PanelFavIcon } from "../PanelFavIcon";
-import { Link } from 'react-router-dom';
-
+import { Link } from "react-router-dom";
 
 export const Panel = ({ panel }) => {
   return (
@@ -10,6 +9,7 @@ export const Panel = ({ panel }) => {
       <img
         className={style.panelImg}
         src={panel.image || "/static/panelImg.png"}
+        alt="Panel"
       />
       <div className={style.panelTextContainer}>
         <div className={style.panelInfoId}>
@@ -38,7 +38,9 @@ export const Panel = ({ panel }) => {
         </div>
       </div>
       <button className={style.redButton}> Sign up for prices </button>
-      <Link to={`/product/${panel.uuid}`} className={style.seeDetails}> See details </Link>
+      <Link to={`/product/${panel.uuid}`} className={style.seeDetails}>
+        See details
+      </Link>
     </div>
   );
 };

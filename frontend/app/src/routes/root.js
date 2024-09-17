@@ -9,7 +9,7 @@ import Payments from "../pages/Payments/Payments";
 import Help from "../pages/Help/Help";
 import Favorites from "../pages/Favorites/Favorites";
 import Invertors from "../pages/Invertors/Invertors";
-import Accessories_electrical from "../pages/Accessories_electrical/Accessories_electrical";
+import AccessoriesElectrical from "../pages/AccessoriesElectrical";
 
 const RootRoutes = [
   {
@@ -22,14 +22,14 @@ const RootRoutes = [
     }),
     children: [
       {
-        id: "login",
-        path: "login",
-        element: <LoginPage />,
-      },
-      {
         id: "home",
         path: "",
         element: <HomePage />,
+      },
+      {
+        id: "login",
+        path: "login",
+        element: <LoginPage />,
       },
       {
         id: "blog",
@@ -84,7 +84,7 @@ const RootRoutes = [
       {
         id: "accessories-electrical",
         path: "accessories-electrical",
-        element: <Accessories_electrical />,
+        element: <AccessoriesElectrical />,
       },
       {
         id: "admin",
@@ -96,7 +96,7 @@ const RootRoutes = [
         ),
       },
     ],
-    errorElement: <PageNotFound />,
+    // errorElement: <PageNotFound />,
   },
 ];
 

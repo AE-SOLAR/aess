@@ -1,18 +1,20 @@
 import React from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import style from "./index.module.css";
-import Footer2 from "../../components/Footer/index.jsx";
-import Header from "../../components/Header/index.jsx";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import EnergyLine from "../../components/EnergyLine";
+import { HeroHighlight } from "../../components/HeroHidhtlight";
 
 export const Layout = () => {
   return (
-    <div className={style.wrapper}>
-      <header className={`${style.header}`}>
+    <HeroHighlight>
+      <div className={style.wrapper}>
+        <EnergyLine />
         <Header />
-      </header>
-
-      <Outlet />
-      <Footer2 />
-    </div>
+        <Outlet />
+        <Footer />
+      </div>
+    </HeroHighlight>
   );
 };

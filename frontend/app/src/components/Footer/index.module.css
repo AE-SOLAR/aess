@@ -1,152 +1,150 @@
 /* Основной контейнер футера */
 .footerContainer {
-    position: relative; /* Чтобы фоновые изображения можно было позиционировать */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: black;
-    padding: 40px 0;
-    width: 100%;
-    overflow: hidden; /* Чтобы изображения не выходили за пределы */
-  }
-  
-  /* Содержание футера */
-  .footerContent {
-    position: relative; /* Для корректного позиционирования элементов */
-    display: flex;
-    justify-content: space-between;
-    max-width: 1200px;
-    width: 100%;
-    padding: 20px;
-    color: white;
-    z-index: 10; /* Текст и контент должны быть поверх */
-  }
-  
-  /* Фоновые изображения */
-  .footerBackgroundLeft {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 550px; /* Коррекция размера для соответствия оригиналу */
-    height: auto;
-    z-index: 1; /* На заднем плане */
-    opacity: 0.8; /* Полупрозрачный эффект для улучшения читаемости */
-  }
-  
-  .footerBackgroundRight {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 450px; /* Коррекция размера для соответствия оригиналу */
-    height: auto;
-    z-index: 1; /* На заднем плане */
-    opacity: 0.8;
-  }
-  
-  /* Левая секция с логотипом */
-  .leftSection {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 300px;
-    z-index: 10; /* Чтобы текст был поверх */
-  }
-  
-  .logoImage {
-    width: 180px; /* Размер логотипа чуть больше для соответствия оригиналу */
-    height: auto;
-    margin-bottom: 10px;
-  }
-  
-  /* Слоган под логотипом */
-  .logoSlogan {
-    color: #FF0000;
-    font-size: 12px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-  
-  .companyInfo {
-    font-size: 12px;
-    color: #cccccc;
-    margin-bottom: 10px;
-  }
-  
-  /* Социальные ссылки */
-  .socialLinks {
-    display: flex;
-    gap: 15px;
-    margin-top: 10px;
-  }
-  
-  .socialLink img {
-    width: 25px;
-    height: 25px;
-    transition: transform 0.3s ease;
-  }
-  
-  .socialLink img:hover {
-    transform: scale(1.2); /* Эффект увеличения при наведении */
-  }
-  
-  /* Группы ссылок */
-  .linkGroups {
-    display: flex;
-    gap: 50px;
-  }
-  
-  /* Группа ссылок */
-  .linkGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .linkGroupTitle {
-    font-size: 14px;
-    font-weight: bold;
-    color: #cccccc;
-    margin-bottom: 10px;
-  }
-  
-  /* Стиль для ссылок */
-  .link {
-    font-size: 14px;
-    color: #ffffff; /* Белый цвет для ссылок */
-    text-decoration: none;
-  }
-  
-  .link:hover {
-    color: #cccccc;
-    text-decoration: underline;
-  }
-  
-  /* Нижний блок футера */
-  .footerBottom {
-    width: 100%;
-    max-width: 1200px;
-    border-top: 1px solid #333;
-    padding-top: 15px;
-    display: flex;
-    justify-content: space-between;
-    color: #cccccc;
-    font-size: 12px;
-  }
-  
-  /* Ссылки в нижнем блоке */
-  .footerBottomLinks {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .footerBottomLinks a {
-    color: #cccccc;
-    text-decoration: none;
-  }
-  
-  .footerBottomLinks a:hover {
-    color: #ffffff;
-    text-decoration: underline;
-  }
-  
+  position: relative; /* Чтобы фоновые изображения можно было позиционировать */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
+  width: 100%;
+  overflow: hidden; /* Чтобы изображения не выходили за пределы */
+}
+
+/* Содержание футера */
+.footerContent {
+  position: relative; /* Для корректного позиционирования элементов */
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  width: 100%;
+  padding: 20px;
+  color: white;
+  z-index: 10; /* Текст и контент должны быть поверх */
+}
+
+/* Фоновые изображения */
+.footerBackgroundLeft {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 550px; /* Коррекция размера для соответствия оригиналу */
+  height: auto;
+  z-index: 1; /* На заднем плане */
+  opacity: 0.8; /* Полупрозрачный эффект для улучшения читаемости */
+}
+
+.footerBackgroundRight {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 450px; /* Коррекция размера для соответствия оригиналу */
+  height: auto;
+  z-index: 1; /* На заднем плане */
+  opacity: 0.8;
+}
+
+/* Левая секция с логотипом */
+.leftSection {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 300px;
+  z-index: 10; /* Чтобы текст был поверх */
+}
+
+.logoImage {
+  width: 180px; /* Размер логотипа чуть больше для соответствия оригиналу */
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* Слоган под логотипом */
+.logoSlogan {
+  color: #ff0000;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.companyInfo {
+  font-size: 12px;
+  color: #cccccc;
+  margin-bottom: 10px;
+}
+
+/* Социальные ссылки */
+.socialLinks {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.socialLink img {
+  width: 25px;
+  height: 25px;
+  transition: transform 0.3s ease;
+}
+
+.socialLink img:hover {
+  transform: scale(1.2); /* Эффект увеличения при наведении */
+}
+
+/* Группы ссылок */
+.linkGroups {
+  display: flex;
+  gap: 50px;
+}
+
+/* Группа ссылок */
+.linkGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.linkGroupTitle {
+  font-size: 14px;
+  font-weight: bold;
+  color: #cccccc;
+  margin-bottom: 10px;
+}
+
+/* Стиль для ссылок */
+.link {
+  font-size: 14px;
+  color: #ffffff; /* Белый цвет для ссылок */
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #cccccc;
+  text-decoration: underline;
+}
+
+/* Нижний блок футера */
+.footerBottom {
+  width: 100%;
+  max-width: 1200px;
+  border-top: 1px solid #333;
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  color: #cccccc;
+  font-size: 12px;
+}
+
+/* Ссылки в нижнем блоке */
+.footerBottomLinks {
+  display: flex;
+  gap: 10px;
+}
+
+.footerBottomLinks a {
+  color: #cccccc;
+  text-decoration: none;
+}
+
+.footerBottomLinks a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}

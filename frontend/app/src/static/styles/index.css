@@ -1,13 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "CriteriaCF";
+  src: url("../fonts/CriteriaCF/Criteria CF Regular.otf") format("orf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CriteriaCF";
+  src: url("../fonts/CriteriaCF/Criteria CF Bold.otf") format("orf");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GTWalsheim";
+  src: url("../fonts/GTWalsheim/GTWalsheimPro-Regular.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GTWalsheim";
+  src: url("../fonts/GTWalsheim/GTWalsheimPro-Bold.ttf") format("ttf");
+  font-weight: bold;
+  font-style: normal;
+}
+
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE и Edge */
+}
+
+/* Скрыть скроллбар в WebKit браузерах (Chrome, Safari) */
+*::-webkit-scrollbar {
+  display: none; /* для WebKit браузеров */
+}
+
+html,
+body {
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "CriteriaCF", "GTWalsheim", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: "CriteriaCF", "GTWalsheim", source-code-pro, "Courier New",
     monospace;
 }

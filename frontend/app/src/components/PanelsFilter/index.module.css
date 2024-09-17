@@ -5,182 +5,182 @@
 } */
 
 .filterContainer {
-    background-color: #121212;
-    color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: left;
-    height: 100%;
+  background-color: rgba(50, 50, 50, 0.5);
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+  height: 100%;
 }
 
 .filterСontainer h2,
 .filterContainer h3,
 .filterContainer h4 {
-    color: #fff;
-    margin-bottom: 10px;
+  color: #fff;
+  margin-bottom: 10px;
 }
 
 .hr {
-    border: none;
-    height: 1px;
-    background-color: #be0c0c;
-    margin: 10px 0;
+  border: none;
+  height: 1px;
+  background-color: #be0c0c;
+  margin: 10px 0;
 }
 
 .filterSection ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .filterSection li {
-    margin: 5px 0;
-    display: flex;
-    align-items: center;
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
 }
 
 .filterSection input[type="checkbox"] {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 15px;
-    height: 15px;
-    border: 2px solid #fff;
-    border-radius: 4px;
-    background-color: #000;
-    position: relative;
-    cursor: pointer;
-    margin-right: 10px;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  background-color: #000;
+  position: relative;
+  cursor: pointer;
+  margin-right: 10px;
 }
 
 .filterSection input[type="checkbox"]:checked {
-    background-color: red;
+  background-color: red;
 }
 
 .filterSection input[type="checkbox"]::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 7px;
-    height: 7px;
-    border-radius: 2px;
-    background-color: #000;
-    transition: background-color 0.3s;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background-color: #000;
+  transition: background-color 0.3s;
 }
 
 .filterSection input[type="checkbox"]:checked::before {
-    background-color: red;
+  background-color: red;
 }
 
 .filterSection label {
-    /* border: solid 1px red; */
-    font-size: 18px;
-    color: #fff;
-    display: flex;
-    align-items: center;
+  /* border: solid 1px red; */
+  font-size: 18px;
+  color: #fff;
+  display: flex;
+  align-items: center;
 }
 
 .filterSection label::before {
-    content: '';
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
 }
 
 .filterButton {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
-
 .resetButton {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 .filterButton {
-    background-color: #e01a22;
-    color: #fff;
+  background-color: #e01a22;
+  color: #fff;
 }
 
 .resetButton {
-    background-color: #121212;
-    color: #e01a22;
+  background-color: #121212;
+  color: #e01a22;
 }
 
 .filterButton:hover {
-    background-color: #bf161d;
+  background-color: #bf161d;
 }
 
 .powerRangeInputsFlex {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .powerRangeInputDiv {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .powerRangeInputDiv {
-    font-size: 12px;
-    font-weight: 600;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .powerRangeInput {
-    border-radius: 12px;
-    width: 70px;
-    height: 40px;
-    font-weight: 600;
-    font-size: 14px;
-    background-color: black;
-    text-align: center;
-    color: white;
-    border: 1px solid rgb(132, 132, 132);
+  border-radius: 12px;
+  width: 70px;
+  height: 40px;
+  font-weight: 600;
+  font-size: 14px;
+  background-color: black;
+  text-align: center;
+  color: white;
+  border: 1px solid rgb(132, 132, 132);
 }
 
 .powerRangeInput:hover {
-    color: white;
-    border: 1px solid rgb(132, 132, 132);
+  color: white;
+  border: 1px solid rgb(132, 132, 132);
 }
 
 .powerRangeInput:active {
-    color: white;
-    border: 1px solid rgb(132, 132, 132);
-    outline: none;
+  color: white;
+  border: 1px solid rgb(132, 132, 132);
+  outline: none;
 }
 
 .powerRangeInput:focus {
-    outline: none;
-    color: white;
-    border: 1px solid rgb(132, 132, 132);
+  outline: none;
+  color: white;
+  border: 1px solid rgb(132, 132, 132);
 }
 
 .powerRangeInput::placeholder {
-    font-weight: 600;
-    font-size: 14px;
+  font-weight: 600;
+  font-size: 14px;
 }
 
-.powerRangeInput[type=number] {
-    -moz-appearance: textfield;
+.powerRangeInput[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
 }
 
-.powerRangeInput[type=number]::-webkit-inner-spin-button,
-.powerRangeInput[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+.powerRangeInput[type="number"]::-webkit-inner-spin-button,
+.powerRangeInput[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
