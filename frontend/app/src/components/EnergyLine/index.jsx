@@ -6,13 +6,19 @@ const EnergyLine = () => {
   const [dotPosition, setDotPosition] = useState(0); // позиция точки
   const lineRef = useRef(null);
 
+  const [scrollPercentage, setScrollPercentage] = useState(0);
+
   const handleScroll = () => {
     const scrollTop = window.scrollY;
     const windowHeight = window.innerHeight;
-    const docHeight = document.documentElement.scrollHeight - 45;
+    const docHeight = document.documentElement.scrollHeight;
+    console.log("docHeight", docHeight, windowHeight, scrollTop + windowHeight);
 
-    const totalScroll = docHeight - windowHeight;
-    const scrollPercentage = (scrollTop / totalScroll) * 100;
+    // const totalScroll = docHeight - windowHeight;
+    // const scrollPercentage = (scrollTop / totalScroll) * 100;
+
+    setScrollPercentage((scrollTop / docHeight) * 100);
+    console.log("scrollPercentage", scrollPercentage);
 
     // Вычисляем новую высоту линии в зависимости от прокрутки
     const newHeight = 100 - scrollPercentage;
@@ -27,7 +33,8 @@ const EnergyLine = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [scrollPercentage]);
 
   return (
     <div
@@ -35,6 +42,7 @@ const EnergyLine = () => {
       className={style.energyLine}
       style={{
         height: `${100 - lineHeight}vh`,
+        opacity: `${scrollPercentage > 1 ? 1 : 0}`,
       }}
     >
       <div

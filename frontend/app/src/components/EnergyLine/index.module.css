@@ -1,6 +1,6 @@
 .energyLine {
-  position: absolute;
-  top: 90px;
+  position: fixed;
+  top: 0px;
   right: 50;
   width: 2px;
   background: linear-gradient(
