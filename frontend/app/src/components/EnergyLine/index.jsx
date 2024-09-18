@@ -10,15 +10,13 @@ const EnergyLine = () => {
 
   const handleScroll = () => {
     const scrollTop = window.scrollY;
-    const windowHeight = window.innerHeight;
+    // const windowHeight = window.innerHeight;
     const docHeight = document.documentElement.scrollHeight;
-    console.log("docHeight", docHeight, windowHeight, scrollTop + windowHeight);
 
     // const totalScroll = docHeight - windowHeight;
     // const scrollPercentage = (scrollTop / totalScroll) * 100;
 
     setScrollPercentage((scrollTop / docHeight) * 100);
-    console.log("scrollPercentage", scrollPercentage);
 
     // Вычисляем новую высоту линии в зависимости от прокрутки
     const newHeight = 100 - scrollPercentage;
