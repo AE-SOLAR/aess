@@ -49,8 +49,6 @@ const SolarPanelsPage = () => {
     request();
   }, []);
 
-  console.log(panels);
-
   return (
     <div className={style.solarPanelsContainer}>
       <PanelsFilter

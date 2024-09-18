@@ -31,9 +31,6 @@ export const ProductPage = () => {
     setPanelInfo(panels.find((panel) => panel.uuid === uuid));
   }, [panels, uuid]);
 
-  console.log(panelInfo);
-  // console.log(panelInfo.powerRange, typeof(panelInfo.powerRange));
-
   return (
     <div className={style.productPageContainer}>
       <div className={style.imgAndMainInfoContainer}>

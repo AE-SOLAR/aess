@@ -1,13 +1,12 @@
 .curved-line {
   position: fixed;
   top: 0;
-  left: 50px; /* Отступ 50px от левого края */
-  height: 100vh; /* Линия будет во всю высоту видимой части страницы */
+  left: 50px;
+  height: 100vh;
   pointer-events: none;
   z-index: 10;
 }
 
-/* Анимация искры */
 .spark {
   animation: flicker 0.5s infinite alternate;
 }
