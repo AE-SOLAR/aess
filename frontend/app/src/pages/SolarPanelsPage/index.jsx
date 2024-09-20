@@ -3,7 +3,7 @@ import { useState } from "react";
 import style from "./index.module.css";
 import { PanelsFilter } from "../../components/PanelsFilter";
 import { Panel } from "../../components/Panel";
-import CircularProgress from "@mui/joy/CircularProgress";
+import { ProductCard, ProductCardSkeleton } from "../../components/ProductCard";
 
 const SolarPanelsPage = () => {
   const [panels, setPanels] = useState([]);
@@ -112,13 +112,13 @@ const SolarPanelsPage = () => {
                 ? parseInt(e.powerRange.split("-")[1], 10) <= highestPowerFilter
                 : true
             )
-            .map((panel) => <Panel panel={panel} key={panel.uuid} />)
+            // .map((panel) => <Panel panel={panel} key={panel.uuid} />)
+            .map((panel) => <ProductCard product={panel} key={panel.uuid} />)
         ) : (
           <>
-            <div></div>
-            <div className={style.loader}>
-              <CircularProgress color="danger" size="lg" />
-            </div>
+            <ProductCardSkeleton />
+            <ProductCardSkeleton />
+            <ProductCardSkeleton />
           </>
         )}
       </div>

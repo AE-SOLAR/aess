@@ -10,7 +10,7 @@
   padding: 20px;
   border-radius: 10px;
   text-align: left;
-  height: 100%;
+  height: fit-content;
 }
 
 .filterСontainer h2,
