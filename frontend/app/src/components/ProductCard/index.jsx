@@ -8,11 +8,11 @@ import { BrandButton } from "../ui/brand-button";
 
 export function ProductCard({ product }) {
   const techData = [
-    ["Max. Power", product.powerRange.split("-")[1]],
+    ["Power range, W", product.powerRange],
     ["Technology", product.cell_type.name],
     ["Demension", `${product.length}x${product.width}x${product.height}`],
   ];
-  console.log(product);
+
   return (
     <CardContainer
       className="w-[100%] max-w-[255px] h-[550px] px-1"
