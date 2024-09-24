@@ -27,7 +27,13 @@ export function ProductCard({ product }) {
       <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-zinc-900 dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl border">
         <CardItem translateZ="100" className="w-full mt-4 px-6">
           <img
-            src={product.image || "/static/panelImg.png"}
+            src={
+              (product?.images &&
+                product.images.length > 0 &&
+                product.images[0]) ||
+              product.image ||
+              "/static/panelImg.png"
+            }
             height="1000"
             width="1000"
             className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
@@ -46,12 +52,7 @@ export function ProductCard({ product }) {
             <span className="text-lg">{product.model}</span>
             <div className="flex gap-2" style={{ color: "#A7A9AC" }}>
               <img
-                src={
-                  (product?.images &&
-                    product.images.length > 0 &&
-                    product.images[0]) ||
-                  `/static/images/logos/aesolar/${product.series.name}.svg`
-                }
+                src={`/static/images/logos/aesolar/${product.series.name}.svg`}
                 alt={product.series.name}
                 className="h-6 w-6 svg-gray"
               />
