@@ -14,7 +14,7 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(root_path="/api/v2")
+app = FastAPI(root_path="/api/v1")
 
 origins = [
     "https://devshop.ae-solar.com/",
