@@ -1,14 +1,14 @@
 from datetime import datetime, timedelta, timezone
 from os import environ
 
+from fastapi import Depends, HTTPException
+from fastapi.security import OAuth2PasswordBearer
+from jose import JWTError, jwt
+from models.database import get_db
 from models.user import RoleEnum, User
 from passlib.context import CryptContext
 from sqlalchemy.future import select
-from fastapi import Depends, HTTPException
-from jose import JWTError, jwt
-from sqlalchemy.ext.asyncio import AsyncSession
-from database import get_db
-from fastapi.security import OAuth2PasswordBearer
+from sqlalchemy.orm import Session
 
 SECRET_KEY = environ["AUTH_SECRET"]
 ALGORITHM = "HS256"
@@ -34,19 +34,17 @@ def get_password_hash(password):
     return pwd_context.hash(password)
 
 
-async def get_user_by_email(db, email: str):
+async def get_user_by_email(email: str, db: Session = Depends(get_db)):
     result = await db.execute(select(User).filter_by(email=email))
     return result.scalar_one_or_none()
 
 
-async def get_user_by_uuid(db, uuid: str):
+async def get_user_by_uuid(uuid: str, db: Session = Depends(get_db)):
     result = await db.execute(select(User).filter_by(uuid=uuid))
     return result.scalar_one_or_none()
 
 
-async def get_current_user(
-    token: str = Depends(oauth2_scheme), db: AsyncSession = Depends(get_db)
-):
+async def get_current_user(token: str = Depends(oauth2_scheme)):
     credentials_exception = HTTPException(
         status_code=401,
         detail="Could not validate credentials",
@@ -61,21 +59,21 @@ async def get_current_user(
     except JWTError:
         raise credentials_exception
 
-    user = await get_user_by_uuid(db, uuid)
+    user = await get_user_by_uuid(uuid)
     if user is None:
         raise credentials_exception
 
     return user
 
 
-async def authenticate_user(db, email: str, password: str):
-    user = await get_user_by_email(db, email)
+async def authenticate_user(email: str, password: str):
+    user = await get_user_by_email(email)
     if user and verify_password(password, user.password):
         return user
     return None
 
 
-async def create_user(db, register_data):
+async def create_user(register_data, db: Session = Depends(get_db)):
     hashed_password = get_password_hash(register_data.password)
     new_user = User(
         email=register_data.email,

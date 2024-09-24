@@ -1,3 +1,13 @@
+export const fetchPanels = async () => {
+  try {
+    return (await fetch(`${process.env.REACT_APP_API_URL}/panels`)).json();
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
+
+
 export const getTags = () => {
   return [
     "#Practical",
@@ -37,15 +47,6 @@ export const addToFavorites = async (productId) => {
       method: "POST",
       body: JSON.stringify({ productId }),
     });
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
-};
-
-export const fetchProducts = async () => {
-  try {
-    return await fetch(`${process.env.REACT_APP_API_URL}/products`);
   } catch (error) {
     console.error(error);
     return [];

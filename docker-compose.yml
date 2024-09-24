@@ -9,7 +9,7 @@ services:
       type: "nginx"
     depends_on:
       - ae_shop_api
-      - ae_shop_backend
+      # - ae_shop_backend
       - ae_shop_frontend
       - ae_shop_phpmyadmin
     profiles:
@@ -34,7 +34,8 @@ services:
       prog: "aeshop"
       type: "frontend"
     depends_on:
-      - ae_shop_backend
+      - ae_shop_api
+      # - ae_shop_backend
     profiles:
       - dev
       - prod
@@ -64,33 +65,33 @@ services:
     env_file:
       - ${ENV_FILE}
     volumes:
-      - ./api/app:/code/app:ro
+      - ./api/app:/code/app
     depends_on:
       - ae_shop_mariadb
     networks:
       - ae_shop_network
 
-  ae_shop_backend:
-    container_name: ae_shop_backend
-    hostname: ae_shop_backend
-    restart: always
-    labels:
-      prog: "aeshop"
-      type: "backend"
-    build:
-      context: ./backend
-    ports:
-      - "3037:3037"
-    env_file:
-      - ${ENV_FILE}
-    volumes:
-      - ./backend/app:/usr/src/app
-      - backend_node_modules_volume:/usr/src/app/node_modules
-    depends_on:
-      # - ae_shop_mongodb
-      - ae_shop_mariadb
-    networks:
-      - ae_shop_network
+  # ae_shop_backend:
+  #   container_name: ae_shop_backend
+  #   hostname: ae_shop_backend
+  #   restart: always
+  #   labels:
+  #     prog: "aeshop"
+  #     type: "backend"
+  #   build:
+  #     context: ./backend
+  #   ports:
+  #     - "3037:3037"
+  #   env_file:
+  #     - ${ENV_FILE}
+  #   volumes:
+  #     - ./backend/app:/usr/src/app
+  #     - backend_node_modules_volume:/usr/src/app/node_modules
+  #   depends_on:
+  #     # - ae_shop_mongodb
+  #     - ae_shop_mariadb
+  #   networks:
+  #     - ae_shop_network
 
   ae_shop_mariadb:
     container_name: ae_shop_mariadb
@@ -164,7 +165,7 @@ volumes:
     labels:
       build: "yes"
       prog: "aeshop"
-  backend_node_modules_volume:
-    labels:
-      build: "yes"
-      prog: "aeshop"
+  # backend_node_modules_volume:
+  #   labels:
+  #     build: "yes"
+  #     prog: "aeshop"

@@ -6,11 +6,14 @@ import { Link } from "react-router-dom";
 import { RedLine } from "../ui/red-line";
 import { BrandButton } from "../ui/brand-button";
 
-export function ProductCard({ product }) {
+export function PanelItem({ product }) {
   const techData = [
-    ["Power range, W", product.powerRange],
-    ["Technology", product.cell_type.name],
-    ["Demension", `${product.length}x${product.width}x${product.height}`],
+    ["Power range, W", `${product.power_range[0]}-${product.power_range[1]}`],
+    ["Technology", product.cell_type],
+    [
+      "Demension",
+      `${product.dimensions.length}x${product.dimensions.width}x${product.dimensions.height}`,
+    ],
   ];
 
   return (
@@ -52,11 +55,11 @@ export function ProductCard({ product }) {
             <span className="text-lg">{product.model}</span>
             <div className="flex gap-2" style={{ color: "#A7A9AC" }}>
               <img
-                src={`/static/images/logos/aesolar/${product.series.name}.svg`}
-                alt={product.series.name}
+                src={`/static/images/logos/aesolar/${product.series}.svg`}
+                alt={product.series}
                 className="h-6 w-6 svg-gray"
               />
-              {product.series.name}
+              {product.series}
             </div>
           </CardItem>
           <CardItem
@@ -90,7 +93,7 @@ export function ProductCard({ product }) {
   );
 }
 
-export function ProductCardSkeleton() {
+export function PanelItemSkeleton() {
   const color = "-red-950";
   return (
     <div

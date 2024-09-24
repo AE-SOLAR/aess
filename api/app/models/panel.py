@@ -68,7 +68,10 @@ class Panel(Base):
         default={"advantages": [], "features": [], "applications": []},
     )
     description = Column(Text, nullable=True)
-    power_range = Column(JSON, nullable=False, index=True, default={"min": 0, "max": 0})
+    files = Column(JSON, nullable=False, default={})
+    images = Column(JSON, nullable=False, default=["/static/images/no-image.png"])
+    min_power = Column(SmallInteger, nullable=True, index=True)
+    max_power = Column(SmallInteger, nullable=True, index=True)
     length = Column(SmallInteger, nullable=True, index=True)
     width = Column(SmallInteger, nullable=True, index=True)
     height = Column(SmallInteger, nullable=True, index=True)

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Favorites.css";
 
 import { fertchUserFavarites } from "../../handlers/api";
-import { ProductCard } from "../../components/ProductCard";
+import { PanelItem } from "../../components/PanelItem";
 
 export default function Favorites() {
   const [favorites, setFavorites] = useState([]);
@@ -23,7 +23,7 @@ export default function Favorites() {
 
       <div classStyle="grip grip-template-colums">
         {favorites?.map((favorite, index) => (
-          <ProductCard key={index} favorite={favorite} />
+          <PanelItem key={index} favorite={favorite} />
         ))}
       </div>
     </div>

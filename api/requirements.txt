@@ -5,3 +5,5 @@ sqlalchemy>=2.0.34,<3.0.0
 aiomysql>=0.2.0,<0.3.0
 passlib>=1.7.4,<2.0.0
 python-jose>=3.3.0,<4.0.0
+mysqlclient>=2.2.4,<3.0.0
+alembic>=1.13.3,<2.0.0

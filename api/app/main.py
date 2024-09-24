@@ -1,19 +1,34 @@
 from contextlib import asynccontextmanager
 
 import uvicorn
-from database import init_db
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from models.database import init_db
 from routers import goods, root, user
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    print("DEBUG: Initializing database")
     await init_db()
     yield
 
 
 app = FastAPI(root_path="/api/v2")
 
+origins = [
+    "https://devshop.ae-solar.com/",
+    "https://shop.ae-solar.com/",
+    "http://localhost/",
+    "http://localhost:3000/",
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(root.router)
 app.include_router(user.router)
