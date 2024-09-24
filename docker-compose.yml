@@ -8,6 +8,7 @@ services:
       prog: "aeshop"
       type: "nginx"
     depends_on:
+      - ae_shop_api
       - ae_shop_backend
       - ae_shop_frontend
       - ae_shop_phpmyadmin
@@ -46,6 +47,26 @@ services:
     volumes:
       - ./frontend/app:/usr/src/app
       - frontend_node_modules_volume:/usr/src/app/node_modules
+    networks:
+      - ae_shop_network
+
+  ae_shop_api:
+    build:
+      context: ./api
+    container_name: ae_shop_api
+    hostname: ae_shop_api
+    restart: unless-stopped
+    ports:
+      - "8088:8088"
+    labels:
+      prog: "aeshop"
+      type: "api"
+    env_file:
+      - ${ENV_FILE}
+    volumes:
+      - ./api/app:/code/app:ro
+    depends_on:
+      - ae_shop_mariadb
     networks:
       - ae_shop_network
 
@@ -104,7 +125,7 @@ services:
     volumes:
       - ./config/mysql/custom-phpmyadmin.conf:/etc/apache2/conf-enabled/custom-phpmyadmin.conf:ro
     ports:
-     - 8080:80
+      - 8080:80
     env_file:
       - ${ENV_FILE}
     depends_on:
