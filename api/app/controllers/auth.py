@@ -6,8 +6,8 @@ from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt  # type: ignore
 from models.user import RoleEnum, User
 from passlib.context import CryptContext  # type: ignore
+from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from sqlalchemy.orm import Session
 
 SECRET_KEY = environ["AUTH_SECRET"]
 ALGORITHM = "HS256"
@@ -33,12 +33,12 @@ def get_password_hash(password):
     return pwd_context.hash(password)
 
 
-async def get_user_by_email(email: str, db: Session):
+async def get_user_by_email(email: str, db: AsyncSession):
     result = await db.execute(select(User).filter_by(email=email))
     return result.scalar_one_or_none()
 
 
-async def get_user_by_uuid(uuid: str, db: Session):
+async def get_user_by_uuid(uuid: str, db: AsyncSession):
     result = await db.execute(select(User).filter_by(uuid=uuid))
     return result.scalar_one_or_none()
 
@@ -65,18 +65,18 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
     return user
 
 
-async def authenticate_user(email: str, password: str, db: Session):
+async def authenticate_user(email: str, password: str, db: AsyncSession):
     user = await get_user_by_email(email, db)
     if user and verify_password(password, user.password):
         return user
     return None
 
 
-async def update_user(update_data, db: Session):
+async def update_user(update_data, db: AsyncSession):
     pass
 
 
-async def create_user(register_data, db: Session):
+async def create_user(register_data, db: AsyncSession):
     hashed_password = get_password_hash(register_data.password)
     new_user = User(
         email=register_data.email,

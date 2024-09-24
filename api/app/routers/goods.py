@@ -1,7 +1,5 @@
-from typing import Union
-
 from controllers.goods import get_panels_with_filters
-from fastapi import APIRouter, Depends, Request, Query
+from fastapi import APIRouter, Depends, Query, Request
 from models.database import get_db
 from sqlalchemy.orm import Session
 
@@ -9,7 +7,7 @@ router = APIRouter()
 
 
 @router.get("/panels", tags=["Goods"], summary="List all items with filters")
-def read_items(
+async def read_items(
     request: Request,
     series: str = Query(None, title="Filter by Series"),
     model: str = Query(None, title="Filter by Model"),
@@ -25,9 +23,4 @@ def read_items(
     db: Session = Depends(get_db),
 ):
     filters = request.query_params
-    return get_panels_with_filters(db, filters)
-
-
-@router.get("/items/{item_id}", tags=["Goods"], summary="Read item")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+    return await get_panels_with_filters(db, filters)

@@ -1,17 +1,7 @@
-from contextlib import asynccontextmanager
-
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from models.database import init_db
 from routers import goods, root, user
-
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    print("DEBUG: Initializing database")
-    await init_db()
-    yield
 
 
 app = FastAPI(root_path="/api/v1")
