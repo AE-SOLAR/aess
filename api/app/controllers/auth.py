@@ -3,10 +3,9 @@ from os import environ
 
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
-from jose import JWTError, jwt
-from models.database import get_db
+from jose import JWTError, jwt  # type: ignore
 from models.user import RoleEnum, User
-from passlib.context import CryptContext
+from passlib.context import CryptContext  # type: ignore
 from sqlalchemy.future import select
 from sqlalchemy.orm import Session
 
@@ -34,12 +33,12 @@ def get_password_hash(password):
     return pwd_context.hash(password)
 
 
-async def get_user_by_email(email: str, db: Session = Depends(get_db)):
+async def get_user_by_email(email: str, db: Session):
     result = await db.execute(select(User).filter_by(email=email))
     return result.scalar_one_or_none()
 
 
-async def get_user_by_uuid(uuid: str, db: Session = Depends(get_db)):
+async def get_user_by_uuid(uuid: str, db: Session):
     result = await db.execute(select(User).filter_by(uuid=uuid))
     return result.scalar_one_or_none()
 
@@ -66,14 +65,18 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
     return user
 
 
-async def authenticate_user(email: str, password: str):
-    user = await get_user_by_email(email)
+async def authenticate_user(email: str, password: str, db: Session):
+    user = await get_user_by_email(email, db)
     if user and verify_password(password, user.password):
         return user
     return None
 
 
-async def create_user(register_data, db: Session = Depends(get_db)):
+async def update_user(update_data, db: Session):
+    pass
+
+
+async def create_user(register_data, db: Session):
     hashed_password = get_password_hash(register_data.password)
     new_user = User(
         email=register_data.email,

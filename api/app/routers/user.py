@@ -2,7 +2,9 @@ from typing import Optional
 
 from controllers import auth as auth_controller
 from fastapi import APIRouter, Depends, HTTPException
+from models.database import get_db
 from pydantic import BaseModel
+from sqlalchemy.orm import Session
 
 router = APIRouter()
 
@@ -31,19 +33,21 @@ class UpdateUserData(BaseModel):
 
 
 @router.post("/signup", tags=["Auth"], summary="Register new user")
-async def register_user(register_data: RegisterData):
-    existing_user = await auth_controller.get_user_by_email(register_data.email)
+async def register_user(register_data: RegisterData, db: Session = Depends(get_db)):
+    existing_user = await auth_controller.get_user_by_email(register_data.email, db)
     if existing_user:
         raise HTTPException(status_code=400, detail="Email already registered")
 
-    new_user = await auth_controller.create_user(register_data)
+    new_user = await auth_controller.create_user(register_data, db)
     return {"msg": "User registered successfully", "user": new_user}
 
 
 @router.post("/signin", tags=["Auth"], summary="Login and get access token")
-async def login_for_access_token(login_data: LoginData):
+async def login_for_access_token(login_data: LoginData, db: Session = Depends(get_db)):
     user = await auth_controller.authenticate_user(
-        login_data.email, login_data.password
+        login_data.email,
+        login_data.password,
+        db,
     )
     if not user:
         raise HTTPException(status_code=400, detail="Incorrect email or password")
@@ -61,8 +65,9 @@ async def logout(current_user: str = Depends(auth_controller.get_current_user)):
 @router.get("/user", tags=["User"], summary="Fetch current user data")
 async def read_users_me(
     current_user: str = Depends(auth_controller.get_current_user),
+    db: Session = Depends(get_db),
 ):
-    user = await auth_controller.get_user_by_email(current_user)
+    user = await auth_controller.get_user_by_email(current_user, db)
     return {
         "email": user.email,
         "first_name": user.first_name,
@@ -71,8 +76,8 @@ async def read_users_me(
 
 
 @router.get("/user/{uuid}", tags=["User"], summary="Fetch user data by UUID")
-async def get_user_by_id(uuid: str):
-    user = await auth_controller.get_user_by_uuid(uuid)
+async def get_user_by_id(uuid: str, db: Session = Depends(get_db)):
+    user = await auth_controller.get_user_by_uuid(uuid, db)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
 
@@ -84,15 +89,16 @@ async def update_user(
     uuid: str,
     update_data: UpdateUserData,
     current_user: str = Depends(auth_controller.get_current_user),
+    db: Session = Depends(get_db),
 ):
-    user = await auth_controller.get_user_by_uuid(uuid)
+    user = await auth_controller.get_user_by_uuid(uuid, db)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
 
     if user.email != current_user:
         raise HTTPException(status_code=403, detail="Not enough permissions")
 
-    updated_user = await auth_controller.update_user(user, update_data)
+    updated_user = await auth_controller.update_user(update_data, db)
     return {"msg": "User updated successfully", "user": updated_user}
 
 
@@ -101,15 +107,16 @@ async def update_user_by_uuid(
     uuid: str,
     update_data: UpdateUserData,
     current_user: str = Depends(auth_controller.get_current_user),
+    db: Session = Depends(get_db),
 ):
-    user = await auth_controller.get_user_by_uuid(uuid)
+    user = await auth_controller.get_user_by_uuid(uuid, db)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
 
     if user.email != current_user:
         raise HTTPException(status_code=403, detail="Not enough permissions")
 
-    updated_user = await auth_controller.update_user(user, update_data)
+    updated_user = await auth_controller.update_user(update_data, db)
     return {"msg": "User updated successfully", "user": updated_user}
 
 
@@ -117,13 +124,14 @@ async def update_user_by_uuid(
 async def block_user_by_uuid(
     uuid: str,
     current_user: str = Depends(auth_controller.get_current_user),
+    db: Session = Depends(get_db),
 ):
-    user = await auth_controller.get_user_by_uuid(uuid)
+    user = await auth_controller.get_user_by_uuid(uuid, db)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
 
     if user.email != current_user:
         raise HTTPException(status_code=403, detail="Not enough permissions")
 
-    await auth_controller.delete_user(user)
+    await auth_controller.delete_user(user, db)
     return {"msg": "User deleted successfully"}
