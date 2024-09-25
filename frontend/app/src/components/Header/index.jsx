@@ -6,6 +6,7 @@ import searchIcon from "../../static/header_icons/search_icon.svg";
 import favoritesIcon from "../../static/header_icons/favorit.svg";
 import bag from "../../static/header_icons/bag.svg";
 import account_menu from "../../static/header_icons/account_menu.svg";
+import { ThemeSwitcher } from "../ThemeSwitcher";
 
 const Header = () => {
   return (
@@ -30,6 +31,7 @@ const Header = () => {
           <Link to="/cart">
             <img src={bag} alt="Cart" />
           </Link>
+          <ThemeSwitcher />
         </div>
       </div>
       <div className={style["nav"]}>

@@ -8,7 +8,8 @@ services:
       prog: "aeshop"
       type: "nginx"
     depends_on:
-      - ae_shop_backend
+      - ae_shop_api
+      # - ae_shop_backend
       - ae_shop_frontend
       - ae_shop_phpmyadmin
     profiles:
@@ -33,7 +34,8 @@ services:
       prog: "aeshop"
       type: "frontend"
     depends_on:
-      - ae_shop_backend
+      - ae_shop_api
+      # - ae_shop_backend
     profiles:
       - dev
       - prod
@@ -49,27 +51,47 @@ services:
     networks:
       - ae_shop_network
 
-  ae_shop_backend:
-    container_name: ae_shop_backend
-    hostname: ae_shop_backend
-    restart: always
+  ae_shop_api:
+    build:
+      context: ./api
+    container_name: ae_shop_api
+    hostname: ae_shop_api
+    restart: unless-stopped
+    ports:
+      - "8088:8088"
     labels:
       prog: "aeshop"
-      type: "backend"
-    build:
-      context: ./backend
-    ports:
-      - "3037:3037"
+      type: "api"
     env_file:
       - ${ENV_FILE}
     volumes:
-      - ./backend/app:/usr/src/app
-      - backend_node_modules_volume:/usr/src/app/node_modules
+      - ./api/app:/code/app
     depends_on:
-      # - ae_shop_mongodb
       - ae_shop_mariadb
     networks:
       - ae_shop_network
+
+  # ae_shop_backend:
+  #   container_name: ae_shop_backend
+  #   hostname: ae_shop_backend
+  #   restart: always
+  #   labels:
+  #     prog: "aeshop"
+  #     type: "backend"
+  #   build:
+  #     context: ./backend
+  #   ports:
+  #     - "3037:3037"
+  #   env_file:
+  #     - ${ENV_FILE}
+  #   volumes:
+  #     - ./backend/app:/usr/src/app
+  #     - backend_node_modules_volume:/usr/src/app/node_modules
+  #   depends_on:
+  #     # - ae_shop_mongodb
+  #     - ae_shop_mariadb
+  #   networks:
+  #     - ae_shop_network
 
   ae_shop_mariadb:
     container_name: ae_shop_mariadb
@@ -103,8 +125,8 @@ services:
       driver: none
     volumes:
       - ./config/mysql/custom-phpmyadmin.conf:/etc/apache2/conf-enabled/custom-phpmyadmin.conf:ro
-    # ports:
-    #  - 80:80
+    ports:
+      - 8080:80
     env_file:
       - ${ENV_FILE}
     depends_on:
@@ -143,7 +165,7 @@ volumes:
     labels:
       build: "yes"
       prog: "aeshop"
-  backend_node_modules_volume:
-    labels:
-      build: "yes"
-      prog: "aeshop"
+  # backend_node_modules_volume:
+  #   labels:
+  #     build: "yes"
+  #     prog: "aeshop"

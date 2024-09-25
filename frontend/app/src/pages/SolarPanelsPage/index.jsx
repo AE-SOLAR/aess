@@ -2,13 +2,11 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import style from "./index.module.css";
 import { PanelsFilter } from "../../components/PanelsFilter";
-import { Panel } from "../../components/Panel";
-import CircularProgress from "@mui/joy/CircularProgress";
+import { PanelItem, PanelItemSkeleton } from "../../components/PanelItem";
+import { fetchPanels } from "../../handlers/api";
 
 const SolarPanelsPage = () => {
   const [panels, setPanels] = useState([]);
-
-  const [onStock, setOnStock] = useState(false);
 
   const [technologyFilter, setTechnologyFilter] = useState([]);
   const [technologyNames, setTechnologyNames] = useState([]);
@@ -30,20 +28,13 @@ const SolarPanelsPage = () => {
 
   useEffect(() => {
     const request = async () => {
-      const response = await fetch(
-        "https://devshop.ae-solar.com/api/v1/panels"
-      );
-      const data = await response.json();
+      const data = await fetchPanels();
       setPanels(data);
-
-      //взять юз парамс 
-
-
-      const _techNames = data.map((e) => e.cell_type.name);
-      const _serNames = data.map((e) => e.series.name);
-      const _colorNames = data.map((e) => e.module_color.name);
-      const _designNames = data.map((e) => e.module_design.name);
-      const _frameColorNames = data.map((e) => e.frame_color.name);
+      const _techNames = data.map((e) => e.cell_type);
+      const _serNames = data.map((e) => e.series);
+      const _colorNames = data.map((e) => e.module_color);
+      const _designNames = data.map((e) => e.module_design);
+      const _frameColorNames = data.map((e) => e.frame_color);
       setTechnologyNames([...new Set(_techNames)]);
       setSeriesNames([...new Set(_serNames)]);
       setPanelColors([...new Set(_colorNames)]);
@@ -51,7 +42,7 @@ const SolarPanelsPage = () => {
       setFrameColor([...new Set(_frameColorNames)]);
     };
     request();
-  }, [+]);
+  }, []);
 
   return (
     <div className={style.solarPanelsContainer}>
@@ -83,27 +74,25 @@ const SolarPanelsPage = () => {
           panels
             .filter(
               (e) =>
-                technologyFilter.includes(e.cell_type.name) ||
+                technologyFilter.includes(e.cell_type) ||
                 technologyFilter.length === 0
             )
             .filter(
               (e) =>
-                colorsFilter.includes(e.module_color.name) ||
+                colorsFilter.includes(e.module_color) ||
                 colorsFilter.length === 0
             )
             .filter(
               (e) =>
-                designsFilter.includes(e.module_design.name) ||
+                designsFilter.includes(e.module_design) ||
                 designsFilter.length === 0
             )
-            .filter((e) => !onStock || e.onStock > 0)
             .filter(
-              (e) =>
-                !seriesFilter.length || seriesFilter.includes(e.series.name)
+              (e) => !seriesFilter.length || seriesFilter.includes(e.series)
             )
             .filter(
               (e) =>
-                frameColorFilter.includes(e.frame_color.name) ||
+                frameColorFilter.includes(e.frame_color) ||
                 frameColorFilter.length === 0
             )
             .filter((e) =>
@@ -116,13 +105,13 @@ const SolarPanelsPage = () => {
                 ? parseInt(e.powerRange.split("-")[1], 10) <= highestPowerFilter
                 : true
             )
-            .map((panel) => <Panel panel={panel} key={panel.uuid} />)
+            // .map((panel) => <Panel panel={panel} key={panel.uuid} />)
+            .map((panel) => <PanelItem product={panel} key={panel.uuid} />)
         ) : (
           <>
-            <div></div>
-            <div className={style.loader}>
-              <CircularProgress color="danger" size="lg" />
-            </div>
+            <PanelItemSkeleton />
+            <PanelItemSkeleton />
+            <PanelItemSkeleton />
           </>
         )}
       </div>

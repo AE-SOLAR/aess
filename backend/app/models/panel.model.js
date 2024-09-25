@@ -63,6 +63,16 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.TEXT,
         allowNull: true,
       },
+      images: {
+        type: Sequelize.JSON,
+        allowNull: false,
+        defaultValue: [],
+      },
+      documents: {
+        type: Sequelize.JSON,
+        allowNull: false,
+        defaultValue: [],
+      },
     },
     {
       indexes: [
