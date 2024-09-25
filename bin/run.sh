@@ -13,14 +13,13 @@ CLEAN_DOCKER() {
 if [[ $1 == "clean" || $1 == "clear" ]]; then
   CLEAN_DOCKER
 elif [[ $1 == "db_update" ]]; then
-  docker exec -it ae_shop_api alembic revision --autogenerate -m "Init migration" && alembic upgrade head
+  docker exec -it ae_shop_api alembic revision --autogenerate -m "Update migration"
+  docker exec -it ae_shop_api alembic upgrade head
   docker exec -it ae_shop_api python3 push_db_data.py
 else
   HOMEDIR=$(basename "$PWD")
   if [[ $HOMEDIR == "bin" ]]; then
     cd ..
-  elif [[ $HOMEDIR != "shop" ]]; then
-    cd ../..
   fi
 
   DEMONIZE=""
