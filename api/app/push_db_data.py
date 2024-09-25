@@ -3,13 +3,13 @@ import traceback
 
 import models
 from dotenv import load_dotenv
-from models.database import session
+from models.database import sync_session
 
 load_dotenv()
 
 
 def push_data():
-    db = session()
+    db = sync_session()
     try:
         with open("mock/data.json") as f:
             data = json.load(f)

@@ -4,7 +4,7 @@ from os import environ
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt  # type: ignore
-from models.user import RoleEnum, User
+from models.user import RoleEnum, User, UserTokens
 from passlib.context import CryptContext  # type: ignore
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
@@ -15,6 +15,18 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
+
+async def get_or_create_access_token(key, data: dict, db: AsyncSession):
+    key = await db.execute(
+        select(UserTokens).where(UserTokens.ip == data["ip"], UserTokens.key == key)
+    )
+    print("KEEEEEYYY: ", key.keys())
+    if key:
+        print('Key found')
+        return key.key
+    print('Key not found')
+    return create_access_token(data)
 
 
 def create_access_token(data: dict):

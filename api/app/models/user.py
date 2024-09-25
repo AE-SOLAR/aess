@@ -2,7 +2,16 @@ import enum
 from uuid import uuid4
 
 from models import Base
-from sqlalchemy import Boolean, Column, DateTime, Enum, SmallInteger, String
+from sqlalchemy import (
+    Boolean,
+    Column,
+    DateTime,
+    Enum,
+    SmallInteger,
+    String,
+    Integer,
+    ForeignKey,
+)
 from sqlalchemy.orm import relationship
 
 from .company import user_company_association
@@ -40,8 +49,25 @@ class User(Base):
     news_subscribe = Column(Boolean, default=False)
 
     companies = relationship(
-        "Company", secondary=user_company_association, back_populates="users"
+        "Company",
+        secondary=user_company_association,
+        back_populates="users",
+        lazy="selectin",
     )
 
     def __repr__(self):
-        return f"<User(username={self.username})>"
+        return f"<User(email={self.email})>"
+
+
+class UserTokens(Base):
+    __tablename__ = "user_tokens"
+
+    id = Column(Integer, primary_key=True, autoincrement=True, index=True)
+    key = Column(String(255), unique=True, nullable=False)
+    ip = Column(String(255), unique=False, nullable=True)
+
+    user_id = Column(String(36), ForeignKey("users.uuid"))
+    user = relationship("User", lazy="selectin")
+
+    def __repr__(self):
+        return f"<UserTokens(email={self.user.email}, key={self.key})>"

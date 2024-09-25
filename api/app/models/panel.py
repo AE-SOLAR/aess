@@ -91,12 +91,14 @@ class Panel(Base):
     module_color_id = Column(Integer, ForeignKey("panel_color.id"))
     frame_color_id = Column(Integer, ForeignKey("panel_color.id"))
 
-    series = relationship("Series")
-    cell_type = relationship("CellType")
-    design = relationship("Design")
-    back_cover_type = relationship("BackCoverType")
-    module_color = relationship("Color", foreign_keys=[module_color_id])
-    frame_color = relationship("Color", foreign_keys=[frame_color_id])
+    series = relationship("Series", lazy="selectin")
+    cell_type = relationship("CellType", lazy="selectin")
+    design = relationship("Design", lazy="selectin")
+    back_cover_type = relationship("BackCoverType", lazy="selectin")
+    module_color = relationship(
+        "Color", foreign_keys=[module_color_id], lazy="selectin"
+    )
+    frame_color = relationship("Color", foreign_keys=[frame_color_id], lazy="selectin")
 
     def __repr__(self):
         return (

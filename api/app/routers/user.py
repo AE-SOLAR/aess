@@ -1,7 +1,7 @@
 from typing import Optional
 
 from controllers import auth as auth_controller
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request, Header
 from models.database import get_db
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
@@ -43,7 +43,12 @@ async def register_user(register_data: RegisterData, db: Session = Depends(get_d
 
 
 @router.post("/signin", tags=["Auth"], summary="Login and get access token")
-async def login_for_access_token(login_data: LoginData, db: Session = Depends(get_db)):
+async def login_for_access_token(
+    request: Request,
+    login_data: LoginData,
+    db: Session = Depends(get_db),
+    authorization: str = Header(None),
+):
     user = await auth_controller.authenticate_user(
         login_data.email,
         login_data.password,
@@ -52,7 +57,17 @@ async def login_for_access_token(login_data: LoginData, db: Session = Depends(ge
     if not user:
         raise HTTPException(status_code=400, detail="Incorrect email or password")
 
-    access_token = auth_controller.create_access_token(data={"sub": user.uuid})
+    data = {"sub": user.uuid, "ip": request.client.host}
+
+    if authorization is None:
+        access_token = auth_controller.create_access_token(data=data)
+    else:
+        key = authorization.split(" ")[1]
+        access_token = await auth_controller.get_or_create_access_token(
+            key=key, data=data, db=db
+        )
+
+    access_token = auth_controller.create_access_token(data=data)
     return {"access_token": access_token, "token_type": "bearer"}
 
 
