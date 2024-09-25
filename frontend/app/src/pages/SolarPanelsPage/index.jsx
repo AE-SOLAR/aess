@@ -35,6 +35,10 @@ const SolarPanelsPage = () => {
       );
       const data = await response.json();
       setPanels(data);
+
+      //взять юз парамс 
+
+
       const _techNames = data.map((e) => e.cell_type.name);
       const _serNames = data.map((e) => e.series.name);
       const _colorNames = data.map((e) => e.module_color.name);
@@ -47,7 +51,7 @@ const SolarPanelsPage = () => {
       setFrameColor([...new Set(_frameColorNames)]);
     };
     request();
-  }, []);
+  }, [+]);
 
   return (
     <div className={style.solarPanelsContainer}>
