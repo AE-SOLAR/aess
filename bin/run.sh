@@ -8,6 +8,7 @@ CLEAN_DOCKER() {
   docker container prune --filter "label=prog=aeshop" --force
   docker image prune --filter "label=prog=aeshop" --force
   docker volume prune --filter "label=prog=aeshop" --force
+  docker buildx prune -f
 }
 
 if [[ $1 == "clean" || $1 == "clear" ]]; then
