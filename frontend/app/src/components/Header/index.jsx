@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import style from "./index.module.css";
 import logo from "../../static/header_icons/aesolar_logo.svg";
@@ -9,6 +9,15 @@ import account_menu from "../../static/header_icons/account_menu.svg";
 import { ThemeSwitcher } from "../ThemeSwitcher";
 
 const Header = () => {
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem(process.env.REACT_APP_TOKEN_KEY_NAME);
+    if (token) {
+      setIsUserLoggedIn(true);
+    }
+  }, []);
+
   return (
     <header className={style["header"]}>
       <div className={style["header-container"]}>
@@ -25,7 +34,7 @@ const Header = () => {
           <Link to="/favorites">
             <img src={favoritesIcon} alt="Favorites" />
           </Link>
-          <Link to="/account_menu">
+          <Link to={isUserLoggedIn ? "/signin" : "/signup"}>
             <img src={account_menu} alt="AccountMenu" />
           </Link>
           <Link to="/cart">

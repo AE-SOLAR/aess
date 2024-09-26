@@ -1,7 +1,16 @@
-import { Layout, HomePage, PageNotFound, AdminPage, Sale, SolarPanelsPage, ProductPage } from "../pages";
+import {
+  Layout,
+  HomePage,
+  // PageNotFound,
+  AdminPage,
+  Sale,
+  SolarPanelsPage,
+  ProductPage,
+  SignIn,
+  SignUp,
+} from "../pages";
 import { PrivateRoute } from "./PrivateRoute";
 import fakeAuthProvider from "../tools/fakeAuthProvider";
-import { LoginPage } from "../pages/LoginPage";
 import Blog from "../pages/Blog/Blog";
 import News from "../pages/News/News";
 import Shipping from "../pages/Shipping/Shipping";
@@ -27,9 +36,14 @@ const RootRoutes = [
         element: <HomePage />,
       },
       {
-        id: "login",
-        path: "login",
-        element: <LoginPage />,
+        id: "signin",
+        path: "signin",
+        element: <SignIn />,
+      },
+      {
+        id: "signup",
+        path: "signup",
+        element: <SignUp />,
       },
       {
         id: "blog",
@@ -69,7 +83,7 @@ const RootRoutes = [
       {
         id: "product",
         path: "product/:uuid",
-        element: <ProductPage />
+        element: <ProductPage />,
       },
       {
         id: "solar-panels",
