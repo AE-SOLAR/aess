@@ -47,7 +47,7 @@ services:
       - ${ENV_FILE}
     volumes:
       - ./frontend/app:/usr/src/app
-      - frontend_node_modules_volume:/usr/src/app/node_modules
+      - shop_frontend_node_modules_volume:/usr/src/app/node_modules
     networks:
       - ae_shop_network
 
@@ -86,7 +86,7 @@ services:
   #     - ${ENV_FILE}
   #   volumes:
   #     - ./backend/app:/usr/src/app
-  #     - backend_node_modules_volume:/usr/src/app/node_modules
+  #     - shop_backend_node_modules_volume:/usr/src/app/node_modules
   #   depends_on:
   #     # - ae_shop_mongodb
   #     - ae_shop_mariadb
@@ -110,6 +110,26 @@ services:
       - ./config/mysql/my.cnf:/etc/mysql/my.cnf:ro
     ports:
       - "3307:3307"
+    networks:
+      - ae_shop_network
+
+  ae_shop_strapi:
+    build:
+      context: ./strapi
+    # image: strapi/strapi
+    container_name: ae_shop_strapi
+    hostname: ae_shop_strapi
+    labels:
+      prog: "aeshop"
+      type: "strapi"
+    env_file:
+      - ${ENV_FILE}
+    ports:
+      - "1337:1337"
+    volumes:
+      - ./strapi:/srv/app
+    depends_on:
+      - ae_shop_mariadb
     networks:
       - ae_shop_network
 
@@ -161,11 +181,11 @@ volumes:
     labels:
       build: "yes"
       prog: "aeshop"
-  frontend_node_modules_volume:
+  shop_frontend_node_modules_volume:
     labels:
       build: "yes"
       prog: "aeshop"
-  # backend_node_modules_volume:
+  # shop_backend_node_modules_volume:
   #   labels:
   #     build: "yes"
   #     prog: "aeshop"
