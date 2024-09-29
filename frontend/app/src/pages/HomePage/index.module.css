@@ -4,30 +4,115 @@
 }
 
 .slider {
+  position: relative; /* Относительное позиционирование для абсолютных потомков */
   display: flex;
   align-items: start;
   justify-content: start;
   text-align: start;
   background-size: cover;
+  background-position: center;
   height: 400px;
 }
 
-.slider caption {
-  font-size: 50px;
-  font-weight: bold;
-  padding: 20px;
-  color: #fff;
+/* Стили для контента на слайде */
+.sliderContent {
+  position: absolute;
+  bottom: 30px; /* Расположение кнопки по вертикали */
+  left: 30px;   /* Расположение кнопки по горизонтали */
 }
 
-.slider description {
-  position: relative;
-  left: 20px;
-  display: flex;
-  width: fit-content;
-  max-width: 500px;
-  border-radius: 25px;
-  background-color: rgba(255, 255, 255, 0.2);
-  font-size: 20px;
-  padding: 20px;
+/* Стили для кнопки на слайде */
+.sliderButton {
+  padding: 10px 30px;
   color: #fff;
+  border: 2px solid red;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.sliderButton:hover {
+  background-color: #4c1b11;
+}
+
+
+
+/* Остальные существующие стили */
+.cartBlock {
+  padding: 10px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.cartBlockText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.SolarPaneltext {
+  color: white;
+  font-family: 'Arial', sans-serif;
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.ExploreText {
+  color: red;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.cartImgButton {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.imgCard {
+  width: 350px;
+  height: 140px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  border: 1px solid red;
+
+  /* Центрируем текст внутри карточек */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.imgCard:hover {
+  transform: scale(1.55); /* Эффект увеличения при наведении */
+}
+
+.imgText {
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 80px;
+  display: block;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Тень для текста */
+}
+
+.solarPanelsText {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.solarPanels {
+  width: 100%;
+  height: 400px;
+  background-size: cover; /* Изображение покрывает весь блок */
+  background-position: center; /* Центрируем изображение */
+  background-repeat: no-repeat; /* Отключаем повторение изображения */
 }
