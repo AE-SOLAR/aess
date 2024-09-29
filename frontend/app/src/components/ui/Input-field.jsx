@@ -9,11 +9,12 @@ export const InputField = ({
   children = "",
   value,
   setValue,
-  password = false,
   autocomplete = "new-password",
   className = "",
   style = {},
+  type = "text",
 }) => {
+  const isPassword = type.toLowerCase() === "password";
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
@@ -23,6 +24,8 @@ export const InputField = ({
     setValue(event.target.value);
   };
 
+  console.log("InputField", children, type);
+
   return (
     <div
       style={{
@@ -31,13 +34,30 @@ export const InputField = ({
         position: "relative",
       }}
     >
+      {type.toLowerCase() === "file" && (
+        <label
+          style={{
+            width: width,
+            height: height,
+            position: "absolute",
+            left: "50px",
+            top: "25%",
+
+            zIndex: "100",
+          }}
+        >
+          {children}
+        </label>
+      )}
       <input
         id={
           id ||
           Math.floor(Math.random() * Math.floor(Math.random() * Date.now()))
         }
-        type={!password || isPasswordVisible ? "text" : "password"}
+        type={isPassword ? (isPasswordVisible ? "text" : "password") : type}
         autoComplete={autocomplete}
+        multiple={type.toLowerCase() === "file"}
+        accept=".pdf,.doc,.docx,.jpg,.jpeg,.zip"
         style={{
           width: width,
           height: height,
@@ -47,7 +67,7 @@ export const InputField = ({
           paddingLeft: "30px",
           paddingRight: "30px",
           borderRadius: "30px",
-          color: "white",
+          color: type.toLowerCase() === "file" ? "transparent" : "white",
           fontSize: "1rem",
           outline: "none",
           placeContent: "center",
@@ -60,7 +80,7 @@ export const InputField = ({
         value={value}
         onChange={handleChange}
       />
-      {password && (
+      {isPassword && (
         <div
           style={{
             position: "absolute",

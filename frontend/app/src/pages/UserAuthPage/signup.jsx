@@ -8,8 +8,10 @@ import { LoadingBlocker } from "../../components/ui/loading-blocker";
 const SignUp = () => {
   const [formData, setFormData] = useState({
     companyName: "",
+    companyPhone: "",
+    website: "",
     vatId: "",
-    businessLicenseDocument: "",
+    businessLicenseDocument: [],
     streetAndNumber: "",
     postcode: "",
     city: "",
@@ -35,10 +37,14 @@ const SignUp = () => {
   const handleSubmit = async () => {
     if (isFormFilled) {
       setIsLoading(true);
-      console.log(await apiSignUp(formData));
+      await apiSignUp(formData);
       setIsLoading(false);
-      console.log("Form is filled!");
     }
+  };
+
+  const handleFileChange = (event) => {
+    const files = event.target.files;
+    setFormData({ ...formData, businessLicenseDocument: files });
   };
 
   const handleChange = (field, value) => {
@@ -48,8 +54,9 @@ const SignUp = () => {
   const handleFormFillCheck = () => {
     const requiredFields = [
       "companyName",
+      "companyPhone",
       "vatId",
-      "businessLicenseDocument",
+      // "businessLicenseDocument",
       "streetAndNumber",
       "postcode",
       "city",
@@ -85,9 +92,10 @@ const SignUp = () => {
   }, [formData]);
 
   const mapInputFields = (fields) => {
-    return fields.map(({ title, field, password = false }) => (
+    return fields.map(({ title, field, type }) => (
       <InputField
         key={field}
+        type={type}
         value={formData[field]}
         setValue={(value) => handleChange(field, value)}
         style={
@@ -95,7 +103,6 @@ const SignUp = () => {
             backgroundColor: "rgba(36, 21, 21, 1)",
           }
         }
-        password={password}
       >
         {title}
       </InputField>
@@ -131,11 +138,14 @@ const SignUp = () => {
               <div className="flex-col justify-start items-start gap-2.5 flex">
                 {mapInputFields([
                   { title: "Company name", field: "companyName" },
+                  { title: "Company phone", field: "companyPhone" },
                   { title: "VAT ID", field: "vatId" },
                   {
                     title: "Business license document",
                     field: "businessLicenseDocument",
+                    type: "file",
                   },
+                  { title: "WebSite", field: "website" },
                 ])}
               </div>
             </div>
@@ -180,11 +190,11 @@ const SignUp = () => {
               <div className="flex-col justify-start items-start gap-2.5 flex">
                 {mapInputFields([
                   { title: "E-mail", field: "loginEmail" },
-                  { title: "Password", field: "password", password: true },
+                  { title: "Password", field: "password", type: "password" },
                   {
                     title: "Password check",
                     field: "passwordCheck",
-                    password: true,
+                    type: "password",
                   },
                 ])}
               </div>
