@@ -1,4 +1,4 @@
-const { Op } = require("sequelize");
+ const { Op } = require("sequelize");
 const { authJwt } = require("../middleware");
 const db = require("../models");
 
