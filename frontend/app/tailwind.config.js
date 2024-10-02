@@ -5,11 +5,38 @@ const {
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx,mdx}"],
   darkMode: "class",
   theme: {
     extend: {
-      // your config here
+      colors: {
+        brandRed: {
+          100: "#fdccce",
+          200: "#fb999d",
+          300: "#fa676b",
+          400: "#f8343a",
+          500: "#f60109",
+          600: "#c50107",
+          700: "#940105",
+          800: "#620004",
+          900: "#310002",
+        },
+        brandGray: {
+          100: "#d3d3d3",
+          200: "#a8a8a8",
+          300: "#7c7c7c",
+          400: "#515151",
+          500: "#252525",
+          600: "#1e1e1e",
+          700: "#161616",
+          800: "#0f0f0f",
+          900: "#070707",
+        },
+        brandDarkBG: "#000000",
+        brandDarkText: "#FFFFFF",
+        brandWhiteBG: "#FFFFFF",
+        brandWhiteText: "#000000",
+      },
     },
   },
   plugins: [
@@ -35,7 +62,6 @@ function addVariablesForColors({ addBase, theme }) {
   let newVars = Object.fromEntries(
     Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
   );
-
   addBase({
     ":root": newVars,
   });
