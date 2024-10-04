@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
-export const InputField = ({
+const BrandInput = ({
   id,
   width = "466px",
   height = "50px",
@@ -23,8 +23,6 @@ export const InputField = ({
   const handleChange = (event) => {
     setValue(event.target.value);
   };
-
-  console.log("InputField", children, type);
 
   return (
     <div
@@ -102,3 +100,5 @@ export const InputField = ({
     </div>
   );
 };
+
+export default BrandInput;

@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import style from "./index.module.css";
 import logo from "../../static/header_icons/aesolar_logo.svg";
-import searchIcon from "../../static/header_icons/search_icon.svg";
 import favoritesIcon from "../../static/header_icons/favorit.svg";
 import bag from "../../static/header_icons/bag.svg";
 import account_menu from "../../static/header_icons/account_menu.svg";
 import { ThemeSwitcher } from "../ThemeSwitcher";
+import { SearchInput } from "../Input";
+import { Breadcrumb } from "../breadcrumb";
+import Page from "../../routes/pages";
 
 const Header = () => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -24,17 +26,12 @@ const Header = () => {
         <div className={style["logo"]}>
           <img src={logo} alt="AESOLAR" />
         </div>
-        <div className={style["search"]}>
-          <input type="text" placeholder="Search sth..." />
-          <button>
-            <img src={searchIcon} alt="Search" />
-          </button>
-        </div>
+        <SearchInput />
         <div className={style["nav-icons"]}>
           <Link to="/favorites">
             <img src={favoritesIcon} alt="Favorites" />
           </Link>
-          <Link to={isUserLoggedIn ? "/signin" : "/signup"}>
+          <Link to={isUserLoggedIn ? Page.signIn.path : Page.signOut.path}>
             <img src={account_menu} alt="AccountMenu" />
           </Link>
           <Link to="/cart">
@@ -44,38 +41,32 @@ const Header = () => {
         </div>
       </div>
       <div className={style["nav"]}>
-        <Link to="/" className={style["nav-link"]}>
-          Home
+        <Link to={Page.home.path} className={style["nav-link"]}>
+          {Page.home.title}
         </Link>
-        <Link to="/solar-panels" className={style["nav-link"]}>
-          Solar panels
+        <Link to={Page.solarPanels.path} className={style["nav-link"]}>
+          {Page.solarPanels.title}
         </Link>
-        <Link to="/sale" className={style["nav-link"]}>
-          Sale
+        <Link to={Page.sale.path} className={style["nav-link"]}>
+          {Page.sale.title}
         </Link>
-        {/* <Link to="/inverters" className={style["nav-link"]}>Inverters</Link> */}
-        {/* <Link to="/home-storage" className={style["nav-link"]}>
-          Home storage
-        </Link> */}
-        <Link to="/accessories-electrical" className={style["nav-link"]}>
-          Accessories & Electrical
+        <Link to={Page.blog.path} className={style["nav-link"]}>
+          {Page.blog.title}
         </Link>
-        <Link to="/blog" className={style["nav-link"]}>
-          Blog
+        <Link to={Page.news.path} className={style["nav-link"]}>
+          {Page.news.title}
         </Link>
-        <Link to="/news" className={style["nav-link"]}>
-          News
+        <Link to={Page.shipping.path} className={style["nav-link"]}>
+          {Page.shipping.title}
         </Link>
-        <Link to="/shipping" className={style["nav-link"]}>
-          Shipping
+        <Link to={Page.payments.path} className={style["nav-link"]}>
+          {Page.payments.title}
         </Link>
-        <Link to="/payments" className={style["nav-link"]}>
-          Payments
-        </Link>
-        <Link to="/help" className={style["nav-link"]}>
-          Help
+        <Link to={Page.help.path} className={style["nav-link"]}>
+          {Page.help.title}
         </Link>
       </div>
+      <Breadcrumb />
     </header>
   );
 };

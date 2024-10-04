@@ -1,0 +1,25 @@
+.breadcrumb {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: var(--color-brand-gray);
+}
+
+.breadcrumb a {
+  text-decoration: none;
+}
+
+.breadcrumb a:hover, .breadcrumb a:last-child:hover {
+  text-decoration: underline;
+  color: var(--color-brand-red);
+}
+
+.breadcrumb a:last-child{
+  color: var(--color-brand-white-text);
+}

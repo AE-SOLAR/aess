@@ -1,0 +1,56 @@
+.BrandBtnWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .BrandBtn {
+    font-size: 24px;
+    border: 2px solid red;
+    border-radius: 50px;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    padding: 14px 40px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Плавная анимация */
+  }
+  
+  .BrandBtn:hover {
+    background-color: #4c1b11; /* Изменение фона при наведении */
+  }
+  
+  
+  
+  .BrandBtn {
+    font-size: 24px;
+    border: 2px solid red;
+    border-radius: 50px;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    padding: 14px 40px;
+    background-color: black; /* Цвет фона для кнопки */
+    color: white;
+    position: relative;
+    z-index: 2; /* Кнопка поверх линий */
+  }
+  
+  .BrandBtnWrapper::before,
+  .BrandBtnWrapper::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, red, transparent);
+    z-index: 1; /* Линии за кнопкой */
+  }
+  
+  .BrandBtnWrapper::before {
+    left: 0;
+  }
+  
+  .BrandBtnWrapper::after {
+    right: 0;
+  }

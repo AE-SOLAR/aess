@@ -4,7 +4,7 @@
 }
 
 .slider {
-  position: relative; /* Относительное позиционирование для абсолютных потомков */
+  position: relative; 
   display: flex;
   align-items: start;
   justify-content: start;
@@ -17,8 +17,8 @@
 /* Стили для контента на слайде */
 .sliderContent {
   position: absolute;
-  bottom: 30px; /* Расположение кнопки по вертикали */
-  left: 30px;   /* Расположение кнопки по горизонтали */
+  bottom: 30px; 
+  left: 30px;   
 }
 
 /* Стили для кнопки на слайде */
@@ -90,7 +90,7 @@
 }
 
 .imgCard:hover {
-  transform: scale(1.55); /* Эффект увеличения при наведении */
+  transform: scale(1.55); 
 }
 
 .imgText {
@@ -99,7 +99,7 @@
   font-weight: bold;
   margin-bottom: 80px;
   display: block;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Тень для текста */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); 
 }
 
 .solarPanelsText {
@@ -109,10 +109,74 @@
   align-items: center;
 }
 
-.solarPanels {
-  width: 100%;
-  height: 400px;
-  background-size: cover; /* Изображение покрывает весь блок */
-  background-position: center; /* Центрируем изображение */
-  background-repeat: no-repeat; /* Отключаем повторение изображения */
+.solarPanelsCart {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  width: 110%;
+  height: 900px;
+  margin: 0 auto;
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
 }
+
+.VideoBlock{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.h2VideoBlockText {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* .VideoContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+  margin: 0 auto;
+} */
+
+.VideoContainer{
+  display: flex;
+  flex-direction: center;
+  gap: 30px;
+}
+
+
+
+.VideoItem iframe {
+  width: 100%;
+  height: 350px;
+  aspect-ratio: 16/9;
+  border-radius: 10%;
+}
+
+.h2DownSlider {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: 100px;
+}
+
+.sliderIcon {
+  width: 50px; /* или любой другой размер, который нужен */
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.sliderText {
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 10px;
+  text-align: center;
+}
+

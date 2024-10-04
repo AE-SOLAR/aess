@@ -1,0 +1,105 @@
+:root {
+  --search-width-active: 460px;
+  --search-width-active-input: 460px;
+}
+
+.searchContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  transition: width 0.4s ease-in-out;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border: 1px dotted green;
+  transition: width 0.4s ease-in-out;
+}
+
+.searchContainer.active {
+  width: var(--search-width-active);
+}
+
+.icon {
+  position: absolute;
+  left: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--color-brand-light-gray);
+  transition: left 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+.input {
+  width: 0;
+  height: 100%;
+  padding: 0;
+  background-color: transparent;
+  color: var(--color-brand-light-gray);
+  outline: none;
+  border: 1px solid var(--color-brand-light-gray);
+  border-radius: 20px;
+  padding-left: 2.5rem;
+  transition: width 0.4s ease-in-out, opacity 0.4s ease-in-out,
+    padding 0.4s ease-in-out;
+  opacity: 0;
+}
+
+.button {
+  width: 0;
+  height: 2rem;
+  padding: 0;
+  margin-left: 0;
+  background-color: var(--color-brand-black);
+  border: 1px solid transparent;
+  border-radius: 20px;
+  cursor: pointer;
+  opacity: 0;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  transition: width 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+.searchContainer:hover {
+  width: var(--search-width-active);
+}
+
+.searchContainer:hover .input {
+  width: var(--search-width-active-input);
+  opacity: 1;
+  padding: 0 1rem;
+  background-color: #131313;
+}
+
+.searchContainer:hover .icon {
+  left: 0.5rem;
+}
+
+.searchContainer:hover .button {
+  width: 80px;
+  opacity: 1;
+  margin-left: 0.5rem;
+}
+
+.searchContainer.active .input {
+  width: var(--search-width-active-input);
+  opacity: 1;
+  padding: 0 1rem;
+  background-color: #131313;
+}
+
+.searchContainer.active .icon {
+  left: 0.5rem;
+}
+
+.searchContainer.active .button {
+  width: 80px;
+  opacity: 1;
+  margin-left: 0.5rem;
+}
+
+@media screen and (max-width: 375px) {
+  .searchContainer {
+    display: none;
+  }
+}

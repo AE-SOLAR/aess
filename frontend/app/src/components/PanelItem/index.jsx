@@ -4,7 +4,7 @@ import React from "react";
 import { CardBody, CardContainer, CardItem } from "../ui/3d-card";
 import { Link } from "react-router-dom";
 import { RedLine } from "../ui/red-line";
-import { BrandButton } from "../ui/brand-button";
+import BrandButton from "../BrandButton";
 
 export function PanelItem({ product }) {
   const techData = [

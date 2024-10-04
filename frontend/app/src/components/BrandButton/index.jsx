@@ -1,13 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-export const BrandButton = ({
+import baseStyle from "./style.module.css";
+
+const BrandButton = ({
   text,
   to,
   onClick,
   width = "100%",
   children,
   disabled = false,
+  className = "",
+  style = {},
 }) => {
   const navigate = useNavigate();
   if (to) {
@@ -19,26 +23,10 @@ export const BrandButton = ({
   return (
     <div
       onClick={onClick}
-      style={{
-        width: { width },
-        height: "100%",
-        paddingLeft: 30,
-        paddingRight: 30,
-        paddingTop: 10,
-        paddingBottom: 10,
-        background: disabled ? "rgba(246, 1, 9, 0.40)" : "#F60109",
-        boxShadow: "0px 0px 14px rgba(246, 1, 9, 0.40) inset",
-        borderRadius: 30,
-        overflow: "hidden",
-        border: "3px #F60109 solid",
-        borderColor: disabled ? "rgba(246, 1, 9, 0.40)" : "#F60109",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        gap: 10,
-        display: "inline-flex",
-        cursor: disabled ? "not-allowed" : "pointer",
-      }}
+      className={`${baseStyle.brandButton} ${
+        disabled ? baseStyle.disabled : ""
+      } ${className}`}
+      style={{ ...style, width }}
     >
       <div
         style={{
@@ -63,3 +51,5 @@ export const BrandButton = ({
     </div>
   );
 };
+
+export default BrandButton;
