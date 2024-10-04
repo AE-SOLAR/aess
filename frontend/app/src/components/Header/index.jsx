@@ -7,7 +7,6 @@ import bag from "../../static/header_icons/bag.svg";
 import account_menu from "../../static/header_icons/account_menu.svg";
 import { ThemeSwitcher } from "../ThemeSwitcher";
 import { SearchInput } from "../Input";
-import { Breadcrumb } from "../breadcrumb";
 import Page from "../../routes/pages";
 
 const Header = () => {
@@ -66,7 +65,6 @@ const Header = () => {
           {Page.help.title}
         </Link>
       </div>
-      <Breadcrumb />
     </header>
   );
 };
