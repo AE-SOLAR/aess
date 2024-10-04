@@ -6,7 +6,7 @@ import Header from "../../components/Header";
 import { HeroHighlight } from "../../components/ui/HeroHidhtlight";
 import CurvedLine from "../../components/CurvedLIne";
 
-export const Layout = () => {
+const Layout = () => {
   return (
     <HeroHighlight>
       <CurvedLine />
@@ -18,3 +18,5 @@ export const Layout = () => {
     </HeroHighlight>
   );
 };
+
+export default Layout;

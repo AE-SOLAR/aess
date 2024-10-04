@@ -7,7 +7,6 @@ import style from "./index.module.css";
 import { fetchPanels } from "../../handlers/api";
 import { getRandomElements } from "../../handlers/tools";
 import { PanelItem } from "../../components/PanelItem";
-import { BrandButton } from "../../components/ui/brand-button";
 import ButtonWithLine from "../../components/ButtonWithLine";
 
 const slideImages = [
@@ -83,66 +82,66 @@ const DownSlider = [
     route: "/solar-panels?type=Aurora",
     buttonText: "solar=panels=Aurora",
     sliderText: "AESOLAR TEXT",
-    sliderIcons : "/static/images/homepage/DownSlider/aurora/30.png",
+    sliderIcons: "/static/images/homepage/DownSlider/aurora/30.png",
   },
   {
     url: "/static/images/homepage/DownSlider/comet.mp4",
     route: "/solar-panels?type=Comet",
     buttonText: "solar=panels=Comet",
     sliderText: "AESOLAR TEXT",
-    sliderIcons : "/static/images/homepage/DownSlider/aurora/30.png",
+    sliderIcons: "/static/images/homepage/DownSlider/aurora/30.png",
   },
   {
     url: "/static/images/homepage/DownSlider/horizon.mp4",
     route: "/solar-panels?type=Horizon",
     buttonText: "solar=panels=Horizon",
     sliderText: "AESOLAR TEXT",
-    sliderIcons : "/static/images/homepage/DownSlider/aurora/30.png",
+    sliderIcons: "/static/images/homepage/DownSlider/aurora/30.png",
   },
   {
     url: "/static/images/homepage/DownSlider/meteor.mp4",
     route: "/solar-panels?type=Meteor",
     buttonText: "solar=panels=Meteor",
     sliderText: "AESOLAR TEXT",
-    sliderIcons : "/static/images/homepage/DownSlider/aurora/30.png",
+    sliderIcons: "/static/images/homepage/DownSlider/aurora/30.png",
   },
   {
     url: "/static/images/homepage/DownSlider/neptune.mp4",
     route: "/solar-panels?type=Neptune",
     buttonText: "solar=panels=Neptune",
     sliderText: "AESOLAR TEXT",
-    sliderIcons : "/static/images/homepage/DownSlider/neptune.mp4",
+    sliderIcons: "/static/images/homepage/DownSlider/neptune.mp4",
   },
   {
     url: "/static/images/homepage/DownSlider/shadestar.mp4",
     route: "/solar-panels?type=ShadeStar",
     buttonText: "solar=panels=ShadeStar",
-    sliderIcons : "/static/images/homepage/DownSlider/aurora/30.png",
+    sliderIcons: "/static/images/homepage/DownSlider/aurora/30.png",
   },
   {
     url: "/static/images/homepage/DownSlider/terra.mp4",
     route: "/solar-panels?type=Terra",
     buttonText: "solar=panels=Terra",
     sliderText: "AESOLAR TEXT",
-    sliderIcons : "/static/images/homepage/DownSlider/aurora/30.png",
+    sliderIcons: "/static/images/homepage/DownSlider/aurora/30.png",
   },
 ];
-
 
 export default function HomePage() {
   const navigate = useNavigate();
   const [panels, setPanels] = useState([]);
 
   useEffect(() => {
-    //фечнуть данные даные с бека 
+    //фечнуть данные даные с бека
     const fetchData = async () => {
       try {
         const data = await fetchPanels();
         setPanels(getRandomElements(data, 4));
       } catch {
         console.error("Error fetching data");
-      }};
-      fetchData();
+      }
+    };
+    fetchData();
   }, []);
 
   const handleClick = (route) => {
@@ -183,7 +182,9 @@ export default function HomePage() {
       <div className={style.cartBlock}>
         <div className={style.cartBlockText}>
           <h2 className={style.SolarPaneltext}>Solar Panels Use</h2>
-          <h2 className={style.ExploreText}>Choose Your Installation Location</h2>
+          <h2 className={style.ExploreText}>
+            Choose Your Installation Location
+          </h2>
         </div>
 
         <div className={style.cartImgButton}>
@@ -209,7 +210,9 @@ export default function HomePage() {
         </div>
         <div
           className={style.solarPanelsCart}
-          style={{ backgroundImage: `url("/static/images/homepage/homepage_img/Circles.png")` }}
+          style={{
+            backgroundImage: `url("/static/images/homepage/homepage_img/Circles.png")`,
+          }}
         >
           {panels.map((p) => (
             <PanelItem product={p} key={p.id} />
@@ -217,104 +220,103 @@ export default function HomePage() {
         </div>
       </div>
 
-     {/* Блок с видео */}
-  <div className={style.VideoBlock}>
-    <div className={style.VideoBlockText}>
-      <div className={style.h2VideoBlockText}>
-      <h2 style={{ fontSize: "70px" }}>Learn more about</h2>
-      <h2 style={{ color: "red", fontSize: "70px" }}>Our Featured Product</h2>
-      </div>
-     
-    </div>
+      {/* Блок с видео */}
+      <div className={style.VideoBlock}>
+        <div className={style.VideoBlockText}>
+          <div className={style.h2VideoBlockText}>
+            <h2 style={{ fontSize: "70px" }}>Learn more about</h2>
+            <h2 style={{ color: "red", fontSize: "70px" }}>
+              Our Featured Product
+            </h2>
+          </div>
+        </div>
 
-    <div className={style.VideoContainer}>
-      <div className={style.VideoItem}>
-        <iframe
-          src="https://www.youtube.com/embed/e0yUQXztO60"
-          title="YouTube video player"
-          frameBorder="2"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
-      </div>
+        <div className={style.VideoContainer}>
+          <div className={style.VideoItem}>
+            <iframe
+              src="https://www.youtube.com/embed/e0yUQXztO60"
+              title="YouTube video player"
+              frameBorder="2"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
 
-      <div className={style.VideoItem}>
-        <iframe
-          src="https://www.youtube.com/embed/NNKjjoxLDcI?controls=0"
-          title="YouTube video player"
-          frameBorder="2"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
-      </div>
-    </div>
-  </div>
-
-  <ButtonWithLine>See our products</ButtonWithLine>
-
-  <div className={style.DownSlider}>
-    <div className={style.h2DownSlider}>
-      <h2 style={{ fontSize: "70px" }}>Our Advantages:</h2>
-      <h2 style={{ color: "red", fontSize: "70px" }}>Essential Insights</h2>
-    </div>
-
-    <div className={style.DownSliderContent}>
-      <div className={style.TextDown}>
-        <h2>Our Advantages</h2>
-        <h2>Essential Insights</h2>
-      </div>
-
-      <div className={style.SliderContent}>
-      <div className={style.SliderContent}>
-      <Fade
-  duration={5000}
-  canSwipe={true}
-  autoplay={true}
-  arrows={false}
-  indicators={true}
-  pauseOnHover={false}
->
-  {DownSlider.map((slide, index) => (
-    <div key={index}>
-      <div className={style.slider}>
-        <video className={style.sliderVideo} autoPlay loop muted>
-          <source src={slide.url} type="video/mp4" />
-        </video>
-        <div className={style.sliderContent}>
-          {/* Иконка для слайда */}
-          {slide.sliderIcons && (
-            <img 
-              src={slide.sliderIcons} 
-              alt="Slider Icon" 
-              className={style.sliderIcon} 
-            />
-          )}
-
-          {/* Текст для слайда */}
-          {slide.sliderText && (
-            <div className={style.sliderText}>
-              <p>{slide.sliderText}</p>
-            </div>
-          )}
-
-          {/* Кнопка для слайда */}
-          <button
-            className={style.sliderButton}
-            onClick={() => handleClick(slide.route)}
-          >
-            {slide.buttonText}
-          </button>
+          <div className={style.VideoItem}>
+            <iframe
+              src="https://www.youtube.com/embed/NNKjjoxLDcI?controls=0"
+              title="YouTube video player"
+              frameBorder="2"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
         </div>
       </div>
-    </div>
-  ))}
-</Fade>
-</div>
 
+      <ButtonWithLine>See our products</ButtonWithLine>
+
+      <div className={style.DownSlider}>
+        <div className={style.h2DownSlider}>
+          <h2 style={{ fontSize: "70px" }}>Our Advantages:</h2>
+          <h2 style={{ color: "red", fontSize: "70px" }}>Essential Insights</h2>
+        </div>
+
+        <div className={style.DownSliderContent}>
+          <div className={style.TextDown}>
+            <h2>Our Advantages</h2>
+            <h2>Essential Insights</h2>
+          </div>
+
+          <div className={style.SliderContent}>
+            <div className={style.SliderContent}>
+              <Fade
+                duration={5000}
+                canSwipe={true}
+                autoplay={true}
+                arrows={false}
+                indicators={true}
+                pauseOnHover={false}
+              >
+                {DownSlider.map((slide, index) => (
+                  <div key={index}>
+                    <div className={style.slider}>
+                      <video className={style.sliderVideo} autoPlay loop muted>
+                        <source src={slide.url} type="video/mp4" />
+                      </video>
+                      <div className={style.sliderContent}>
+                        {/* Иконка для слайда */}
+                        {slide.sliderIcons && (
+                          <img
+                            src={slide.sliderIcons}
+                            alt="Slider Icon"
+                            className={style.sliderIcon}
+                          />
+                        )}
+
+                        {/* Текст для слайда */}
+                        {slide.sliderText && (
+                          <div className={style.sliderText}>
+                            <p>{slide.sliderText}</p>
+                          </div>
+                        )}
+
+                        {/* Кнопка для слайда */}
+                        <button
+                          className={style.sliderButton}
+                          onClick={() => handleClick(slide.route)}
+                        >
+                          {slide.buttonText}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </Fade>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
     </>
   );
 }
-

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import style from "./index.module.css";
 import { PanelFavIcon } from "../../components/PanelFavIcon";
 
-export const ProductPage = () => {
+const ProductPage = () => {
   const { uuid } = useParams();
 
   const [panels, setPanels] = useState([]);
@@ -152,3 +152,5 @@ export const ProductPage = () => {
     </div>
   );
 };
+
+export default ProductPage;

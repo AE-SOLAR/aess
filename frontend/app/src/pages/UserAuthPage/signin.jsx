@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { FaFacebook, FaMicrosoft, FaInstagram } from "react-icons/fa";
 
 import styles from "./styles.module.css";
-import { InputField } from "../../components/ui/Input-field";
-import { BrandButton } from "../../components/ui/brand-button";
+import { BrandInput } from "../../components/Input";
+import BrandButton from "../../components/BrandButton";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -35,17 +35,17 @@ const LoginForm = () => {
     <div className={styles.loginForm}>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <InputField id="email" value={email} setValue={setEmail}>
+        <BrandInput id="email" value={email} setValue={setEmail}>
           Email:
-        </InputField>
-        <InputField
+        </BrandInput>
+        <BrandInput
           id="password"
           value={password}
           setValue={setPassword}
           type="password"
         >
           Password:
-        </InputField>
+        </BrandInput>
         <BrandButton type="submit">Login</BrandButton>
       </form>
 

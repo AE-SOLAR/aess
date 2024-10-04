@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { InputField } from "../../components/ui/Input-field";
+import { BrandInput } from "../../components/Input";
 import { CheckBox } from "../../components/ui/check-box";
-import { BrandButton } from "../../components/ui/brand-button";
+import BrandButton from "../../components/BrandButton";
 import { apiSignUp } from "../../handlers/api";
 import { LoadingBlocker } from "../../components/ui/loading-blocker";
 
@@ -89,11 +89,12 @@ const SignUp = () => {
 
   useEffect(() => {
     handleFormFillCheck();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData]);
 
-  const mapInputFields = (fields) => {
+  const mapBrandInputs = (fields) => {
     return fields.map(({ title, field, type }) => (
-      <InputField
+      <BrandInput
         key={field}
         type={type}
         value={formData[field]}
@@ -105,7 +106,7 @@ const SignUp = () => {
         }
       >
         {title}
-      </InputField>
+      </BrandInput>
     ));
   };
 
@@ -136,7 +137,7 @@ const SignUp = () => {
                 Company information
               </div>
               <div className="flex-col justify-start items-start gap-2.5 flex">
-                {mapInputFields([
+                {mapBrandInputs([
                   { title: "Company name", field: "companyName" },
                   { title: "Company phone", field: "companyPhone" },
                   { title: "VAT ID", field: "vatId" },
@@ -155,7 +156,7 @@ const SignUp = () => {
                 Company address
               </div>
               <div className="flex-col justify-start items-start gap-2.5 flex">
-                {mapInputFields([
+                {mapBrandInputs([
                   { title: "Street and number", field: "streetAndNumber" },
                   { title: "Postcode", field: "postcode" },
                   { title: "City", field: "city" },
@@ -169,7 +170,7 @@ const SignUp = () => {
                 Contact person information
               </div>
               <div className="flex-col justify-start items-start gap-2.5 flex">
-                {mapInputFields([
+                {mapBrandInputs([
                   { title: "Name", field: "name" },
                   { title: "Surname", field: "surname" },
                   { title: "Job title", field: "jobTitle" },
@@ -188,7 +189,7 @@ const SignUp = () => {
                 Log in information
               </div>
               <div className="flex-col justify-start items-start gap-2.5 flex">
-                {mapInputFields([
+                {mapBrandInputs([
                   { title: "E-mail", field: "loginEmail" },
                   { title: "Password", field: "password", type: "password" },
                   {

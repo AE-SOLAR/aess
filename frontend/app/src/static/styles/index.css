@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-brand-white: #ffffff;
+  --color-brand-black: #000000;
+  --color-brand-white-text: #e9e9ea;
+  --color-brand-red: #f60109;
+  --color-brand-gray: #808285;
+  --color-brand-dark-gray: #252525;
+  --color-brand-light-gray: #a7a9ac;
+}
+
 @font-face {
   font-family: "Criteria CF";
   src: url("../fonts/CriteriaCF/Criteria CF Regular.otf") format("orf");
