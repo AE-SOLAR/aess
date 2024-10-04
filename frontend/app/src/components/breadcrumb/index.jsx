@@ -3,11 +3,9 @@ import { useLocation } from "react-router-dom";
 
 import style from "./style.module.css";
 
-export const Breadcrumb = () => {
+const Breadcrumb = () => {
   const location = useLocation();
-  console.log(location);
   const breadcrumb = location.pathname.split("/").slice(1);
-  console.log(breadcrumb);
   return (
     <>
       {location.pathname !== "/" && (
@@ -29,3 +27,5 @@ export const Breadcrumb = () => {
     </>
   );
 };
+
+export default Breadcrumb;
