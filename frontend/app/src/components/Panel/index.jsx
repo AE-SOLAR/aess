@@ -13,27 +13,27 @@ export const Panel = ({ panel }) => {
       />
       <div className={style.panelTextContainer}>
         <div className={style.panelInfoId}>
-          <p> {panel.model} </p>
+          <span> {panel.model} </span>
           <div className={style.favoriteIcon}>
             <PanelFavIcon />
           </div>
         </div>
         <div className={style.panelInfoManufactur}>
-          <p> Manufacturer: AESOLAR </p>
-          <p> Color: {panel.module_color.name} </p>
+          <span> Manufacturer: AESOLAR </span>
+          <span> Color: {panel.module_color.name} </span>
         </div>
         <div className={style.panelInfoTechnology}>
           <div className="panelInfoTechnologyParams">
-            <p> Power: </p>
-            <p> Technology: </p>
-            <p> Dimensions: </p>
+            <span> Power: </span>
+            <span> Technology: </span>
+            <span> Dimensions: </span>
           </div>
           <div className={style.panelInfoTechnologyValue}>
-            <p> {panel.powerRange} </p>
-            <p> {panel.cell_type.name} </p>
-            <p>
+            <span> {panel.powerRange} </span>
+            <span> {panel.cell_type.name} </span>
+            <span>
               {panel.length} x {panel.width} x {panel.height} mm
-            </p>
+            </span>
           </div>
         </div>
       </div>

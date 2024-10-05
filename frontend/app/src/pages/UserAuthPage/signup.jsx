@@ -5,7 +5,7 @@ import BrandButton from "../../components/BrandButton";
 import { apiSignUp } from "../../handlers/api";
 import { LoadingBlocker } from "../../components/ui/loading-blocker";
 
-const SignUp = () => {
+const SignUpPage = () => {
   const [formData, setFormData] = useState({
     companyName: "",
     companyPhone: "",
@@ -320,4 +320,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignUpPage;

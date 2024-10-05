@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import style from "./index.module.css";
 import logo from "../../static/header_icons/aesolar_logo.svg";
-import favoritesIcon from "../../static/header_icons/favorit.svg";
-import bag from "../../static/header_icons/bag.svg";
-import account_menu from "../../static/header_icons/account_menu.svg";
-import { ThemeSwitcher } from "../ThemeSwitcher";
 import { SearchInput } from "../Input";
-import Page from "../../routes/pages";
+import { Page } from "../../routes/pages";
+
+import {
+  FaCartShopping,
+  FaCircleUser,
+  FaHeart,
+  FaHeartCircleBolt,
+} from "react-icons/fa6";
 
 const Header = () => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -25,26 +28,27 @@ const Header = () => {
         <div className={style["logo"]}>
           <img src={logo} alt="AESOLAR" />
         </div>
-        <SearchInput />
-        <div className={style["nav-icons"]}>
+        <div className={`${style["nav-icons"]}`}>
+          <SearchInput />
           <Link to="/favorites">
-            <img src={favoritesIcon} alt="Favorites" />
+            {<FaHeartCircleBolt size={"1.5rem"} /> || (
+              <FaHeart size={"1.5rem"} />
+            )}
           </Link>
-          <Link to={isUserLoggedIn ? Page.signIn.path : Page.signOut.path}>
-            <img src={account_menu} alt="AccountMenu" />
+          <Link to={isUserLoggedIn ? Page.signin.path : Page.signup.path}>
+            <FaCircleUser size={"1.5rem"} />
           </Link>
           <Link to="/cart">
-            <img src={bag} alt="Cart" />
+            <FaCartShopping size={"1.5rem"} />
           </Link>
-          <ThemeSwitcher />
         </div>
       </div>
       <div className={style["nav"]}>
         <Link to={Page.home.path} className={style["nav-link"]}>
           {Page.home.title}
         </Link>
-        <Link to={Page.solarPanels.path} className={style["nav-link"]}>
-          {Page.solarPanels.title}
+        <Link to={Page.solarpanels.path} className={style["nav-link"]}>
+          {Page.solarpanels.title}
         </Link>
         <Link to={Page.sale.path} className={style["nav-link"]}>
           {Page.sale.title}

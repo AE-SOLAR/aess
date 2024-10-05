@@ -33,7 +33,7 @@ const SolarPanelsPage = () => {
       const _techNames = data.map((e) => e.cell_type);
       const _serNames = data.map((e) => e.series);
       const _colorNames = data.map((e) => e.module_color);
-      const _designNames = data.map((e) => e.module_design);
+      const _designNames = data.map((e) => e.design);
       const _frameColorNames = data.map((e) => e.frame_color);
       setTechnologyNames([...new Set(_techNames)]);
       setSeriesNames([...new Set(_serNames)]);
@@ -84,8 +84,7 @@ const SolarPanelsPage = () => {
             )
             .filter(
               (e) =>
-                designsFilter.includes(e.module_design) ||
-                designsFilter.length === 0
+                designsFilter.includes(e.design) || designsFilter.length === 0
             )
             .filter(
               (e) => !seriesFilter.length || seriesFilter.includes(e.series)
@@ -106,7 +105,7 @@ const SolarPanelsPage = () => {
                 : true
             )
             // .map((panel) => <Panel panel={panel} key={panel.uuid} />)
-            .map((panel) => <PanelItem product={panel} key={panel.uuid} />)
+            .map((panel) => <PanelItem product={panel} key={panel.id} />)
         ) : (
           <>
             <PanelItemSkeleton />

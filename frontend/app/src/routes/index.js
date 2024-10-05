@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import fakeAuthProvider from "../tools/fakeAuthProvider";
 import PageNotFound from "../pages/PageNotFound";
 import Layout from "../pages/Layout";
-import Page from "./pages";
+import { Page } from "./pages";
 
 const router = createBrowserRouter([
   {
@@ -14,7 +14,7 @@ const router = createBrowserRouter([
       isAuthenticated: fakeAuthProvider.isAuthenticated,
     }),
     children: Object.entries(Page).map(([key, value]) => ({
-      id: key,
+      id: key.toLowerCase(),
       path: value.path,
       element: value.element,
     })),

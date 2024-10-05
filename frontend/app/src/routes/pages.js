@@ -1,12 +1,18 @@
-import AboutPage from "../pages//AboutPage";
-import AdminPage from "../pages//AdminPage";
-import HomePage from "../pages//HomePage";
-import Sale from "../pages//Sale";
-import SolarPanelsPage from "../pages//SolarPanelsPage";
-import ProductPage from "../pages//ProductPage";
-import { SignIn, SignUp } from "../pages//UserAuthPage";
+import AboutPage from "../pages/AboutPage";
+import AdminPage from "../pages/AdminPage";
+import HomePage from "../pages/HomePage";
+import SalePage from "../pages/SalePage";
+import SolarPanelsPage from "../pages/SolarPanelsPage";
+import ProductPage from "../pages/ProductPage";
+import BlogPage from "../pages/BlogPage";
+import FavoritesPage from "../pages/FavoritesPage";
+import HelpPage from "../pages/HelpPage";
+import NewsPage from "../pages/NewsPage";
+import ShippingPage from "../pages/ShippingPage";
+import PaymentsPage from "../pages/PaymentsPage";
+import { SignInPage, SignUpPage } from "../pages/UserAuthPage";
 
-const Page = {
+export const Page = {
   home: {
     title: "Home",
     path: "/",
@@ -25,53 +31,56 @@ const Page = {
   sale: {
     title: "Sale",
     path: "/sale",
-    element: <Sale />,
+    element: <SalePage />,
   },
-  solarPanels: {
+  solarpanels: {
     title: "Solar Panels",
     path: "/product/panels",
     element: <SolarPanelsPage />,
   },
-  productPage: {
+  productpage: {
     title: "Product detailed info",
     path: "/product/:category/:uuid",
     element: <ProductPage />,
   },
-  signIn: {
+  signin: {
     title: "Sign In",
     path: "/signin",
-    element: <SignIn />,
+    element: <SignInPage />,
   },
-  signOut: {
+  signup: {
     title: "Sign Up",
     path: "/signup",
-    element: <SignUp />,
+    element: <SignUpPage />,
   },
   blog: {
     title: "Blog",
     path: "/blog",
-    element: <div>Blog</div>,
+    element: <BlogPage />,
   },
   news: {
     title: "News",
     path: "/news",
-    element: <div>News</div>,
+    element: <NewsPage />,
   },
   shipping: {
     title: "Shipping",
     path: "/shipping",
-    element: <div>Shipping</div>,
+    element: <ShippingPage />,
   },
   payments: {
     title: "Payments",
     path: "/payments",
-    element: <div>Payments</div>,
+    element: <PaymentsPage />,
   },
   help: {
     title: "Help",
     path: "/help",
-    element: <div>Help</div>,
+    element: <HelpPage />,
+  },
+  favorites: {
+    title: "Favorites",
+    path: "/favorites",
+    element: <FavoritesPage />,
   },
 };
-
-export default Page;

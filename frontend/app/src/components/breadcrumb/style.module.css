@@ -11,15 +11,26 @@
   color: var(--color-brand-gray);
 }
 
-.breadcrumb a {
+.breadcrumb.a {
   text-decoration: none;
 }
 
-.breadcrumb a:hover, .breadcrumb a:last-child:hover {
+.breadcrumb .a:hover,
+.breadcrumb .a:last-child:hover {
   text-decoration: underline;
   color: var(--color-brand-red);
 }
 
-.breadcrumb a:last-child{
+.breadcrumb:where(body.dark *) a:last-child {
   color: var(--color-brand-white-text);
+}
+
+.breadcrumb a:last-child {
+  color: var(--color-brand-dark-gray);
+}
+
+.elements {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
