@@ -5,7 +5,7 @@ import styles from "./styles.module.css";
 import { BrandInput } from "../../components/Input";
 import BrandButton from "../../components/BrandButton";
 
-const LoginForm = () => {
+const SignInPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -75,4 +75,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignInPage;

@@ -8,25 +8,26 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  transition: width 0.4s ease-in-out;
-  width: 40px;
-  height: 40px;
   overflow: hidden;
-  border: 1px dotted green;
   transition: width 0.4s ease-in-out;
+  width: 2rem;
+  height: 1.8rem;
 }
 
 .searchContainer.active {
   width: var(--search-width-active);
 }
 
-.icon {
+.searchContainer .icon {
   position: absolute;
   left: 0.5rem;
-  width: 1.5rem;
-  height: 1.5rem;
-  color: var(--color-brand-light-gray);
+  size: 1.5rem;
   transition: left 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  color: var(--color-brand-dark-gray);
+}
+
+body.dark .searchContainer .icon {
+  color: var(--color-brand-white-text) !important;
 }
 
 .input {
@@ -34,7 +35,6 @@
   height: 100%;
   padding: 0;
   background-color: transparent;
-  color: var(--color-brand-light-gray);
   outline: none;
   border: 1px solid var(--color-brand-light-gray);
   border-radius: 20px;
@@ -68,7 +68,12 @@
   width: var(--search-width-active-input);
   opacity: 1;
   padding: 0 1rem;
-  background-color: #131313;
+  padding-left: 2.5rem;
+  background-color: var(--color-brand-light-gray);
+}
+
+body.dark .searchContainer:hover .input {
+  background-color: var(--color-brand-dark-gray) !important;
 }
 
 .searchContainer:hover .icon {
@@ -76,7 +81,7 @@
 }
 
 .searchContainer:hover .button {
-  width: 80px;
+  width: 1.1rem;
   opacity: 1;
   margin-left: 0.5rem;
 }
@@ -85,15 +90,12 @@
   width: var(--search-width-active-input);
   opacity: 1;
   padding: 0 1rem;
+  padding-left: 2.5rem;
   background-color: #131313;
 }
 
-.searchContainer.active .icon {
-  left: 0.5rem;
-}
-
 .searchContainer.active .button {
-  width: 80px;
+  width: 1.1rem;
   opacity: 1;
   margin-left: 0.5rem;
 }

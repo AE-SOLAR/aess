@@ -7,6 +7,7 @@ import facebookIcon from "../../static/social/facebook.svg";
 import linkedinIcon from "../../static/social/linkedin.svg";
 import instagramIcon from "../../static/social/instagram.svg";
 import twitterIcon from "../../static/social/twitter.svg";
+import { ThemeSwitcher } from "../ThemeSwitcher";
 
 const Footer = () => {
   return (
@@ -141,6 +142,7 @@ const Footer = () => {
           <a href="/" className={styles.link}>
             Legal
           </a>
+          <ThemeSwitcher />
         </div>
       </div>
     </div>

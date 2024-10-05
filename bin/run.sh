@@ -6,6 +6,11 @@ CLEAN_DOCKER() {
   export $(grep -v '^#' $ENV_FILE | xargs)
   docker compose down
   docker container prune --filter "label=prog=aeshop" --force
+  
+  docker volume rm shop_frontend_node_modules_volume
+  docker volume rm shop_backend_node_modules_volume
+  docker volume rm frontend_build_volume
+  
   docker system prune --force
   docker buildx prune --force
 }
@@ -15,7 +20,7 @@ if [[ $1 == "clean" || $1 == "clear" ]]; then
 elif [[ $1 == "db_update" ]]; then
   docker exec -it ae_shop_api alembic revision --autogenerate -m "Update migration"
   docker exec -it ae_shop_api alembic upgrade head
-  docker exec -it ae_shop_api python3 push_db_data.py
+  docker exec -it ae_shop_api python3 push_db_data.py 
 else
   HOMEDIR=$(basename "$PWD")
   if [[ $HOMEDIR == "bin" ]]; then

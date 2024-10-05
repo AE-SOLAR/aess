@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaSun, FaMoon } from "react-icons/fa6";
 
 export const ThemeSwitcher = () => {
   const [dark, setDark] = useState(true);
@@ -18,12 +18,13 @@ export const ThemeSwitcher = () => {
   }, [dark]);
 
   return (
-    <div onClick={darkModeHandler}>
-      {dark ? (
-        <FontAwesomeIcon icon="fa-solid fa-sun" />
-      ) : (
-        <FontAwesomeIcon icon="fa-solid fa-moon" />
-      )}
+    <div
+      onClick={darkModeHandler}
+      style={{
+        cursor: "pointer",
+      }}
+    >
+      {dark ? <FaSun size={"1.2rem"} /> : <FaMoon size={"1.2rem"} />}
     </div>
   );
 };

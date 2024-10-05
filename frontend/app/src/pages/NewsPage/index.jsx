@@ -1,23 +1,25 @@
-import React from 'react'
-import './News.css'
-import { getTags, getPosts } from '../../handlers/api';
+import React from "react";
+import "./News.css";
+import { getTags, getPosts } from "../../handlers/api";
 
-export default function News() {
+export default function NewsPage() {
   return (
     <div className="sidebar">
-      <h2 className='mainTittle'>Our news</h2>
+      <h2 className="mainTittle">Our news</h2>
 
       <div className="popular-posts">
         <h3>Popular news</h3>
         <ul>
           {getPosts().map((post, index) => (
-            <li key={index} className="post-item">{post}</li>
+            <li key={index} className="post-item">
+              {post}
+            </li>
           ))}
         </ul>
       </div>
 
       <div className="subscribe-section">
-        <p>Stay up to date with our newsletter</p>
+        <span>Stay up to date with our newsletter</span>
         <button className="subscribe-button">Subscribe now</button>
       </div>
 
@@ -25,10 +27,12 @@ export default function News() {
         <h3>Tags</h3>
         <div className="tags">
           {getTags().map((tag, index) => (
-            <span key={index} className="tag">{tag}</span>
+            <span key={index} className="tag">
+              {tag}
+            </span>
           ))}
         </div>
       </div>
     </div>
-  )
+  );
 }

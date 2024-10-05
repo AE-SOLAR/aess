@@ -14,12 +14,12 @@ const Breadcrumb = () => {
           {breadcrumb.map((e, idx) => {
             const link = breadcrumb.slice(0, idx + 1).join("/");
             return (
-              <>
+              <div key={`${e}.${idx}`} className={style.elements}>
                 <span>-</span>
                 <a href={`/${link}`}>
                   {e.charAt(0).toUpperCase() + e.slice(1)}
                 </a>
-              </>
+              </div>
             );
           })}
         </div>

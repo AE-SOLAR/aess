@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import style from "./index.module.css";
 
 export const PanelsFilter = ({
@@ -70,8 +70,6 @@ export const PanelsFilter = ({
     setHighestPowerFilter(target.value);
   };
 
-  const [triggerEffect, setTriggerEffect] = useState(false);
-
   const handleResetButtonClick = () => {
     setTechnologyFilter([]);
     setSeriesFilter([]);
@@ -80,7 +78,6 @@ export const PanelsFilter = ({
     setFrameColorFilter([]);
     setLowerPowerFilter("");
     setHighestPowerFilter("");
-    setTriggerEffect((prev) => !prev);
   };
 
   return (
@@ -198,7 +195,7 @@ export const PanelsFilter = ({
                 className={style.powerRangeInput}
                 placeholder={0}
               ></input>
-              <p>from</p>
+              <span>from</span>
             </div>
             <div className={style.powerRangeInputDiv}>
               <input
@@ -208,7 +205,7 @@ export const PanelsFilter = ({
                 className={style.powerRangeInput}
                 placeholder={60000}
               ></input>
-              <p>up to</p>
+              <span>up to</span>
             </div>
           </div>
         </div>

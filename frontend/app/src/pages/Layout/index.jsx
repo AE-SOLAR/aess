@@ -9,15 +9,19 @@ import Breadcrumb from "../../components/Breadcrumb";
 
 const Layout = () => {
   return (
-    <HeroHighlight>
-      <CurvedLine />
-      <div className={style.wrapper}>
-        <Header />
-        <Breadcrumb />
-        <Outlet />
-        <Footer />
-      </div>
-    </HeroHighlight>
+    <div className={style.layoutContainer}>
+      <HeroHighlight>
+        <CurvedLine />
+        <div className={style.wrapper}>
+          <Header />
+          <div className={style.outletContainer}>
+            <Breadcrumb />
+            <Outlet />
+          </div>
+          <Footer />
+        </div>
+      </HeroHighlight>
+    </div>
   );
 };
 

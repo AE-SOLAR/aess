@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import style from "./style.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FaSearchengin } from "react-icons/fa6";
 
 const SearchInput = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -25,7 +24,7 @@ const SearchInput = () => {
     <div
       className={`${style.searchContainer} ${isFocused ? style.active : ""}`}
     >
-      <FontAwesomeIcon icon={faSearch} className={style.icon} />
+      <FaSearchengin size={"1.5rem"} className={style.icon} />
       <input
         type="text"
         placeholder="Search"
@@ -35,9 +34,9 @@ const SearchInput = () => {
         onFocus={handleFocus}
         onBlur={handleBlur}
       />
-      {searchValue.length > 0 && (
+      {/* {searchValue.length > 0 && (
         <button className={style.button}>Search</button>
-      )}
+      )} */}
     </div>
   );
 };
