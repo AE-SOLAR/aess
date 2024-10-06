@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 
 import style from "./style.module.css";
 
-const Breadcrumb = () => {
+const Breadcrumbs = () => {
   const location = useLocation();
   const breadcrumb = location.pathname.split("/").slice(1);
   return (
@@ -28,4 +28,4 @@ const Breadcrumb = () => {
   );
 };
 
-export default Breadcrumb;
+export default Breadcrumbs;

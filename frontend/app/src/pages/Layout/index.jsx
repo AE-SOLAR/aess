@@ -5,7 +5,7 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { HeroHighlight } from "../../components/ui/HeroHidhtlight";
 import CurvedLine from "../../components/ScrollBarLIne";
-import Breadcrumb from "../../components/Breadcrumb";
+import Breadcrumbs from "../../components/Breadcrumbs";
 
 const Layout = () => {
   return (
@@ -15,7 +15,7 @@ const Layout = () => {
           <CurvedLine />
           <Header />
           <div className={style.outletContainer}>
-            <Breadcrumb />
+            <Breadcrumbs />
             <Outlet />
           </div>
           <Footer />
