@@ -1,30 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { FaSun, FaMoon } from "react-icons/fa6";
 
-export const ThemeSwitcher = () => {
-  const [dark, setDark] = useState(true);
+const THEME_KEY = "themeMode";
 
-  const darkModeHandler = () => {
-    setDark(!dark);
-    document.body.classList.toggle("dark");
-  };
+export const ThemeSwitcher = () => {
+  const [themeMode, setThemeMode] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem(THEME_KEY) || "dark";
+    }
+    return "dark";
+  });
 
   useEffect(() => {
-    if (dark) {
-      document.body.classList.add("dark");
+    const root = document.body;
+    if (themeMode === "light") {
+      root.classList.add("light");
+      root.classList.remove("dark");
     } else {
-      document.body.classList.remove("dark");
+      root.classList.add("dark");
+      root.classList.remove("light");
     }
-  }, [dark]);
+    localStorage.setItem(THEME_KEY, themeMode);
+  }, [themeMode]);
+
+  const toggleTheme = useCallback(() => {
+    setThemeMode((prevMode) => (prevMode === "dark" ? "light" : "dark"));
+  }, []);
 
   return (
-    <div
-      onClick={darkModeHandler}
+    <button
+      onClick={toggleTheme}
       style={{
         cursor: "pointer",
+        background: "none",
+        border: "none",
+        padding: 0,
       }}
+      aria-label={`Switch to ${themeMode === "dark" ? "light" : "dark"}`}
     >
-      {dark ? <FaSun size={"1.2rem"} /> : <FaMoon size={"1.2rem"} />}
-    </div>
+      {themeMode === "light" ? (
+        <FaSun size="1.2rem" />
+      ) : (
+        <FaMoon size="1.2rem" />
+      )}
+    </button>
   );
 };

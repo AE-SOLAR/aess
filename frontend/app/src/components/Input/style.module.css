@@ -21,7 +21,7 @@
 .searchContainer .icon {
   position: absolute;
   left: 0.5rem;
-  size: 1.5rem;
+  font-size: 1.5rem;
   transition: left 0.4s ease-in-out, opacity 0.4s ease-in-out;
   color: var(--color-brand-dark-gray);
 }
@@ -33,14 +33,12 @@ body.dark .searchContainer .icon {
 .input {
   width: 0;
   height: 100%;
-  padding: 0;
+  padding: 0 0 0 2.5rem;
   background-color: transparent;
   outline: none;
   border: 1px solid var(--color-brand-light-gray);
   border-radius: 20px;
-  padding-left: 2.5rem;
-  transition: width 0.4s ease-in-out, opacity 0.4s ease-in-out,
-    padding 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out, opacity 0.4s ease-in-out, padding 0.4s ease-in-out;
   opacity: 0;
 }
 

@@ -4,7 +4,7 @@ import { FaSearchengin } from "react-icons/fa6";
 
 const SearchInput = () => {
   const [searchValue, setSearchValue] = useState("");
-  const [isFocused, setIsFocused] = useState(false); // Добавляем состояние фокуса
+  const [isFocused, setIsFocused] = useState(false);
 
   const handlerChange = (e) => {
     setSearchValue(e.target.value);
