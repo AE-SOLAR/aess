@@ -8,8 +8,10 @@ const BackgroundVideo = ({ videoSrc, children }) => {
   };
 
   const handleMouseLeave = () => {
-    videoRef.current.pause();
-    videoRef.current.currentTime = 0;
+    if (!videoRef.current.paused) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
   };
 
   return (
