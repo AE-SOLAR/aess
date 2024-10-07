@@ -4,12 +4,13 @@ import fakeAuthProvider from "../tools/fakeAuthProvider";
 import { LoginPage } from "../pages/LoginPage";
 import Blog from "../pages/Blog/Blog";
 import News from "../pages/News/News";
-import Shipping from "../pages/Shipping/Shipping";
-import Payments from "../pages/Payments/Payments";
 import Help from "../pages/Help/Help";
 import Favorites from "../pages/Favorites/Favorites";
 import Invertors from "../pages/Invertors/Invertors";
 import AccessoriesElectrical from "../pages/AccessoriesElectrical";
+import TermsAndConditions from '../pages/Terms&Conditions';
+import ShippingPage from "../pages/ShipingPage";
+import Payments from "../pages/Payments";
 
 const RootRoutes = [
   {
@@ -42,14 +43,9 @@ const RootRoutes = [
         element: <News />,
       },
       {
-        id: "shipping",
-        path: "shipping",
-        element: <Shipping />,
-      },
-      {
         id: "payments",
         path: "payments",
-        element: <Payments />,
+        element: <Payments/>,
       },
       {
         id: "help",
@@ -85,6 +81,16 @@ const RootRoutes = [
         id: "accessories-electrical",
         path: "accessories-electrical",
         element: <AccessoriesElectrical />,
+      },
+      {
+        id: "shiping",
+        path: "shiping",
+        element: <ShippingPage/>,
+      },
+      {
+        id: "terms-and-onditions",
+        path: "terms-and-onditions",
+        element: <TermsAndConditions/>,
       },
       {
         id: "admin",
