@@ -1,129 +1,124 @@
 
-body {
-    font-family: 'GT Walsheim Pro', Arial, sans-serif;
-  }
-  
-  .Payments {
-    padding: 20px;
-    text-align: left;
-    font-family: 'Criteria CF', Arial, sans-serif;
-  }
-  
-  .PaymentsHeader {
-    position: relative;
-    display: inline-block;
-    text-align: center; 
-  }
-  
-  .PaymentsImage {
-    width: 100%;
-    height: auto;
-    position: relative;
-    display: block;
-  }
-  
-  .PaymentsTitle, .InformationTitle {
-    position: absolute;
-    color: white;
-    font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  }
-  
-  .PaymentsTitle {
-    top: 50%;
-    left: 15%;
-    font-size: 70px;
-    transform: translate(-50%, -50%);
-  }
-  
-  .InformationTitle {
-    top: 80%;
-    left: 15%;
-    font-size: 30px;
-    color: red;
-    transform: translate(-50%, -50%);
-  }
-  
-  .WhichText {
-    margin-top: 50px;
-    font-size: 30px;
-    font-weight: bold;
-  }
-  
-  .PaymentText {
-    margin-top: 20px;
-    font-size: 16px;
-    line-height: 1.6;
-  }
-  
-  .PaymentMethods, .Choose_h2 {
-    text-align: center;
-    margin-top: 30px;
-  }
-  
-  .PaymentMethods {
-    font-size: 48px;
-  }
-  
-  .Choose_h2 {
-    font-size: 28px;
-    color: red;
-    margin-top: 10px;
-  }
-  
-  .PaymentsImgBlock {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 40px;
-  }
-  
-  .PaymentOption {
-    position: relative;
-    width: 45%;
-  }
-  
-  .PaymentOption img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    border: 1px solid red;
-  }
-  
-  .PaymentTextBlock {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    color: white;
-    font-size: 24px;
-    font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  }
-  
-  .PaymentTextBlock p {
-    font-size: 16px;
-    margin-top: 10px;
-  }
-  
-  .TextBox {
-    padding: 10px;
-    max-width: 90%; 
-    box-sizing: border-box; 
-    font-size: 16px;
-    color: white;
-    text-align: center;
-  }
-  
-  .PaymentImg {
-    font-size: 64px;
-  }
-  
-  .lineDown {
-    margin-top: 100px;
-  }
-  
-  .PaymentImg1,
-  .PaymentImg2 {
-    font-size: 64px;
-  }
-  
+.Payments {
+  padding: 20px;
+  text-align: left;
+  font-family: 'Criteria CF', Arial, sans-serif;
+}
+
+.PaymentsHeader {
+  position: relative;
+  display: inline-block;
+  text-align: center; 
+}
+
+.PaymentsImage {
+  width: 100%;
+  height: auto;
+  position: relative;
+  display: block;
+}
+
+.PaymentsTitle, .InformationTitle {
+  position: absolute;
+  color: white;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.PaymentsTitle {
+  top: 50%;
+  left: 15%;
+  font-size: 70px;
+  transform: translate(-50%, -50%);
+}
+
+.InformationTitle {
+  top: 80%;
+  left: 15%;
+  font-size: 30px;
+  color: red;
+  transform: translate(-50%, -50%);
+}
+
+.WhichText {
+  margin-top: 50px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.PaymentText {
+  margin-top: 20px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.PaymentMethods, .Choose_h2 {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.PaymentMethods {
+  font-size: 48px;
+}
+
+.Choose_h2 {
+  font-size: 28px;
+  color: red;
+  margin-top: 10px;
+}
+
+.PaymentsImgBlock {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.PaymentOption {
+  position: relative;
+  width: 45%;
+}
+
+.PaymentOption img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid red;
+}
+
+.PaymentTextBlock {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.PaymentTextBlock p {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.TextBox {
+  padding: 10px;
+  max-width: 90%; 
+  box-sizing: border-box; 
+  font-size: 16px;
+  color: white;
+  text-align: center;
+}
+
+.PaymentImg {
+  font-size: 64px;
+}
+
+.lineDown {
+  margin-top: 100px;
+}
+
+.PaymentImg1,
+.PaymentImg2 {
+  font-size: 64px;
+}
