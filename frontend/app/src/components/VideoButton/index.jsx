@@ -25,7 +25,7 @@ const BackgroundVideo = ({ videoSrc, children }) => {
         loop={false}
         className="absolute top-0 left-0 w-full h-full object-cover z-0"
       />
-      <div className="relative z-10">{children}</div>
+      <div className="relative z-10 h-full w-full">{children}</div>
     </div>
   );
 };

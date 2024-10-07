@@ -71,7 +71,7 @@ const InstallationLocation = [
   {
     url: "/static/images/homepage/homepage_img/building_rooftops.png",
     video: "/static/videos/homepage/building_rooftops.mp4",
-    text: "Building Rooftops",
+    text: "Rooftops",
     route: "/Building_Rooftops_panels",
   },
   {
