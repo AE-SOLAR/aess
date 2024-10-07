@@ -78,7 +78,9 @@ export function PanelItem({ product }) {
           <div className="w-[100%] flex flex-col justify-between items-center px-6">
             <BrandButton to={Page.signup.path}>Sign up for prices</BrandButton>
             <Link
-              to={`/product/panels/${product.id}`}
+              to={`/product/panels/${product.model
+                .replace(/\s/g, "-")
+                .replace(/×/g, "x")}`}
               className="px-4 py-2 font-normal text-black dark:text-white"
             >
               See details
@@ -91,29 +93,28 @@ export function PanelItem({ product }) {
 }
 
 export function PanelItemSkeleton() {
-  const color = "-red-950";
   return (
     <div
-      className={`w-[250px] h-[500px] border border${color} shadow rounded-md p-4 mx-auto`}
+      className={`w-[250px] h-[500px] border border-red-950 shadow rounded-md p-4 mx-auto`}
     >
-      <div className="animate-pulse flex flex-col">
-        <div className={`h-[200px] w-[100%] bg${color} rounded`}></div>
+      <div className="flex flex-col">
+        <div className={`h-[200px] w-[100%] bg-red-950 rounded`}></div>
         <div className="flex-1 space-y-6 py-8">
-          <div className={`h-2 bg${color} rounded`}></div>
+          <div className={`h-2 bg-red-950 rounded`}></div>
           <div className="space-y-3">
             <div className="grid grid-cols-3 gap-4">
-              <div className={`h-2 bg${color} rounded col-span-2`}></div>
-              <div className={`h-2 bg${color} rounded col-span-1`}></div>
+              <div className={`h-2 bg-red-950 rounded col-span-2`}></div>
+              <div className={`h-2 bg-red-950 rounded col-span-1`}></div>
             </div>
             <div className="grid grid-cols-3 gap-4">
-              <div className={`h-2 bg${color} rounded col-span-1`}></div>
-              <div className={`h-2 bg${color} rounded col-span-2`}></div>
+              <div className={`h-2 bg-red-950 rounded col-span-1`}></div>
+              <div className={`h-2 bg-red-950 rounded col-span-2`}></div>
             </div>
-            <div className={`h-2 bg${color} rounded`}></div>
+            <div className={`h-2 bg-red-950 rounded`}></div>
           </div>
           <div className="flex justify-between items-center flex-col gap-5 py-4">
-            <div className={`h-12 w-[100%] bg${color} rounded`}></div>
-            <div className={`h-12 w-[100%] bg${color} rounded`}></div>
+            <div className={`h-12 w-[100%] bg-red-950 rounded`}></div>
+            <div className={`h-12 w-[100%] bg-red-950 rounded`}></div>
           </div>
         </div>
       </div>
