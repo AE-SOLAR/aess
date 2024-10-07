@@ -8,6 +8,7 @@ import { fetchPanels } from "../../handlers/api";
 import { getRandomElements } from "../../handlers/tools";
 import { PanelItem } from "../../components/PanelItem";
 import ButtonWithLine from "../../components/ButtonWithLine";
+import VideoButton from "../../components/VideoButton";
 
 const slideImages = [
   {
@@ -51,26 +52,31 @@ const slideImages = [
 const InstallationLocation = [
   {
     url: "/static/images/homepage/homepage_img/fields.png",
+    video: "/static/videos/homepage/fields.mp4",
     text: "Fields",
     route: "/Fields_panels",
   },
   {
     url: "/static/images/homepage/homepage_img/house_roofs.png",
+    video: "/static/videos/homepage/house_roofs.mp4",
     text: "House Roofs",
     route: "/House_Roofs_panels",
   },
   {
     url: "/static/images/homepage/homepage_img/car_ports.png",
+    video: "/static/videos/homepage/car_ports.mp4",
     text: "Car Ports",
     route: "/Car_Ports_panels",
   },
   {
     url: "/static/images/homepage/homepage_img/building_rooftops.png",
+    video: "/static/videos/homepage/building_rooftops.mp4",
     text: "Building Rooftops",
     route: "/Building_Rooftops_panels",
   },
   {
     url: "/static/images/homepage/homepage_img/fence.png",
+    video: "/static/videos/homepage/fence.mp4",
     text: "Fence",
     route: "/fence_panels",
   },
@@ -193,9 +199,10 @@ export default function HomePage() {
               key={index}
               className={style.imgCard}
               onClick={() => handleClick(image.route)}
-              style={{ backgroundImage: `url(${image.url})` }}
             >
-              <span className={style.imgText}>{image.text}</span>
+              <VideoButton videoSrc={image.video}>
+                <span className={style.imgText}>{image.text}</span>
+              </VideoButton>
             </div>
           ))}
         </div>
