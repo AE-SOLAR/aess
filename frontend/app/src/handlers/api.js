@@ -7,6 +7,22 @@ export const fetchPanels = async () => {
   }
 };
 
+export const apiSignUp = async (data) => {
+  console.log(data);
+  console.log("Aaaa", JSON.stringify(data));
+  try {
+    return await fetch(`${process.env.REACT_APP_API_URL}/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+};
 
 export const getTags = () => {
   return [

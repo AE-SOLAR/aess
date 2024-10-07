@@ -1,70 +1,72 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import style from "./index.module.css";
 import logo from "../../static/header_icons/aesolar_logo.svg";
-import searchIcon from "../../static/header_icons/search_icon.svg";
-import favoritesIcon from "../../static/header_icons/favorit.svg";
-import bag from "../../static/header_icons/bag.svg";
-import account_menu from "../../static/header_icons/account_menu.svg";
-import { ThemeSwitcher } from "../ThemeSwitcher";
+import { SearchInput } from "../Input";
+import { Page } from "../../routes/pages";
+
+import {
+  FaCartShopping,
+  FaCircleUser,
+  FaHeart,
+  FaHeartCircleBolt,
+} from "react-icons/fa6";
 
 const Header = () => {
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem(process.env.REACT_APP_TOKEN_KEY_NAME);
+    if (token) {
+      setIsUserLoggedIn(true);
+    }
+  }, []);
+
   return (
     <header className={style["header"]}>
       <div className={style["header-container"]}>
         <div className={style["logo"]}>
           <img src={logo} alt="AESOLAR" />
         </div>
-        <div className={style["search"]}>
-          <input type="text" placeholder="Search sth..." />
-          <button>
-            <img src={searchIcon} alt="Search" />
-          </button>
-        </div>
-        <div className={style["nav-icons"]}>
+        <div className={`${style["nav-icons"]}`}>
+          <SearchInput />
           <Link to="/favorites">
-            <img src={favoritesIcon} alt="Favorites" />
+            {<FaHeartCircleBolt size={"1.5rem"} /> || (
+              <FaHeart size={"1.5rem"} />
+            )}
           </Link>
-          <Link to="/account_menu">
-            <img src={account_menu} alt="AccountMenu" />
+          <Link to={isUserLoggedIn ? Page.signin.path : Page.signup.path}>
+            <FaCircleUser size={"1.5rem"} />
           </Link>
           <Link to="/cart">
-            <img src={bag} alt="Cart" />
+            <FaCartShopping size={"1.5rem"} />
           </Link>
-          <ThemeSwitcher />
         </div>
       </div>
       <div className={style["nav"]}>
-        <Link to="/" className={style["nav-link"]}>
-          Home
+        <Link to={Page.home.path} className={style["nav-link"]}>
+          {Page.home.title}
         </Link>
-        <Link to="/solar-panels" className={style["nav-link"]}>
-          Solar panels
+        <Link to={Page.solarpanels.path} className={style["nav-link"]}>
+          {Page.solarpanels.title}
         </Link>
-        <Link to="/sale" className={style["nav-link"]}>
-          Sale
+        <Link to={Page.sale.path} className={style["nav-link"]}>
+          {Page.sale.title}
         </Link>
-        {/* <Link to="/inverters" className={style["nav-link"]}>Inverters</Link> */}
-        {/* <Link to="/home-storage" className={style["nav-link"]}>
-          Home storage
-        </Link> */}
-        <Link to="/accessories-electrical" className={style["nav-link"]}>
-          Accessories & Electrical
+        <Link to={Page.blog.path} className={style["nav-link"]}>
+          {Page.blog.title}
         </Link>
-        <Link to="/blog" className={style["nav-link"]}>
-          Blog
+        <Link to={Page.news.path} className={style["nav-link"]}>
+          {Page.news.title}
         </Link>
-        <Link to="/news" className={style["nav-link"]}>
-          News
+        <Link to={Page.shipping.path} className={style["nav-link"]}>
+          {Page.shipping.title}
         </Link>
-        <Link to="/shipping" className={style["nav-link"]}>
-          Shipping
+        <Link to={Page.payments.path} className={style["nav-link"]}>
+          {Page.payments.title}
         </Link>
-        <Link to="/payments" className={style["nav-link"]}>
-          Payments
-        </Link>
-        <Link to="/help" className={style["nav-link"]}>
-          Help
+        <Link to={Page.help.path} className={style["nav-link"]}>
+          {Page.help.title}
         </Link>
       </div>
     </header>

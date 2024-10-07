@@ -1,0 +1,77 @@
+:root {
+  --search-width-active: 460px;
+  --search-width-active-input: 460px;
+}
+
+.searchContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  transition: width 0.4s ease-in-out;
+  width: 2rem;
+  height: 1.8rem;
+}
+
+.searchContainer.active {
+  width: var(--search-width-active);
+}
+
+.button {
+  width: 0;
+  height: 2rem;
+  padding: 0;
+  margin-left: 0;
+  background-color: var(--color-brand-black);
+  border: 1px solid transparent;
+  border-radius: 20px;
+  cursor: pointer;
+  opacity: 0;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  transition: width 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+.searchContainer:hover {
+  width: var(--search-width-active);
+}
+
+.searchContainer:hover .input {
+  width: var(--search-width-active-input);
+  opacity: 1;
+  padding: 0 1rem;
+  padding-left: 2.5rem;
+  background-color: transparent;
+}
+
+body.dark .searchContainer:hover .input {
+  background-color: var(--color-brand-dark-gray) !important;
+}
+
+.searchContainer:hover .button {
+  width: 1.1rem;
+  opacity: 1;
+  margin-left: 0.5rem;
+}
+
+.searchContainer.active .input {
+  width: var(--search-width-active-input);
+  opacity: 1;
+  padding: 0 1rem;
+  padding-left: 2.5rem;
+  background-color: transparent;
+}
+
+.searchContainer.active .button {
+  width: 1.1rem;
+  opacity: 1;
+  margin-left: 0.5rem;
+}
+
+@media screen and (max-width: 375px) {
+  .searchContainer {
+    display: none;
+  }
+}

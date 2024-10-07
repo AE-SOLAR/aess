@@ -1,10 +1,9 @@
-"use client";
-
 import React from "react";
 import { CardBody, CardContainer, CardItem } from "../ui/3d-card";
 import { Link } from "react-router-dom";
 import { RedLine } from "../ui/red-line";
-import { BrandButton } from "../ui/brand-button";
+import BrandButton from "../BrandButton";
+import { Page } from "../../routes/pages";
 
 export function PanelItem({ product }) {
   const techData = [
@@ -63,26 +62,26 @@ export function PanelItem({ product }) {
             </div>
           </CardItem>
           <CardItem
-            as="p"
+            as="span"
             translateZ="60"
             className="w-[100%] flex flex-col text-neutral-500 text-sm max-w-sm dark:text-neutral-300 px-6"
           >
             {techData.map(([key, value]) => (
               <div className="flex gap-2" key={key}>
                 <span>{key}:</span>
-                <span className="font-bold dark:text-white text-black">
+                <span className="font-bold dark:text-white text-black whitespace-nowrap">
                   {value}
                 </span>
               </div>
             ))}
           </CardItem>
           <div className="w-[100%] flex flex-col justify-between items-center px-6">
-            <BrandButton to={`/product/${product.uuid}`}>
-              Sign up for prices
-            </BrandButton>
+            <BrandButton to={Page.signup.path}>Sign up for prices</BrandButton>
             <Link
-              to={`/product/${product.uuid}`}
-              className="px-4 py-2 font-normal dark:text-white"
+              to={`/product/panels/${product.model
+                .replace(/\s/g, "-")
+                .replace(/×/g, "x")}`}
+              className="px-4 py-2 font-normal text-black dark:text-white"
             >
               See details
             </Link>
@@ -94,29 +93,28 @@ export function PanelItem({ product }) {
 }
 
 export function PanelItemSkeleton() {
-  const color = "-red-950";
   return (
     <div
-      class={`w-[250px] h-[500px] border border${color} shadow rounded-md p-4 mx-auto`}
+      className={`w-[250px] h-[500px] border border-red-950 shadow rounded-md p-4 mx-auto`}
     >
-      <div class="animate-pulse flex flex-col">
-        <div class={`h-[200px] w-[100%] bg${color} rounded`}></div>
-        <div class="flex-1 space-y-6 py-8">
-          <div class={`h-2 bg${color} rounded`}></div>
-          <div class="space-y-3">
-            <div class="grid grid-cols-3 gap-4">
-              <div class={`h-2 bg${color} rounded col-span-2`}></div>
-              <div class={`h-2 bg${color} rounded col-span-1`}></div>
+      <div className="flex flex-col">
+        <div className={`h-[200px] w-[100%] bg-red-950 rounded`}></div>
+        <div className="flex-1 space-y-6 py-8">
+          <div className={`h-2 bg-red-950 rounded`}></div>
+          <div className="space-y-3">
+            <div className="grid grid-cols-3 gap-4">
+              <div className={`h-2 bg-red-950 rounded col-span-2`}></div>
+              <div className={`h-2 bg-red-950 rounded col-span-1`}></div>
             </div>
-            <div class="grid grid-cols-3 gap-4">
-              <div class={`h-2 bg${color} rounded col-span-1`}></div>
-              <div class={`h-2 bg${color} rounded col-span-2`}></div>
+            <div className="grid grid-cols-3 gap-4">
+              <div className={`h-2 bg-red-950 rounded col-span-1`}></div>
+              <div className={`h-2 bg-red-950 rounded col-span-2`}></div>
             </div>
-            <div class={`h-2 bg${color} rounded`}></div>
+            <div className={`h-2 bg-red-950 rounded`}></div>
           </div>
-          <div class="flex justify-between items-center flex-col gap-5 py-4">
-            <div class={`h-12 w-[100%] bg${color} rounded`}></div>
-            <div class={`h-12 w-[100%] bg${color} rounded`}></div>
+          <div className="flex justify-between items-center flex-col gap-5 py-4">
+            <div className={`h-12 w-[100%] bg-red-950 rounded`}></div>
+            <div className={`h-12 w-[100%] bg-red-950 rounded`}></div>
           </div>
         </div>
       </div>

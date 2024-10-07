@@ -2,15 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-brand-white: #ffffff;
+  --color-brand-black: #000000;
+  --color-brand-white-text: #e9e9ea;
+  --color-brand-red: #f60109;
+  --color-brand-gray: #808285;
+  --color-brand-dark-gray: #252525;
+  --color-brand-light-gray: #a7a9ac;
+}
+
 @font-face {
-  font-family: "CriteriaCF";
+  font-family: "Criteria CF";
   src: url("../fonts/CriteriaCF/Criteria CF Regular.otf") format("orf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "CriteriaCF";
+  font-family: "Criteria CF";
   src: url("../fonts/CriteriaCF/Criteria CF Bold.otf") format("orf");
   font-weight: bold;
   font-style: normal;
@@ -40,35 +50,74 @@
 
 /* Скрыть скроллбар в WebKit браузерах (Chrome, Safari) */
 *::-webkit-scrollbar {
-  display: none; /* для WebKit браузеров */
+  display: none;
 }
 
 html,
 body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Criteria CF", "GTWalsheim", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   overflow: auto;
-  scrollbar-width: none;
   -ms-overflow-style: none;
 }
 
-html::-webkit-scrollbar,
-body::-webkit-scrollbar {
-  display: none;
-}
-
 body {
-  margin: 0;
-  font-family: "CriteriaCF", "GTWalsheim", -apple-system, BlinkMacSystemFont,
-    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: "CriteriaCF", "GTWalsheim", source-code-pro, "Courier New",
-    monospace;
+#root,
+#root a {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
 }
 
-.svg-gray {
-  filter: invert(34%) sepia(2%) saturate(461%) hue-rotate(178deg) brightness(92%) contrast(90%);
+#root,
+#root a {
+  color: var(--color-brand-dark-gray);
+}
+
+body.dark #root,
+body.dark #root a {
+  color: var(--color-brand-white-text);
+}
+
+#root a:hover,
+body.dark #root a:hover {
+  color: var(--color-brand-red);
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotating {
+  animation: rotate 5s linear infinite;
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.scaling {
+  animation: scale 5s ease-in-out infinite;
 }

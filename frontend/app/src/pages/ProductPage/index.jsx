@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import style from "./index.module.css";
-import { PanelFavIcon } from "../../components/PanelFavIcon";
 
-export const ProductPage = () => {
+const ProductPage = () => {
   const { uuid } = useParams();
 
   const [panels, setPanels] = useState([]);
@@ -42,29 +41,28 @@ export const ProductPage = () => {
         <div className={style.mainInfoContainer}>
           <div className={style.mainInfoTitleAndFavIcon}>
             <h2> Solar panel AZ3y48273847432 </h2>
-            <PanelFavIcon />
           </div>
           <div className={style.mainInfoParamsList}>
-            <p>Manufacturer: AESOLAR</p>
-            <p>Power: {panelInfo?.powerRange} </p>
-            <p>Technology: {panelInfo?.cell_type?.name}</p>
-            <p>
+            <span>Manufacturer: AESOLAR</span>
+            <span>Power: {panelInfo?.powerRange} </span>
+            <span>Technology: {panelInfo?.cell_type?.name}</span>
+            <span>
               Dimensions: {panelInfo?.length} x {panelInfo?.width} x{" "}
               {panelInfo?.height} mm
-            </p>
-            <p>WEEE Reg. Nr.:</p>
-            <p>Units per PU:</p>
+            </span>
+            <span>WEEE Reg. Nr.:</span>
+            <span>Units per PU:</span>
           </div>
           <div className={style.mainInfoPriceContainer}>
-            <p>Price:</p>
-            <p className={style.price}>550€</p>
+            <span>Price:</span>
+            <span className={style.price}>550€</span>
           </div>
-          <p className={style.mainInfoPriceDesciption}>
+          <span className={style.mainInfoPriceDesciption}>
             The price shown includes the 3 % early payment discount. Compulsory
             value-added tax (VAT) is NOT shown in the price and WILL BE ADDED.
             Excluded are intra-community deliveries (EU) and export deliveries
             (non EU). Additional shipping costs may apply.
-          </p>
+          </span>
         </div>
       </div>
       <div className={style.detailInfoChangeButtons}>
@@ -88,8 +86,8 @@ export const ProductPage = () => {
       </div>
       <div className={style.detailInfoContainer}>
         <h3>Solar panel</h3>
-        {/* <p> {panelInfo.powerRange} </p> */}
-        <p className={style.detailInfoDescription}>
+        {/* <span> {panelInfo.powerRange} </span> */}
+        <span className={style.detailInfoDescription}>
           JinkoSolar is a Chinese company founded in Shanghai in 2006. The solar
           module in the 405 Watt version belongs to the Tiger product line, is
           monofacial / P-type, and based on the multi-busbar technology.  In
@@ -98,13 +96,13 @@ export const ProductPage = () => {
           exposure to diffuse sunlight. The new Tiger Pro series is also highly
           resistant to salt and ammonia, making it perfect for roof
           installations in areas with extreme weather conditions.
-        </p>
+        </span>
         <div className={style.detailInfoParamsList}>
-          <p>Power: </p>
-          <p>Technology: </p>
-          <p>Dimensions: </p>
-          <p>Frame color: </p>
-          <p>Backsheet: </p>
+          <span>Power: </span>
+          <span>Technology: </span>
+          <span>Dimensions: </span>
+          <span>Frame color: </span>
+          <span>Backsheet: </span>
         </div>
         <h4>Product advantages</h4>
         <ul className={style.detailInfoUl}>
@@ -138,7 +136,7 @@ export const ProductPage = () => {
           </li>
         </ul>
         <h4>Module manufacturer AESOLAR</h4>
-        <p className={style.detailInfoDescription}>
+        <span className={style.detailInfoDescription}>
           JinkoSolar is a Chinese company founded in Shanghai in 2006. The solar
           module in the 405 Watt version belongs to the Tiger product line, is
           monofacial / P-type, and based on the multi-busbar technology.  In
@@ -147,8 +145,10 @@ export const ProductPage = () => {
           exposure to diffuse sunlight. The new Tiger Pro series is also highly
           resistant to salt and ammonia, making it perfect for roof
           installations in areas with extreme weather conditions.
-        </p>
+        </span>
       </div>
     </div>
   );
 };
+
+export default ProductPage;

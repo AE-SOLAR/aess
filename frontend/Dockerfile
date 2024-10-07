@@ -5,7 +5,7 @@ LABEL prog="aeshop"
 WORKDIR /usr/src/app
 
 COPY ./app/package.json .
-COPY ./app/yarn.lock .
+# COPY ./app/yarn.lock .
 
 RUN rm -rf node_modules/.cache
 RUN rm -rf node_modules

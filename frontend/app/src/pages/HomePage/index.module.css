@@ -4,7 +4,7 @@
 }
 
 .slider {
-  position: relative; 
+  position: relative;
   display: flex;
   align-items: start;
   justify-content: start;
@@ -17,8 +17,8 @@
 /* Стили для контента на слайде */
 .sliderContent {
   position: absolute;
-  bottom: 30px; 
-  left: 30px;   
+  bottom: 30px;
+  left: 30px;
 }
 
 /* Стили для кнопки на слайде */
@@ -36,8 +36,6 @@
   background-color: #4c1b11;
 }
 
-
-
 /* Остальные существующие стили */
 .cartBlock {
   padding: 10px;
@@ -53,53 +51,75 @@
 
 .SolarPaneltext {
   color: white;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   font-size: 48px;
   font-weight: bold;
 }
 
 .ExploreText {
   color: red;
-  font-family: 'Helvetica', sans-serif;
+  font-family: "Helvetica", sans-serif;
   font-size: 24px;
   margin-bottom: 30px;
 }
 
 .cartImgButton {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  justify-content: stretch;
+  justify-items: stretch;
+  align-items: center;
+  align-content: center;
+  gap: 1rem;
 }
 
 .imgCard {
-  width: 350px;
-  height: 140px;
+  height: 150px;
   background-size: cover;
   background-position: center;
   border-radius: 15px;
   position: relative;
   cursor: pointer;
-  transition: transform 0.3s ease;
   border: 1px solid red;
-
+  z-index: 1;
   /* Центрируем текст внутри карточек */
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+
+  transition: z-index 0.3s ease-in-out, transform 0.3s ease-in-out,
+    scale 0.3s ease-in-out, filter 0.3s ease-in-out;
+
+  filter: grayscale(70%);
+  overflow: hidden;
 }
 
 .imgCard:hover {
-  transform: scale(1.55); 
+  transform: scale(1.3);
+  z-index: 2;
+  filter: grayscale(0%);
 }
 
 .imgText {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: white;
   font-size: 22px;
   font-weight: bold;
-  margin-bottom: 80px;
-  display: block;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); 
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  text-wrap: nowrap;
+}
+
+.solarPanelsblock {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 
 .solarPanelsText {
@@ -111,16 +131,17 @@
 
 .solarPanelsCart {
   display: grid;
-  grid-template-columns: repeat(4,1fr);
-  width: 110%;
-  height: 900px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  width: 100%;
+  min-height: 900px;
   margin: 0 auto;
-  background-size: cover; 
-  background-position: center; 
-  background-repeat: no-repeat; 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  gap: 1rem;
 }
 
-.VideoBlock{
+.VideoBlock {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -143,13 +164,11 @@
   margin: 0 auto;
 } */
 
-.VideoContainer{
+.VideoContainer {
   display: flex;
   flex-direction: center;
   gap: 30px;
 }
-
-
 
 .VideoItem iframe {
   width: 100%;
@@ -160,7 +179,7 @@
 
 .h2DownSlider {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -179,4 +198,3 @@
   margin-bottom: 10px;
   text-align: center;
 }
-
