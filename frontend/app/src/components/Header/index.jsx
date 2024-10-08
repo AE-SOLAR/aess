@@ -4,13 +4,15 @@ import style from "./index.module.css";
 import logo from "../../static/header_icons/aesolar_logo.svg";
 import { SearchInput } from "../Input";
 import { Page } from "../../routes/pages";
-
+import Breadcrumbs from "../Breadcrumbs";
 import {
   FaCartShopping,
   FaCircleUser,
   FaHeart,
   FaHeartCircleBolt,
 } from "react-icons/fa6";
+import MenuItem from "../MenuItem";
+import { MenuBurger } from "../MenuBurger";
 
 const Header = () => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -23,11 +25,41 @@ const Header = () => {
   }, []);
 
   return (
-    <header className={style["header"]}>
-      <div className={style["header-container"]}>
-        <div className={style["logo"]}>
-          <img src={logo} alt="AESOLAR" />
+    <header className="flex flex-col w-full pt-5 dark:bg-black">
+      <div className="flex justify-between items-center z-40">
+        <div className="flex gap-4">
+          <div className="w-[200px] h-[27px] pl-4">
+            <img src={logo} alt="AE SOLAR" />
+          </div>
+          <MenuBurger>
+            <Link to={Page.home.path}>Home</Link>
+            <Link to={Page.products.path}>Products</Link>
+            <Link to={Page.news.path}>News</Link>
+            <Link to={Page.shipping.path}>Shipping</Link>
+            <Link to={Page.payments.path}>Payments</Link>
+            <Link to={Page.help.path}>Help</Link>
+          </MenuBurger>
         </div>
+        <nav className="justify-between w-100 md:flex hidden z-40">
+          <MenuItem title={Page.home.title} to={Page.home.path} />
+          <MenuItem
+            title={Page.products.title}
+            to={Page.products.path}
+            sub={[
+              { title: Page.solarpanels.title, to: Page.solarpanels.path },
+              { title: Page.sale.title, to: Page.sale.path },
+            ]}
+          />
+          <MenuItem
+            title="Info"
+            sub={[
+              { title: Page.shipping.title, to: Page.shipping.path },
+              { title: Page.payments.title, to: Page.payments.path },
+              { title: Page.help.title, to: Page.help.path },
+            ]}
+          />
+          <MenuItem title={Page.news.title} to={Page.news.path} />
+        </nav>
         <div className={`${style["nav-icons"]}`}>
           <SearchInput />
           <Link to="/favorites">
@@ -43,32 +75,7 @@ const Header = () => {
           </Link>
         </div>
       </div>
-      <div className={style["nav"]}>
-        <Link to={Page.home.path} className={style["nav-link"]}>
-          {Page.home.title}
-        </Link>
-        <Link to={Page.solarpanels.path} className={style["nav-link"]}>
-          {Page.solarpanels.title}
-        </Link>
-        <Link to={Page.sale.path} className={style["nav-link"]}>
-          {Page.sale.title}
-        </Link>
-        <Link to={Page.blog.path} className={style["nav-link"]}>
-          {Page.blog.title}
-        </Link>
-        <Link to={Page.news.path} className={style["nav-link"]}>
-          {Page.news.title}
-        </Link>
-        <Link to={Page.shipping.path} className={style["nav-link"]}>
-          {Page.shipping.title}
-        </Link>
-        <Link to={Page.payments.path} className={style["nav-link"]}>
-          {Page.payments.title}
-        </Link>
-        <Link to={Page.help.path} className={style["nav-link"]}>
-          {Page.help.title}
-        </Link>
-      </div>
+      <Breadcrumbs />
     </header>
   );
 };

@@ -33,6 +33,11 @@ export const Page = {
     path: "/sale",
     element: <SalePage />,
   },
+  products: {
+    title: "Products",
+    path: "/product",
+    element: <div>Products Page</div>,
+  },
   solarpanels: {
     title: "Solar Panels",
     path: "/product/panels",
