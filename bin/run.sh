@@ -80,7 +80,6 @@ else
     ENV_FILE="/home/0.data/.env.$COMPOSE_PROFILES"
   fi
 
-  ENV_FILE="./config/.env.$COMPOSE_PROFILES"
   NGINX_CONFIG_FILE="./config/nginx/nginx.$COMPOSE_PROFILES.conf"
   DOCKERFILE="./config/docker/Dockerfile.$COMPOSE_PROFILES"
 
