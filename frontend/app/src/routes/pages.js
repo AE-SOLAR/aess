@@ -8,9 +8,9 @@ import BlogPage from "../pages/BlogPage";
 import FavoritesPage from "../pages/FavoritesPage";
 import HelpPage from "../pages/HelpPage";
 import NewsPage from "../pages/NewsPage";
-import ShippingPage from "../pages/ShippingPage";
 import PaymentsPage from "../pages/PaymentsPage";
 import { SignInPage, SignUpPage } from "../pages/UserAuthPage";
+import ShipingPage from "../pages/ShipingPage";
 
 export const Page = {
   home: {
@@ -48,11 +48,7 @@ export const Page = {
     path: "/product/:category/:uuid",
     element: <ProductPage />,
   },
-  signin: {
-    title: "Sign In",
-    path: "/signin",
-    element: <SignInPage />,
-  },
+
   signup: {
     title: "Sign Up",
     path: "/signup",
@@ -71,7 +67,7 @@ export const Page = {
   shipping: {
     title: "Shipping",
     path: "/shipping",
-    element: <ShippingPage />,
+    element: <ShipingPage/>,
   },
   payments: {
     title: "Payments",
