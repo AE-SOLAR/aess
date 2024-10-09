@@ -1,0 +1,182 @@
+services:
+  ae_shop_nginx:
+    image: nginx:1.27
+    container_name: ae_shop_nginx
+    hostname: ae_shop
+    restart: always
+    labels:
+      prog: "aeshop"
+      type: "nginx"
+    depends_on:
+      - ae_shop_api
+      # - ae_shop_backend
+      - ae_shop_frontend
+      - ae_shop_phpmyadmin
+    profiles:
+      - dev
+      - prod
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./frontend/app/build:/var/www/html
+      - ${NGINX_CONFIG_FILE}:/etc/nginx/conf.d/default.conf
+      - /home/0.data/ssl:/etc/nginx/ssl:ro
+      - shop_upload_volume:/var/www/html/static/uploads
+    networks:
+      - ae_shop_network
+
+  ae_shop_frontend:
+    image: ae_shop_frontend:latest
+    container_name: ae_shop_frontend
+    hostname: ae_shop_frontend
+    restart: always
+    labels:
+      prog: "aeshop"
+      type: "frontend"
+    depends_on:
+      - ae_shop_api
+      # - ae_shop_backend
+    profiles:
+      - dev
+      - prod
+    build:
+      context: frontend
+    ports:
+      - "3000:3000"
+    env_file:
+      - ${ENV_FILE}
+    volumes:
+      - ./frontend/app:/usr/src/app
+      - shop_frontend_node_modules_volume:/usr/src/app/node_modules
+      - shop_upload_volume:/usr/src/app/public/static/uploads
+    networks:
+      - ae_shop_network
+
+  ae_shop_api:
+    build:
+      context: ./api
+    container_name: ae_shop_api
+    hostname: ae_shop_api
+    restart: unless-stopped
+    ports:
+      - "8088:8088"
+    labels:
+      prog: "aeshop"
+      type: "api"
+    env_file:
+      - ${ENV_FILE}
+    volumes:
+      - ./api/app:/code/app
+      - shop_upload_volume:/code/app/public/uploads
+    depends_on:
+      - ae_shop_mariadb
+    networks:
+      - ae_shop_network
+
+  ae_shop_mariadb:
+    container_name: ae_shop_mariadb
+    hostname: ae_shop_mariadb
+    restart: unless-stopped
+    image: mariadb:11.4.2-noble
+    labels:
+      prog: "aeshop"
+      type: "database"
+    logging:
+      driver: none
+    env_file:
+      - ${ENV_FILE}
+    volumes:
+      - /home/0.data/shop-database/mysql/data:/var/lib/mysql
+      - ./config/mysql/my.cnf:/etc/mysql/my.cnf:ro
+    ports:
+      - "3307:3307"
+    networks:
+      - ae_shop_network
+
+  ae_shop_strapi:
+    build:
+      context: ./strapi
+    container_name: ae_shop_strapi
+    hostname: ae_shop_strapi
+    labels:
+      prog: "aeshop"
+      type: "strapi"
+    env_file:
+      - ${ENV_FILE}
+    ports:
+      - "1337:1337"
+    volumes:
+      - ./strapi:/srv/app
+      - /home/0.data/strapi-public:/srv/app/public
+      - shop_upload_volume:/srv/app/public/uploads
+    depends_on:
+      - ae_shop_mariadb
+    networks:
+      - ae_shop_network
+
+  ae_shop_phpmyadmin:
+    image: phpmyadmin:5.2
+    container_name: ae_shop_phpmyadmin
+    hostname: ae_shop_pma
+    labels:
+      prog: "aeshop"
+      type: "database"
+    restart: unless-stopped
+    logging:
+      driver: none
+    volumes:
+      - ./config/mysql/custom-phpmyadmin.conf:/etc/apache2/conf-enabled/custom-phpmyadmin.conf:ro
+    ports:
+      - 8080:80
+    env_file:
+      - ${ENV_FILE}
+    depends_on:
+      - ae_shop_mariadb
+    networks:
+      - ae_shop_network
+
+  # ae_shop_mongodb:
+  #   container_name: ae_shop_mongodb
+  #   hostname: ae_shop_mongodb
+  #   restart: unless-stopped
+  #   image: mongo:7.0
+  #   env_file:
+  #     - ${ENV_FILE}
+  #   volumes:
+  #     - ../support-database/desk-mongo/data:/data/db
+  #     - ./config/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+  #   ports:
+  #     - '3306:3306'
+  #   networks:
+  #     - ae_shop_network
+  #   command: mongod --quiet --logpath /dev/null
+
+networks:
+  ae_shop_network:
+    external: true
+    labels:
+      prog: "aeshop"
+
+volumes:
+  frontend_build_volume:
+    labels:
+      build: "yes"
+      prog: "aeshop"
+  shop_frontend_node_modules_volume:
+    labels:
+      build: "yes"
+      prog: "aeshop"
+  # shop_backend_node_modules_volume:
+  #   labels:
+  #     build: "yes"
+  #     prog: "aeshop"
+  shop_upload_volume:
+    labels:
+      build: "yes"
+      prog: "aeshop"
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/0.data/uploads
