@@ -9,12 +9,15 @@ const PageNotFound = () => {
 
   return (
     <>
-      {" "}
+     {/* Не трогать  */}
       {isDevelopment && error && (
         <div className={style.detailError}>
           <pre>{error.statusText || error.message}</pre>
         </div>
-      )}
+      )} 
+      {/* Не трогать  */}
+
+     
       <div className={style["not-found-container"]}>
         <div className={style["error-code"]}>404</div>
         <div className={style["error-message"]}>Oops! Page Not Found</div>
