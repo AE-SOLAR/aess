@@ -36,7 +36,6 @@ services:
       type: "frontend"
     depends_on:
       - ae_shop_api
-      # - ae_shop_backend
     profiles:
       - dev
       - prod
@@ -74,28 +73,6 @@ services:
     networks:
       - ae_shop_network
 
-  # ae_shop_backend:
-  #   container_name: ae_shop_backend
-  #   hostname: ae_shop_backend
-  #   restart: always
-  #   labels:
-  #     prog: "aeshop"
-  #     type: "backend"
-  #   build:
-  #     context: ./backend
-  #   ports:
-  #     - "3037:3037"
-  #   env_file:
-  #     - ${ENV_FILE}
-  #   volumes:
-  #     - ./backend/app:/usr/src/app
-  #     - shop_backend_node_modules_volume:/usr/src/app/node_modules
-  #   depends_on:
-  #     # - ae_shop_mongodb
-  #     - ae_shop_mariadb
-  #   networks:
-  #     - ae_shop_network
-
   ae_shop_mariadb:
     container_name: ae_shop_mariadb
     hostname: ae_shop_mariadb
@@ -119,7 +96,6 @@ services:
   ae_shop_strapi:
     build:
       context: ./strapi
-    # image: strapi/strapi
     container_name: ae_shop_strapi
     hostname: ae_shop_strapi
     labels:
@@ -158,22 +134,6 @@ services:
     networks:
       - ae_shop_network
 
-  # ae_shop_mongodb:
-  #   container_name: ae_shop_mongodb
-  #   hostname: ae_shop_mongodb
-  #   restart: unless-stopped
-  #   image: mongo:7.0
-  #   env_file:
-  #     - ${ENV_FILE}
-  #   volumes:
-  #     - ../support-database/desk-mongo/data:/data/db
-  #     - ./config/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
-  #   ports:
-  #     - '3306:3306'
-  #   networks:
-  #     - ae_shop_network
-  #   command: mongod --quiet --logpath /dev/null
-
 networks:
   ae_shop_network:
     external: true
@@ -189,16 +149,4 @@ volumes:
     labels:
       build: "yes"
       prog: "aeshop"
-  # shop_backend_node_modules_volume:
-  #   labels:
-  #     build: "yes"
-  #     prog: "aeshop"
-  shop_upload_volume:
-    labels:
-      build: "yes"
-      prog: "aeshop"
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./uploads
+  

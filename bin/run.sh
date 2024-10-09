@@ -73,8 +73,10 @@ else
   done
 
   ENV_FILE="./config/.env.$COMPOSE_PROFILES"
+  UPLOADS_PATH = './uploads'
   if [[ $COMPOSE_PROFILES == "prod" ]]; then
     ENV_FILE="/home/0.data/.env.$COMPOSE_PROFILES"
+    UPLOADS_PATH = '/home/0.data/uploads'
   fi
 
   NGINX_CONFIG_FILE="./config/nginx/nginx.$COMPOSE_PROFILES.conf"
@@ -89,21 +91,22 @@ else
   echo "| NGINX_CONFIG_FILE: $NGINX_CONFIG_FILE"
   echo "| DEMONIZE: $DEMONIZE"
   echo "| RUNNING COMMAND: docker compose -f ./docker-compose.$COMPOSE_PROFILES --env-file $ENV_FILE --profile $COMPOSE_PROFILES up $BUILD $DEMONIZE"
-  echo "======================================================="
 
   docker compose --env-file $ENV_FILE down
 
+  echo "| Creating Docker network 'ae_shop_network'"
   docker network create ae_shop_network >/dev/null 2>&1
+  echo "| Creating Docker volume 'shop_upload_volume'"
+  docker volume create --driver local --opt type=none --opt device=/home/0.data/uploads --opt o=bind shop_upload_volume
 
   if [[ $CLEAN == true ]]; then
     echo "| Cleaning Docker containers, images, and volumes"
     CLEAN_DOCKER
-    echo "======================================================="
   fi
 
   if [[ $ACTION == "up" ]]; then
-    echo "| Running Docker compose"
+    echo "| Running Docker compose..."
     docker compose -f docker-compose.$COMPOSE_PROFILES --env-file $ENV_FILE --profile $COMPOSE_PROFILES up $BUILD $DEMONIZE
-    echo "======================= Done =========================="
   fi
+  echo "======================= Done =========================="
 fi

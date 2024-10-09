@@ -149,12 +149,3 @@ volumes:
     labels:
       build: "yes"
       prog: "aeshop"
-  shop_upload_volume:
-    labels:
-      build: "yes"
-      prog: "aeshop"
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/0.data/uploads
