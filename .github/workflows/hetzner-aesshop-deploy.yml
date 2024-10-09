@@ -1,4 +1,4 @@
-name: Hetzner AE Support CI/CD Pipeline
+name: Hetzner AE Online Shop CI/CD Pipeline
 
 on:
   push:
@@ -19,11 +19,12 @@ jobs:
       - name: Deploy to Server via SSH
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SSH_KEY }}
+          host: ${{ secrets.AESS_SERVER_HOST }}
+          username: ${{ secrets.AESS_SERVER_USER }}
+          key: ${{ secrets.AESS_SSH_KEY }}
           script: |
             cd /home/shop
+            git checkout deploy
             git pull origin deploy
             chmod +x ./bin/run.sh
-            ./bin/run.sh -c -p -d
+            ./bin/run.sh -p -d
