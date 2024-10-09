@@ -12,11 +12,11 @@
 }
 
 .PaymentsImage {
-  width: 100%;
-  height: auto;
+  width: 100vw; 
+  height: auto; 
   position: relative;
-  display: block;
-}
+  left: 50%; 
+  transform: translateX(-50%);}
 
 .PaymentsTitle, .InformationTitle {
   position: absolute;
@@ -28,14 +28,14 @@
 .PaymentsTitle {
   top: 50%;
   left: 15%;
-  font-size: 70px;
+  font-size: 96px;
   transform: translate(-50%, -50%);
 }
 
 .InformationTitle {
   top: 80%;
   left: 15%;
-  font-size: 30px;
+  font-size: 64px;
   color: red;
   transform: translate(-50%, -50%);
 }
@@ -54,17 +54,19 @@
 
 .PaymentMethods, .Choose_h2 {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 48px;
 }
 
 .PaymentMethods {
   font-size: 48px;
+  font-weight: bold;
 }
 
 .Choose_h2 {
   font-size: 28px;
   color: red;
   margin-top: 10px;
+  font-weight: bold;
 }
 
 .PaymentsImgBlock {
