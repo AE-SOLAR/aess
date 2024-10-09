@@ -16,7 +16,11 @@ const MenuItem = ({ title, to, sub = [] }) => {
         className="inline-flex gap-1 justify-center items-center w-full px-4 py-2 text-sm font-medium "
         aria-expanded={isOpen}
       >
-        {title || to || "Menu Item"}
+        {to && !hasSubItems ? (
+          <Link to={to}>{title || "Menu Item"}</Link>
+        ) : (
+          title || to || "Menu Item"
+        )}
         {hasSubItems && (
           <svg
             width="9"
