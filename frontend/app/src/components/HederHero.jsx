@@ -1,6 +1,3 @@
-// 518 - 75 = 443
-// 443 - 75 = 368
-
 import { RedLine } from "./ui/red-line";
 
 const HeaderHero = ({
