@@ -24,7 +24,6 @@ jobs:
           key: ${{ secrets.AESS_SSH_KEY }}
           script: |
             cd /home/shop
-            git checkout deploy
             git pull origin deploy
             chmod +x ./bin/run.sh
             ./bin/run.sh -p -d
