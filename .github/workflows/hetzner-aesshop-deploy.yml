@@ -19,9 +19,9 @@ jobs:
       - name: Deploy to Server via SSH
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.AESS.AESS_SERVER_HOST }}
-          username: ${{ secrets.AESS.AESS_SERVER_USER }}
-          key: ${{ secrets.AESS.AESS_SSH_KEY }}
+          host: ${{ secrets.AESS_SERVER_HOST }}
+          username: ${{ secrets.AESS_SERVER_USER }}
+          key: ${{ secrets.AESS_SSH_KEY }}
           script: |
             cd /home/shop
             git checkout deploy
