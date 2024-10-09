@@ -2,7 +2,6 @@
 
 CLEAN_DOCKER() {
   echo "Cleaning Docker containers, images, and volumes"
-  export ENV_FILE="./config/.env.dev"
   export $(grep -v '^#' $ENV_FILE | xargs)
   docker compose down
   docker container prune --filter "label=prog=aeshop" --force
@@ -15,9 +14,7 @@ CLEAN_DOCKER() {
   docker buildx prune --force
 }
 
-if [[ $1 == "clean" || $1 == "clear" ]]; then
-  CLEAN_DOCKER
-elif [[ $1 == "db_update" ]]; then
+if [[ $1 == "db_update" ]]; then
   docker exec -it ae_shop_api alembic revision --autogenerate -m "Update migration"
   docker exec -it ae_shop_api alembic upgrade head
   docker exec -it ae_shop_api python3 push_db_data.py 
@@ -87,16 +84,29 @@ else
   export DOCKERFILE
   export ENV_FILE
 
+  echo "================== Running with: ======================"
+  echo "| ACTION: $ACTION"
+  echo "| COMPOSE_PROFILES: $COMPOSE_PROFILES"
+  echo "| DOCKERFILE: $DOCKERFILE"
+  echo "| ENV_FILE: $ENV_FILE"
+  echo "| NGINX_CONFIG_FILE: $NGINX_CONFIG_FILE"
+  echo "| DEMONIZE: $DEMONIZE"
+  echo "| RUNNING COMMAND: docker compose -f docker-compose.$COMPOSE_PROFILES --env-file $ENV_FILE --profile $COMPOSE_PROFILES up $BUILD $DEMONIZE"
+  echo "======================================================="
+
   docker compose --env-file $ENV_FILE down
 
   docker network create ae_shop_network >/dev/null 2>&1
 
   if [[ $CLEAN == true ]]; then
+    echo "| Cleaning Docker containers, images, and volumes"
     CLEAN_DOCKER
+    echo "======================================================="
   fi
 
   if [[ $ACTION == "up" ]]; then
-    echo "$ACTION Docker for $COMPOSE_PROFILES with ENV file $ENV_FILE"
+    echo "| Running Docker compose"
     docker compose -f docker-compose.$COMPOSE_PROFILES --env-file $ENV_FILE --profile $COMPOSE_PROFILES up $BUILD $DEMONIZE
+    echo "======================= Done =========================="
   fi
 fi
