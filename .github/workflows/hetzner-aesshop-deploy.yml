@@ -1,29 +1,18 @@
-name: Hetzner AE Online Shop CI/CD Pipeline
+name: AESS CI/CD Self-Hosted Action Runner
 
 on:
   push:
-    branches:
-      - deploy
-  pull_request:
-    branches:
-      - deploy
+    branches: [deploy]
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-
+  build:
+    runs-on: self-hosted
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Deploy to Server via SSH
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.AESS_SERVER_HOST }}
-          username: ${{ secrets.AESS_SERVER_USER }}
-          key: ${{ secrets.AESS_SSH_KEY }}
-          script: |
-            cd /home/shop
-            git pull origin deploy
-            chmod +x ./bin/run.sh
-            ./bin/run.sh -p -d
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: copy env
+        run: cp /home/config/.env.prod config/.env.prod
+      - name: up
+        run: echo ${{ secrets.AESS_SUDO_PASSWORD }} | sudo -S bin/run.sh -p -d
+      - name: prune
+        run: yes | echo ${{ secrets.AESS_SUDO_PASSWORD }} | sudo -S docker system prune
