@@ -78,20 +78,17 @@ else
   fi
 
   NGINX_CONFIG_FILE="./config/nginx/nginx.$COMPOSE_PROFILES.conf"
-  DOCKERFILE="./config/docker/Dockerfile.$COMPOSE_PROFILES"
 
   export NGINX_CONFIG_FILE
-  export DOCKERFILE
   export ENV_FILE
 
   echo "================== Running with: ======================"
   echo "| ACTION: $ACTION"
   echo "| COMPOSE_PROFILES: $COMPOSE_PROFILES"
-  echo "| DOCKERFILE: $DOCKERFILE"
   echo "| ENV_FILE: $ENV_FILE"
   echo "| NGINX_CONFIG_FILE: $NGINX_CONFIG_FILE"
   echo "| DEMONIZE: $DEMONIZE"
-  echo "| RUNNING COMMAND: docker compose -f docker-compose.$COMPOSE_PROFILES --env-file $ENV_FILE --profile $COMPOSE_PROFILES up $BUILD $DEMONIZE"
+  echo "| RUNNING COMMAND: docker compose -f ./docker-compose.$COMPOSE_PROFILES --env-file $ENV_FILE --profile $COMPOSE_PROFILES up $BUILD $DEMONIZE"
   echo "======================================================="
 
   docker compose --env-file $ENV_FILE down
