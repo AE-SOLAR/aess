@@ -93,6 +93,6 @@ else
 
   if [[ $ACTION == "up" ]]; then
     echo "$ACTION Docker for $COMPOSE_PROFILES with ENV file $ENV_FILE"
-    docker compose --env-file $ENV_FILE --profile $COMPOSE_PROFILES up $BUILD $DEMONIZE
+    docker compose -f docker-compose.$COMPOSE_PROFILES --env-file $ENV_FILE --profile $COMPOSE_PROFILES up $BUILD $DEMONIZE
   fi
 fi
