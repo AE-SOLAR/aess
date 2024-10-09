@@ -1,4 +1,5 @@
 // 518 - 75 = 443
+// 443 - 75 = 368
 
 import { RedLine } from "./ui/red-line";
 
@@ -11,7 +12,7 @@ const HeaderHero = ({
   return (
     <div className={redLine && "pb-4"}>
       <div
-        className={`relative z-10 ${
+        className={`relative z-10 overflow-y-visible ${
           onHeader === true
             ? "overflow-x-visible w-[calc(1440px - 1rem)]"
             : "overflow-x-hidden w-[100%]"
@@ -20,11 +21,9 @@ const HeaderHero = ({
         <img
           src={imageURL}
           alt="header_image"
-          className={`z-10 absolute object-cover inset-0 h-full w-auto min-w-full min-h-full ${
-            onHeader === true ? `h-[518px] top-[-75px] left-0` : `h-[443px]`
-          }`}
+          className={`z-10 absolute object-cover w-auto min-w-full !h-[518px] left-0 bottom-0 `}
         />
-        <div className="relative">{children}</div>
+        <div className="relative z-20">{children}</div>
       </div>
       {redLine && <RedLine />}
     </div>
