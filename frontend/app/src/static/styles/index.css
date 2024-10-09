@@ -12,6 +12,14 @@
   --color-brand-light-gray: #a7a9ac;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+}
+
 @font-face {
   font-family: "Criteria CF";
   src: url("../fonts/CriteriaCF/Criteria CF Regular.otf") format("orf");
