@@ -10,8 +10,12 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
-      - name: copy env
-        run: cp /home/config/.env.prod config/.env.prod
+      - name: symlink env
+        run: echo ${{ secrets.AESS_SUDO_PASSWORD }} | sudo -S ln -s /home/config/.env.prod config/.env.prod
+      - name: symlink uploads
+        run: echo ${{ secrets.AESS_SUDO_PASSWORD }} | sudo -S ln -s /home/config/uploads/ uploads/
+      - name: symlink udatabese_folder
+        run: echo ${{ secrets.AESS_SUDO_PASSWORD }} | sudo -S ln -s /home/config/shop-database/ ../shop-database/
       - name: up
         run: echo ${{ secrets.AESS_SUDO_PASSWORD }} | sudo -S bin/run.sh -p -d
       - name: prune
