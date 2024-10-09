@@ -1,7 +1,9 @@
-from typing import Optional
+from pathlib import Path
+from typing import List, Optional
 
 from controllers import auth as auth_controller
-from fastapi import APIRouter, Depends, HTTPException, Request, Header
+from controllers import company as company_controller
+from fastapi import APIRouter, Depends, File, Header, HTTPException, Request, UploadFile
 from models.database import get_db
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
@@ -15,12 +17,31 @@ class LoginData(BaseModel):
 
 
 class RegisterData(BaseModel):
-    email: str
+    companyName: str
+    vatId: str
+    businessLicenseDocument: List[UploadFile] = File(...)
+
+    streetAndNumber: str
+    postcode: str
+    city: str
+    country: str
+    companyPhone: str
+    website: Optional[str] = None
+
+    name: str
+    surname: str
+    jobTitle: Optional[str] = None
+    phoneNumber: Optional[str] = None
+    workingTimeForContact: Optional[str] = None
+    timezone: Optional[str] = None
+
+    acceptPrivacyPolicy: bool
+    acceptTermsAndConditions: bool
+    subscribeNewsletter: bool
+
+    loginEmail: str
     password: str
-    first_name: str
-    last_name: str
-    position_title: Optional[str] = None
-    phone: Optional[str] = None
+    passwordCheck: str
 
 
 class UpdateUserData(BaseModel):
@@ -33,13 +54,34 @@ class UpdateUserData(BaseModel):
 
 
 @router.post("/signup", tags=["Auth"], summary="Register new user")
-async def register_user(register_data: RegisterData, db: Session = Depends(get_db)):
-    existing_user = await auth_controller.get_user_by_email(register_data.email, db)
+async def register_user(data: RegisterData, db: Session = Depends(get_db)):
+    existing_user = await auth_controller.get_user_by_email(data.loginEmail, db)
     if existing_user:
         raise HTTPException(status_code=400, detail="Email already registered")
 
-    new_user = await auth_controller.create_user(register_data, db)
-    return {"msg": "User registered successfully", "user": new_user}
+    existing_company = await company_controller.get_company_by_tax_id(data.vatId, db)
+    if existing_company:
+        raise HTTPException(status_code=400, detail="Company already registered")
+
+    try:
+        for file in data.businessLicenseDocument:
+            directory_path = Path(f"/code/app/public/uploads/documents/company/{data.vatId}.{data.companyName.replace(' ', '_')}")
+            directory_path.mkdir(parents=True, exist_ok=True)
+            file_path = directory_path / file.filename
+            with open(file_path, "wb") as f:
+                f.write(file.file.read())
+        
+            print(f"Received file: {file.filename}")
+
+        new_user = await auth_controller.create_user(data, db)
+        new_company = await company_controller.create_company(data, db)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    return {
+        "msg": "User registered successfully",
+        "user": new_user,
+        "company": new_company,
+    }
 
 
 @router.post("/signin", tags=["Auth"], summary="Login and get access token")

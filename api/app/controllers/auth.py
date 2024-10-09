@@ -23,9 +23,9 @@ async def get_or_create_access_token(key, data: dict, db: AsyncSession):
     )
     print("KEEEEEYYY: ", key.keys())
     if key:
-        print('Key found')
+        print("Key found")
         return key.key
-    print('Key not found')
+    print("Key not found")
     return create_access_token(data)
 
 
@@ -104,7 +104,6 @@ async def create_user(register_data, db: AsyncSession):
         updatedAt=datetime.now(timezone.utc),
     )
 
-    # Добавляем и сохраняем нового пользователя
     db.add(new_user)
     await db.commit()
     await db.refresh(new_user)

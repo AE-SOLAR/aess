@@ -19,6 +19,7 @@ class Company(Base):
     uuid = Column(
         String(36), primary_key=True, index=True, default=lambda: str(uuid4())
     )
+    
     name = Column(String(64), unique=True, nullable=False)
     country = Column(String(64))
     zipcode = Column(String(9))
