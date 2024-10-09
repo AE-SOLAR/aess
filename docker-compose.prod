@@ -149,3 +149,5 @@ volumes:
     labels:
       build: "yes"
       prog: "aeshop"
+  shop_upload_volume:
+      external: true

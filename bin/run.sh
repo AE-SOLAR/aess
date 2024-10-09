@@ -3,7 +3,7 @@
 CLEAN_DOCKER() {
   echo "Cleaning Docker containers, images, and volumes"
   export $(grep -v '^#' $ENV_FILE | xargs)
-  docker compose down
+  docker compose -f ./docker-compose.$COMPOSE_PROFILES down
   docker container prune --filter "label=prog=aeshop" --force
   
   docker volume rm shop_frontend_node_modules_volume
@@ -92,7 +92,8 @@ else
   echo "| DEMONIZE: $DEMONIZE"
   echo "| RUNNING COMMAND: docker compose -f ./docker-compose.$COMPOSE_PROFILES --env-file $ENV_FILE --profile $COMPOSE_PROFILES up $BUILD $DEMONIZE"
 
-  docker compose --env-file $ENV_FILE down
+  echo "| Stopping old Docker compose..."
+  docker compose -f ./docker-compose.$COMPOSE_PROFILES --env-file $ENV_FILE down
 
   echo "| Creating Docker network 'ae_shop_network'"
   docker network create ae_shop_network >/dev/null 2>&1
