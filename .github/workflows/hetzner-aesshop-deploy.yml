@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
+      - name: pull
+        run: echo ${{ secrets.AESS_SUDO_PASSWORD }} | git pull origin deploy
       - name: up
         run: echo ${{ secrets.AESS_SUDO_PASSWORD }} | sudo -S bin/run.sh -p -d
       - name: prune
