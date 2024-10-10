@@ -5,9 +5,13 @@ const HeaderHero = ({
   children,
   onHeader = false,
   redLine = true,
+  blurMenu = false,
 }) => {
   return (
     <div className={redLine && "pb-4"}>
+      {blurMenu && (
+        <div className="absolute left-0 top-0 w-[1440px] h-[75px] backdrop-blur-[5px] z-20" />
+      )}
       <div
         className={`relative z-10 overflow-y-visible ${
           onHeader === true
