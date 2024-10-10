@@ -19,6 +19,7 @@ if [[ $1 == "db_update" ]]; then
   docker exec -it ae_shop_api alembic upgrade head
   docker exec -it ae_shop_api python3 push_db_data.py 
 else
+  RUNDIR="$(pwd)"
   HOMEDIR=$(basename "$PWD")
   if [[ $HOMEDIR == "bin" ]]; then
     cd ..
@@ -73,10 +74,10 @@ else
   done
 
   ENV_FILE="./config/.env.$COMPOSE_PROFILES"
-  UPLOADS_PATH = './uploads'
+  UPLOADS_PATH="$RUNDIR/uploads"
   if [[ $COMPOSE_PROFILES == "prod" ]]; then
     ENV_FILE="/home/0.data/.env.$COMPOSE_PROFILES"
-    UPLOADS_PATH = '/home/0.data/uploads'
+    UPLOADS_PATH='/home/0.data/uploads'
   fi
 
   NGINX_CONFIG_FILE="./config/nginx/nginx.$COMPOSE_PROFILES.conf"
@@ -89,16 +90,18 @@ else
   echo "| COMPOSE_PROFILES: $COMPOSE_PROFILES"
   echo "| ENV_FILE: $ENV_FILE"
   echo "| NGINX_CONFIG_FILE: $NGINX_CONFIG_FILE"
+  echo "| UPLOAD_PATH: $UPLOADS_PATH"
   echo "| DEMONIZE: $DEMONIZE"
   echo "| RUNNING COMMAND: docker compose -f ./docker-compose.$COMPOSE_PROFILES --env-file $ENV_FILE --profile $COMPOSE_PROFILES up $BUILD $DEMONIZE"
 
   echo "| Stopping old Docker compose..."
   docker compose -f ./docker-compose.$COMPOSE_PROFILES --env-file $ENV_FILE down
+  docker volume rm shop_upload_volume
 
   echo "| Creating Docker network 'ae_shop_network'"
   docker network create ae_shop_network >/dev/null 2>&1
   echo "| Creating Docker volume 'shop_upload_volume'"
-  docker volume create --driver local --opt type=none --opt device=/home/0.data/uploads --opt o=bind shop_upload_volume
+  docker volume create --driver local --opt type=none --opt device="$UPLOADS_PATH" --opt o=bind shop_upload_volume
 
   if [[ $CLEAN == true ]]; then
     echo "| Cleaning Docker containers, images, and volumes"

@@ -7,7 +7,7 @@ const Breadcrumbs = () => {
   return (
     <>
       {location.pathname !== "/" && (
-        <div className="z-20 p-0 m-0 pl-4 font-light flex flex-wrap items-center justify-start gap-2 text-[0.8rem] list-none text-[var(--color-brand-gray)] dark:text-[var(--color-brand-light-gray)]">
+        <div className="z-30 p-0 m-0 pl-4 font-light flex flex-wrap items-center justify-start gap-2 text-[0.8rem] list-none text-[var(--color-brand-gray)] dark:text-[var(--color-brand-light-gray)]">
           <Link to="/">Home</Link>
           {breadcrumb.map((e, idx) => {
             const link = breadcrumb.slice(0, idx + 1).join("/");
