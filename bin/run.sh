@@ -2,9 +2,8 @@
 
 CLEAN_DOCKER() {
   echo "Cleaning Docker containers, images, and volumes"
-  export ENV_FILE="./config/.env.dev"
   export $(grep -v '^#' $ENV_FILE | xargs)
-  docker compose down
+  docker compose -f ./docker-compose.$COMPOSE_PROFILES down
   docker container prune --filter "label=prog=aeshop" --force
   
   docker volume rm shop_frontend_node_modules_volume
@@ -15,9 +14,7 @@ CLEAN_DOCKER() {
   docker buildx prune --force
 }
 
-if [[ $1 == "clean" || $1 == "clear" ]]; then
-  CLEAN_DOCKER
-elif [[ $1 == "db_update" ]]; then
+if [[ $1 == "db_update" ]]; then
   docker exec -it ae_shop_api alembic revision --autogenerate -m "Update migration"
   docker exec -it ae_shop_api alembic upgrade head
   docker exec -it ae_shop_api python3 push_db_data.py 
@@ -76,23 +73,41 @@ else
   done
 
   ENV_FILE="./config/.env.$COMPOSE_PROFILES"
+  UPLOADS_PATH = './uploads'
+  if [[ $COMPOSE_PROFILES == "prod" ]]; then
+    ENV_FILE="/home/0.data/.env.$COMPOSE_PROFILES"
+    UPLOADS_PATH = '/home/0.data/uploads'
+  fi
+
   NGINX_CONFIG_FILE="./config/nginx/nginx.$COMPOSE_PROFILES.conf"
-  DOCKERFILE="./config/docker/Dockerfile.$COMPOSE_PROFILES"
 
   export NGINX_CONFIG_FILE
-  export DOCKERFILE
   export ENV_FILE
 
-  docker compose --env-file $ENV_FILE down
+  echo "================== Running with: ======================"
+  echo "| ACTION: $ACTION"
+  echo "| COMPOSE_PROFILES: $COMPOSE_PROFILES"
+  echo "| ENV_FILE: $ENV_FILE"
+  echo "| NGINX_CONFIG_FILE: $NGINX_CONFIG_FILE"
+  echo "| DEMONIZE: $DEMONIZE"
+  echo "| RUNNING COMMAND: docker compose -f ./docker-compose.$COMPOSE_PROFILES --env-file $ENV_FILE --profile $COMPOSE_PROFILES up $BUILD $DEMONIZE"
 
+  echo "| Stopping old Docker compose..."
+  docker compose -f ./docker-compose.$COMPOSE_PROFILES --env-file $ENV_FILE down
+
+  echo "| Creating Docker network 'ae_shop_network'"
   docker network create ae_shop_network >/dev/null 2>&1
+  echo "| Creating Docker volume 'shop_upload_volume'"
+  docker volume create --driver local --opt type=none --opt device=/home/0.data/uploads --opt o=bind shop_upload_volume
 
   if [[ $CLEAN == true ]]; then
+    echo "| Cleaning Docker containers, images, and volumes"
     CLEAN_DOCKER
   fi
 
   if [[ $ACTION == "up" ]]; then
-    echo "$ACTION Docker for $COMPOSE_PROFILES with ENV file $ENV_FILE"
-    docker compose --env-file $ENV_FILE --profile $COMPOSE_PROFILES up $BUILD $DEMONIZE
+    echo "| Running Docker compose..."
+    docker compose -f docker-compose.$COMPOSE_PROFILES --env-file $ENV_FILE --profile $COMPOSE_PROFILES up $BUILD $DEMONIZE
   fi
+  echo "======================= Done =========================="
 fi
