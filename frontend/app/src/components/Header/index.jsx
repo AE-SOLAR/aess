@@ -25,7 +25,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="flex flex-col w-full pt-5 dark:bg-black">
+    <header className="relative flex flex-col w-full pt-5">
       <div className="flex justify-between items-center z-40">
         <div className="flex gap-4">
           <div className="w-[200px] h-[27px] pl-4">
@@ -40,7 +40,7 @@ const Header = () => {
             <Link to={Page.help.path}>Help</Link>
           </MenuBurger>
         </div>
-        <nav className="justify-between w-100 md:flex hidden z-40">
+        <nav className="justify-between w-100 md:flex hidden">
           <MenuItem title={Page.home.title} to={Page.home.path} />
           <MenuItem
             title={Page.products.title}
