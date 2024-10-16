@@ -9,6 +9,8 @@ import { getRandomElements } from "../../handlers/tools";
 import { PanelItem } from "../../components/PanelItem";
 import ButtonWithLine from "../../components/ButtonWithLine";
 import VideoButton from "../../components/VideoButton";
+import SolarPanelsSlider from "../../components/SolarPanelsSlider";
+import { BrandInput } from "../../components/Input";
 
 const slideImages = [
   {
@@ -48,7 +50,6 @@ const slideImages = [
   },
 ];
 
-// Блок под слайдером
 const InstallationLocation = [
   {
     url: "/static/images/homepage/homepage_img/fields.png",
@@ -91,21 +92,21 @@ const DownSlider = [
     sliderIcons: "/static/images/homepage/DownSlider/aurora/30.png",
   },
   {
-    url: "/static/images/homepage/DownSlider/comet.mp4",
+    url: "/static/images/homepage/DownSlider/comet/comet.mp4",
     route: "/product/panels?type=Comet",
     buttonText: "solar=panels=Comet",
     sliderText: "AESOLAR TEXT",
     sliderIcons: "/static/images/homepage/DownSlider/aurora/30.png",
   },
   {
-    url: "/static/images/homepage/DownSlider/horizon.mp4",
+    url: "/static/images/homepage/DownSlider/horizon/horizon.mp4",
     route: "/product/panels?type=Horizon",
     buttonText: "solar=panels=Horizon",
     sliderText: "AESOLAR TEXT",
     sliderIcons: "/static/images/homepage/DownSlider/aurora/30.png",
   },
   {
-    url: "/static/images/homepage/DownSlider/meteor.mp4",
+    url: "/static/images/homepage/DownSlider/meteor/meteor.mp4",
     route: "/product/panels?type=Meteor",
     buttonText: "solar=panels=Meteor",
     sliderText: "AESOLAR TEXT",
@@ -119,13 +120,13 @@ const DownSlider = [
     sliderIcons: "/static/images/homepage/DownSlider/neptune.mp4",
   },
   {
-    url: "/static/images/homepage/DownSlider/shadestar.mp4",
+    url: "/static/images/homepage/DownSlider/shadestar/shadestar.mp4",
     route: "/product/panels?type=ShadeStar",
     buttonText: "solar=panels=ShadeStar",
     sliderIcons: "/static/images/homepage/DownSlider/aurora/30.png",
   },
   {
-    url: "/static/images/homepage/DownSlider/terra.mp4",
+    url: "/static/images/homepage/DownSlider/terra/terra.mp4",
     route: "/product/panels?type=Terra",
     buttonText: "solar=panels=Terra",
     sliderText: "AESOLAR TEXT",
@@ -136,9 +137,10 @@ const DownSlider = [
 export default function HomePage() {
   const navigate = useNavigate();
   const [panels, setPanels] = useState([]);
+  const [subscibeCompany, setSubscibeCompany] = useState("");
+  const [subscibeEmail, setSubscibeEmail] = useState("");
 
   useEffect(() => {
-    //фечнуть данные даные с бека
     const fetchData = async () => {
       try {
         const data = await fetchPanels();
@@ -208,6 +210,8 @@ export default function HomePage() {
         </div>
       </div>
 
+      <SolarPanelsSlider />
+
       <div className={style.solarPanelsblock}>
         <div className={style.solarPanelsText}>
           <h2 style={{ fontSize: "80px" }}>Our Best Sellers</h2>
@@ -227,7 +231,6 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Блок с видео */}
       <div className={style.VideoBlock}>
         <div className={style.VideoBlockText}>
           <div className={style.h2VideoBlockText}>
@@ -276,54 +279,59 @@ export default function HomePage() {
           </div>
 
           <div className={style.SliderContent}>
-            <div className={style.SliderContent}>
-              <Fade
-                duration={5000}
-                canSwipe={true}
-                autoplay={true}
-                arrows={false}
-                indicators={true}
-                pauseOnHover={false}
-              >
-                {DownSlider.map((slide, index) => (
-                  <div key={index}>
-                    <div className={style.slider}>
-                      <video className={style.sliderVideo} autoPlay loop muted>
-                        <source src={slide.url} type="video/mp4" />
-                      </video>
-                      <div className={style.sliderContent}>
-                        {/* Иконка для слайда */}
-                        {slide.sliderIcons && (
-                          <img
-                            src={slide.sliderIcons}
-                            alt="Slider Icon"
-                            className={style.sliderIcon}
-                          />
-                        )}
-
-                        {/* Текст для слайда */}
-                        {slide.sliderText && (
-                          <div className={style.sliderText}>
-                            <p>{slide.sliderText}</p>
-                          </div>
-                        )}
-
-                        {/* Кнопка для слайда */}
-                        <button
-                          className={style.sliderButton}
-                          onClick={() => handleClick(slide.route)}
-                        >
-                          {slide.buttonText}
-                        </button>
-                      </div>
+            <Fade
+              duration={5000}
+              canSwipe={true}
+              autoplay={true}
+              arrows={false}
+              indicators={true}
+              pauseOnHover={false}
+            >
+              {DownSlider.map((slide, index) => (
+                <div key={index}>
+                  <div className={style.slider}>
+                    <video className={style.sliderVideo} autoPlay loop muted>
+                      <source src={slide.url} type="video/mp4" />
+                    </video>
+                    <div className={style.sliderContent}>
+                      {slide.sliderIcons && (
+                        <img
+                          src={slide.sliderIcons}
+                          alt="Slider Icon"
+                          className={style.sliderIcon}
+                        />
+                      )}
+                      {slide.sliderText && (
+                        <div className={style.sliderText}>
+                          <p>{slide.sliderText}</p>
+                        </div>
+                      )}
+                      <button
+                        className={style.sliderButton}
+                        onClick={() => handleClick(slide.route)}
+                      >
+                        {slide.buttonText}
+                      </button>
                     </div>
                   </div>
-                ))}
-              </Fade>
-            </div>
+                </div>
+              ))}
+            </Fade>
           </div>
         </div>
       </div>
+
+      <div className={style.DownForm}>
+        <div className={style.DownBlock}>
+        <p>Subscribe to our newsletter</p>
+          <h1>Be always</h1>
+          <h1>in touch with us</h1>
+          <BrandInput value={subscibeCompany} setValue={setSubscibeCompany}>Company</BrandInput>
+          <BrandInput value={subscibeEmail} setValue={setSubscibeEmail}>Email</BrandInput>
+        </div>
+      </div>
+
+
     </>
   );
 }

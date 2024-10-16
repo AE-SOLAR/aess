@@ -14,14 +14,14 @@
   height: 400px;
 }
 
-/* Стили для контента на слайде */
+
 .sliderContent {
   position: absolute;
   bottom: 30px;
   left: 30px;
 }
 
-/* Стили для кнопки на слайде */
+
 .sliderButton {
   padding: 10px 30px;
   color: #fff;
@@ -36,7 +36,7 @@
   background-color: #4c1b11;
 }
 
-/* Остальные существующие стили */
+
 .cartBlock {
   padding: 10px;
   width: 80%;
@@ -54,6 +54,8 @@
   font-family: "Arial", sans-serif;
   font-size: 48px;
   font-weight: bold;
+  margin: 0; 
+  height: 100px; 
 }
 
 .ExploreText {
@@ -198,3 +200,16 @@
   margin-bottom: 10px;
   text-align: center;
 }
+
+.DownForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid red;
+  
+
+}
+
