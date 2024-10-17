@@ -1,9 +1,9 @@
 module.exports = ({ env }) => ({
   host: env("STRAPI_HOST", "0.0.0.0"),
   port: env.int("STRAPI_PORT", 1337),
-  url: env("STRAPI_URL", "https://strapi.shop.ae-solar.com"),
+  url: env("STRAPI_URL", "https://shop.ae-solar.com/strapi"),
   admin: {
-    url: "https://strapi.shop.ae-solar.com",
+    url: "https://shop.ae-solar.com/strapi",
   },
   app: {
     keys: env.array("STRAPI_APP_KEYS"),

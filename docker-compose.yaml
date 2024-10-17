@@ -3,25 +3,49 @@ services:
     image: nginx:1.27
     container_name: ae_shop_nginx
     hostname: ae_shop
-    restart: always
-    labels:
-      prog: "aeshop"
-      type: "nginx"
+    restart: unless-stopped
+    profiles:
+      - production
     depends_on:
       - ae_shop_api
       - ae_shop_frontend
-      - ae_shop_phpmyadmin
-    profiles:
-      - dev
-      - prod
+      - ae_shop_maridb
+      - ae_shop_strapi
+    labels:
+      prog: "aeshop"
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ./frontend/app/build:/var/www/html
+      - frontend_build_volume:/var/www/html
       - ${NGINX_CONFIG_FILE}:/etc/nginx/conf.d/default.conf
-      - /home/0.data/.htpasswd:/etc/nginx/.htpasswd:ro
-      - /home/0.data/ssl:/etc/nginx/ssl:ro
+      - ${CONFIG_PATH}/.htpasswd:/etc/nginx/.htpasswd:ro
+      - ${CONFIG_PATH}/ssl:/etc/nginx/ssl:ro
+      - shop_upload_volume:/var/www/html/static/uploads
+    networks:
+      - ae_shop_network
+
+  ae_shop_nginx_debug:
+    image: nginx:1.27
+    container_name: ae_shop_nginx
+    hostname: ae_shop
+    restart: unless-stopped
+    profiles:
+      - debug
+    depends_on:
+      - ae_shop_api
+      - ae_shop_frontend
+      - ae_shop_phpmyadmin
+    labels:
+      prog: "aeshop"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - frontend_build_volume:/var/www/html
+      - ${NGINX_CONFIG_FILE}:/etc/nginx/conf.d/default.conf
+      - ${CONFIG_PATH}/.htpasswd:/etc/nginx/.htpasswd:ro
+      - ${CONFIG_PATH}/ssl:/etc/nginx/ssl:ro
       - shop_upload_volume:/var/www/html/static/uploads
     networks:
       - ae_shop_network
@@ -30,15 +54,12 @@ services:
     image: ae_shop_frontend:latest
     container_name: ae_shop_frontend
     hostname: ae_shop_frontend
-    restart: always
+    restart: unless-stopped
+    profiles:
+      - production
+      - debug
     labels:
       prog: "aeshop"
-      type: "frontend"
-    depends_on:
-      - ae_shop_api
-    profiles:
-      - dev
-      - prod
     build:
       context: frontend
     ports:
@@ -47,6 +68,7 @@ services:
       - ${ENV_FILE}
     volumes:
       - ./frontend/app:/usr/src/app
+      - frontend_build_volume:/usr/src/app/build
       - shop_frontend_node_modules_volume:/usr/src/app/node_modules
       - shop_upload_volume:/usr/src/app/public/static/uploads
     networks:
@@ -58,36 +80,35 @@ services:
     container_name: ae_shop_api
     hostname: ae_shop_api
     restart: unless-stopped
+    profiles:
+      - production
+      - debug
     ports:
       - "8088:8088"
     labels:
       prog: "aeshop"
-      type: "api"
     env_file:
       - ${ENV_FILE}
     volumes:
       - ./api/app:/code/app
       - shop_upload_volume:/code/app/public/uploads
-    depends_on:
-      - ae_shop_mariadb
     networks:
       - ae_shop_network
 
   ae_shop_mariadb:
+    image: mariadb:11.4.2-noble
     container_name: ae_shop_mariadb
     hostname: ae_shop_mariadb
     restart: unless-stopped
-    image: mariadb:11.4.2-noble
+    profiles:
+      - production
     labels:
       prog: "aeshop"
-      type: "database"
-    logging:
-      driver: none
     env_file:
       - ${ENV_FILE}
     volumes:
-      - /home/0.data/shop-database/mysql/data:/var/lib/mysql
-      - ./config/mysql/my.cnf:/etc/mysql/my.cnf:ro
+      - ${CONFIG_PATH}/shop-database/mysql/data:/var/lib/mysql
+      - ${CONFIG_PATH}/mysql/my.cnf:/etc/mysql/my.cnf:ro
     ports:
       - "3307:3307"
     networks:
@@ -97,20 +118,17 @@ services:
     image: phpmyadmin:5.2
     container_name: ae_shop_phpmyadmin
     hostname: ae_shop_pma
+    restart: unless-stopped
+    profiles:
+      - debug
     labels:
       prog: "aeshop"
-      type: "database"
-    restart: unless-stopped
-    logging:
-      driver: none
     volumes:
-      - ./config/mysql/custom-phpmyadmin.conf:/etc/apache2/conf-enabled/custom-phpmyadmin.conf:ro
+      - ${CONFIG_PATH}/mysql/custom-phpmyadmin.conf:/etc/apache2/conf-enabled/custom-phpmyadmin.conf:ro
     ports:
       - 8080:80
     env_file:
       - ${ENV_FILE}
-    depends_on:
-      - ae_shop_mariadb
     networks:
       - ae_shop_network
 
@@ -119,16 +137,18 @@ services:
       context: ./strapi
     container_name: ae_shop_strapi
     hostname: ae_shop_strapi
+    restart: unless-stopped
+    profiles:
+      - production
     labels:
       prog: "aeshop"
-      type: "strapi"
     env_file:
       - ${ENV_FILE}
     ports:
       - "1337:1337"
     volumes:
       - ./strapi:/srv/app
-      - /home/0.data/strapi-public:/srv/app/public
+      - ${CONFIG_PATH}/strapi-public:/srv/app/public
       - shop_upload_volume:/srv/app/public/uploads
     depends_on:
       - ae_shop_mariadb
@@ -144,11 +164,9 @@ networks:
 volumes:
   frontend_build_volume:
     labels:
-      build: "yes"
       prog: "aeshop"
   shop_frontend_node_modules_volume:
     labels:
-      build: "yes"
       prog: "aeshop"
   shop_upload_volume:
       external: true
