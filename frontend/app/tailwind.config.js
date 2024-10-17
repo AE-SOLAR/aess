@@ -18,6 +18,12 @@ module.exports = {
       lg: "1440px",
       // => @media (min-width: 1440px) { ... }
     },
+    backgroundImage: {
+      'block': 'url("/usr/src/app/src/static/images/backgrounds/block-bg.png")',
+      'circle': 'url("/usr/src/app/src/static/images/backgrounds/circles-bg.png")',
+      'inf0': 'url("/usr/src/app/src/static/images/backgrounds/info-bg.png")',
+      'panel-flower': 'url("/usr/src/app/src/static/images/backgrounds/panel-flower-bg.png")',
+    },
     extend: {
       colors: {
         brandRed: {
