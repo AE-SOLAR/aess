@@ -211,62 +211,49 @@ export default function HomePage() {
       </div>
 
       {/* Background Image Section */}
-      <div className={style.DownSection}
-        style={{
-          backgroundImage: `url("/static/images/homepage/homepage_img/Circles.png")`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          padding: '20px',
-          borderRadius: '8px',
-          color: 'white',
-          height: '100vh',
-        }}
-      >
-        <div className={style.SectionForm}
-         style={{
-            backgroundImage: `url("/static/images/homepage/homepage_img/FormBackground.png")`, 
-            backgroundSize: 'cover', 
-            backgroundPosition: 'center', 
-            backgroundRepeat: 'no-repeat', 
-            padding: '20px', 
-            borderRadius: '8px',
-            color: 'white',
-            height: '100vh',
- }}>
-         
-           <div className={style.DownBlock}>
-            <p>Subscribe to our newsletter</p>
-            <h1>Be always</h1>
-            <h1>in touch with us</h1>
-            <BrandInput className={style.BrandInput} value={subscibeCompany} setValue={setSubscibeCompany}>Company</BrandInput>
-            <BrandInput className={style.BrandInput} value={subscibeEmail} setValue={setSubscibeEmail}>Email</BrandInput>
-            <BrandButton>test</BrandButton>
+      <div className="flex flex-col w-full min-h-[100vh] h-full justify-center items-center bg-circle bg-cover bg-center bg-no-repeat p-20">
+        <div
+          className="flex flex-col min-w-[80vw] justify-center items-center bg-cover bg-center bg-no-repeat p-20 py-48 overflow-hidden backdrop-blur-sm"
+          style={{
+            borderRadius: "30px",
+            border: "2px solid rgba(100, 16, 16, .5)",
+            boxShadow: "0px 0px 75px rgba(100, 16, 16, .5)",
+          }}
+        >
+          <div className="flex flex-col gap-4">
+            <div
+              style={{
+                fontSize: "3rem",
+                lineHeight: "3rem",
+              }}
+            >
+              <span
+                style={{
+                  color: "red",
+                  fontSize: "1.5rem",
+                  lineHeight: "1.5rem",
+                  fontWeight: "900",
+                }}
+              >
+                Subscribe to our newsletter
+              </span>
+              <h1>Be always</h1>
+              <h1>in touch with us</h1>
+            </div>
+            <BrandInput
+              className={style.BrandInput}
+              value={subscibeCompany}
+              setValue={setSubscibeCompany}
+            >
+              Company
+            </BrandInput>
+            <BrandInput value={subscibeEmail} setValue={setSubscibeEmail}>
+              Email
+            </BrandInput>
+            <BrandButton>Subscribe newsleter</BrandButton>
           </div>
-        </div>
-        <div className={style.DownForm}>
-
         </div>
       </div>
     </>
   );
 }
-
-
-
-{/* style={{backgroundImage: `url("/static/images/homepage/homepage_img/FormBackground.png")
-// backgroundSize: 'cover',
-// backgroundPosition: 'center',
-// height: '30vh'
-// }}
-
-// style={{
-//   backgroundImage: `url("/static/images/homepage/homepage_img/Circles.png")`, 
-//   backgroundSize: 'cover', 
-//   backgroundPosition: 'center', 
-//   backgroundRepeat: 'no-repeat', 
-//   padding: '20px', 
-//   borderRadius: '8px',
-//   color: 'white', 
-//   height: '100vh',
-// }}> */}
