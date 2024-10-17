@@ -201,6 +201,13 @@
   text-align: center;
 }
 
+.DownSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .DownForm {
   display: flex;
   flex-direction: column;
@@ -209,7 +216,24 @@
   align-items: center;
   gap: 10px;
   border: 1px solid red;
-  
-
 }
+.SectionForm {
+  display: flex;                   
+  justify-content: center;         
+  align-items: center;             
+  flex-direction: column;          
+  height: 100vh;                   
+  background-image: url("/static/images/homepage/homepage_img/FormBackground.png"); 
+  background-size: cover;          
+  background-position: center;     
+  background-repeat: no-repeat;    
+  padding: 20px;                   
+  border-radius: 8px;              
+  color: white;                    
+}
+
+
+
+
+
 

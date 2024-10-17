@@ -11,127 +11,18 @@ import ButtonWithLine from "../../components/ButtonWithLine";
 import VideoButton from "../../components/VideoButton";
 import SolarPanelsSlider from "../../components/SolarPanelsSlider";
 import { BrandInput } from "../../components/Input";
+import BrandButton from "../../components/BrandButton";
 
 const slideImages = [
-  {
-    url: "/static/images/homepage/slider/horizon.svg",
-    route: "/product/panels?type=Horizon",
-    buttonText: "solar=panels=Horizon",
-  },
-  {
-    url: "/static/images/homepage/slider/terra.svg",
-    route: "/product/panels?type=Terra",
-    buttonText: "solar=panels=Terra",
-  },
-  {
-    url: "/static/images/homepage/slider/meteor.svg",
-    route: "/product/panels?type=Meteor",
-    buttonText: "solar=panels=Meteor",
-  },
-  {
-    url: "/static/images/homepage/slider/aurora.svg",
-    route: "/product/panels?type=Aurora",
-    buttonText: "solar=panels=Aurora",
-  },
-  {
-    url: "/static/images/homepage/slider/Comet.svg",
-    route: "/product/panels?type=Comet",
-    buttonText: "solar=panels=Comet",
-  },
-  {
-    url: "/static/images/homepage/slider/Neptune.svg",
-    route: "/product/panels?type=Neptune",
-    buttonText: "solar=panels=Neptune",
-  },
-  {
-    url: "/static/images/homepage/slider/shadestar.svg",
-    route: "/product/panels?type=ShadeStar",
-    buttonText: "solar=panels=ShadeStar",
-  },
+  // Слайды для слайдера
 ];
 
 const InstallationLocation = [
-  {
-    url: "/static/images/homepage/homepage_img/fields.png",
-    video: "/static/videos/homepage/fields.mp4",
-    text: "Fields",
-    route: "/Fields_panels",
-  },
-  {
-    url: "/static/images/homepage/homepage_img/house_roofs.png",
-    video: "/static/videos/homepage/house_roofs.mp4",
-    text: "House Roofs",
-    route: "/House_Roofs_panels",
-  },
-  {
-    url: "/static/images/homepage/homepage_img/car_ports.png",
-    video: "/static/videos/homepage/car_ports.mp4",
-    text: "Car Ports",
-    route: "/Car_Ports_panels",
-  },
-  {
-    url: "/static/images/homepage/homepage_img/building_rooftops.png",
-    video: "/static/videos/homepage/building_rooftops.mp4",
-    text: "Rooftops",
-    route: "/Building_Rooftops_panels",
-  },
-  {
-    url: "/static/images/homepage/homepage_img/fence.png",
-    video: "/static/videos/homepage/fence.mp4",
-    text: "Fence",
-    route: "/fence_panels",
-  },
+  // Локации для установки
 ];
 
 const DownSlider = [
-  {
-    url: "/static/images/homepage/DownSlider/aurora/aurora.mp4",
-    route: "/product/panels?type=Aurora",
-    buttonText: "solar=panels=Aurora",
-    sliderText: "AESOLAR TEXT",
-    sliderIcons: "/static/images/homepage/DownSlider/aurora/30.png",
-  },
-  {
-    url: "/static/images/homepage/DownSlider/comet/comet.mp4",
-    route: "/product/panels?type=Comet",
-    buttonText: "solar=panels=Comet",
-    sliderText: "AESOLAR TEXT",
-    sliderIcons: "/static/images/homepage/DownSlider/aurora/30.png",
-  },
-  {
-    url: "/static/images/homepage/DownSlider/horizon/horizon.mp4",
-    route: "/product/panels?type=Horizon",
-    buttonText: "solar=panels=Horizon",
-    sliderText: "AESOLAR TEXT",
-    sliderIcons: "/static/images/homepage/DownSlider/aurora/30.png",
-  },
-  {
-    url: "/static/images/homepage/DownSlider/meteor/meteor.mp4",
-    route: "/product/panels?type=Meteor",
-    buttonText: "solar=panels=Meteor",
-    sliderText: "AESOLAR TEXT",
-    sliderIcons: "/static/images/homepage/DownSlider/aurora/30.png",
-  },
-  {
-    url: "/static/images/homepage/DownSlider/neptune.mp4",
-    route: "/product/panels?type=Neptune",
-    buttonText: "solar=panels=Neptune",
-    sliderText: "AESOLAR TEXT",
-    sliderIcons: "/static/images/homepage/DownSlider/neptune.mp4",
-  },
-  {
-    url: "/static/images/homepage/DownSlider/shadestar/shadestar.mp4",
-    route: "/product/panels?type=ShadeStar",
-    buttonText: "solar=panels=ShadeStar",
-    sliderIcons: "/static/images/homepage/DownSlider/aurora/30.png",
-  },
-  {
-    url: "/static/images/homepage/DownSlider/terra/terra.mp4",
-    route: "/product/panels?type=Terra",
-    buttonText: "solar=panels=Terra",
-    sliderText: "AESOLAR TEXT",
-    sliderIcons: "/static/images/homepage/DownSlider/aurora/30.png",
-  },
+  // Слайды для нижнего слайдера
 ];
 
 export default function HomePage() {
@@ -209,8 +100,6 @@ export default function HomePage() {
           ))}
         </div>
       </div>
-
-      <SolarPanelsSlider />
 
       <div className={style.solarPanelsblock}>
         <div className={style.solarPanelsText}>
@@ -321,17 +210,63 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className={style.DownForm}>
-        <div className={style.DownBlock}>
-        <p>Subscribe to our newsletter</p>
-          <h1>Be always</h1>
-          <h1>in touch with us</h1>
-          <BrandInput value={subscibeCompany} setValue={setSubscibeCompany}>Company</BrandInput>
-          <BrandInput value={subscibeEmail} setValue={setSubscibeEmail}>Email</BrandInput>
+      {/* Background Image Section */}
+      <div className={style.DownSection}
+        style={{
+          backgroundImage: `url("/static/images/homepage/homepage_img/Circles.png")`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          padding: '20px',
+          borderRadius: '8px',
+          color: 'white',
+          height: '100vh',
+        }}
+      >
+        <div className={style.SectionForm}
+         style={{
+            backgroundImage: `url("/static/images/homepage/homepage_img/FormBackground.png")`, 
+            backgroundSize: 'cover', 
+            backgroundPosition: 'center', 
+            backgroundRepeat: 'no-repeat', 
+            padding: '20px', 
+            borderRadius: '8px',
+            color: 'white',
+            height: '100vh',
+ }}>
+         
+           <div className={style.DownBlock}>
+            <p>Subscribe to our newsletter</p>
+            <h1>Be always</h1>
+            <h1>in touch with us</h1>
+            <BrandInput className={style.BrandInput} value={subscibeCompany} setValue={setSubscibeCompany}>Company</BrandInput>
+            <BrandInput className={style.BrandInput} value={subscibeEmail} setValue={setSubscibeEmail}>Email</BrandInput>
+            <BrandButton>test</BrandButton>
+          </div>
+        </div>
+        <div className={style.DownForm}>
+
         </div>
       </div>
-
-
     </>
   );
 }
+
+
+
+{/* style={{backgroundImage: `url("/static/images/homepage/homepage_img/FormBackground.png")
+// backgroundSize: 'cover',
+// backgroundPosition: 'center',
+// height: '30vh'
+// }}
+
+// style={{
+//   backgroundImage: `url("/static/images/homepage/homepage_img/Circles.png")`, 
+//   backgroundSize: 'cover', 
+//   backgroundPosition: 'center', 
+//   backgroundRepeat: 'no-repeat', 
+//   padding: '20px', 
+//   borderRadius: '8px',
+//   color: 'white', 
+//   height: '100vh',
+// }}> */}
