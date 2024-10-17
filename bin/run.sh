@@ -2,8 +2,7 @@
 
 CLEAN_DOCKER() {
   echo "Cleaning Docker containers, images, and volumes"
-  export $(grep -v '^#' $ENV_FILE | xargs)
-  docker compose -f ./docker-compose.$COMPOSE_PROFILES down
+  docker compose -f ./docker-compose.yaml down
   docker container prune --filter "label=prog=aeshop" --force
   
   docker volume rm shop_frontend_node_modules_volume
@@ -24,11 +23,12 @@ else
   if [[ $HOMEDIR == "bin" ]]; then
     cd ..
   fi
+  RUNDIR="$(pwd)"
 
   DEMONIZE=""
   ACTION="up"
   CLEAN=false
-  COMPOSE_PROFILES="dev"
+  COMPOSE_PROFILES="debug"
   while [[ $# -gt 0 ]]; do
     case $1 in
     down)
@@ -55,11 +55,11 @@ else
       shift
       ;;
     -p | --production | --prod)
-      COMPOSE_PROFILES="prod"
+      COMPOSE_PROFILES="production"
       shift
       ;;
     -t | --development | --dev)
-      COMPOSE_PROFILES="dev"
+      COMPOSE_PROFILES="debug"
       shift
       ;;
     -b | --build)
@@ -73,29 +73,35 @@ else
     esac
   done
 
-  ENV_FILE="./config/.env.$COMPOSE_PROFILES"
-  UPLOADS_PATH="$RUNDIR/uploads"
-  if [[ $COMPOSE_PROFILES == "prod" ]]; then
-    ENV_FILE="/home/0.data/.env.$COMPOSE_PROFILES"
-    UPLOADS_PATH='/home/0.data/uploads'
+  if ($COMPOSE_PROFILES == "production"); then
+    echo "================== Running in production mode ======================"
+    CONFIG_PATH="/home/0.data"
+  else
+    echo "================== Running in development mode ======================"
+    CONFIG_PATH=$RUNDIR"/config"
   fi
+  export CONFIG_PATH
 
-  NGINX_CONFIG_FILE="./config/nginx/nginx.$COMPOSE_PROFILES.conf"
+  NGINX_CONFIG_FILE="$CONFIG_PATH/nginx/nginx.$COMPOSE_PROFILES.conf"
+  # export NGINX_CONFIG_FILE
 
-  export NGINX_CONFIG_FILE
+  ENV_FILE="$CONFIG_PATH/.env.$COMPOSE_PROFILES"
   export ENV_FILE
 
-  echo "================== Running with: ======================"
+  UPLOADS_PATH="$CONFIG_PATH/uploads"
+  export UPLOADS_PATH
+
+  echo "| RUNDIR: $RUNDIR"
   echo "| ACTION: $ACTION"
   echo "| COMPOSE_PROFILES: $COMPOSE_PROFILES"
   echo "| ENV_FILE: $ENV_FILE"
   echo "| NGINX_CONFIG_FILE: $NGINX_CONFIG_FILE"
   echo "| UPLOAD_PATH: $UPLOADS_PATH"
   echo "| DEMONIZE: $DEMONIZE"
-  echo "| RUNNING COMMAND: docker compose -f ./docker-compose.$COMPOSE_PROFILES --env-file $ENV_FILE --profile $COMPOSE_PROFILES up $BUILD $DEMONIZE"
+  echo "| RUNNING COMMAND: docker compose -f ./docker-compose.yaml --env-file '$ENV_FILE' --profile $COMPOSE_PROFILES up $BUILD $DEMONIZE"
 
   echo "| Stopping old Docker compose..."
-  docker compose -f ./docker-compose.$COMPOSE_PROFILES --env-file $ENV_FILE down
+  docker compose -f ./docker-compose.yaml --env-file "$ENV_FILE" --profile $COMPOSE_PROFILES down
   docker volume rm shop_upload_volume
 
   echo "| Creating Docker network 'ae_shop_network'"
@@ -110,7 +116,11 @@ else
 
   if [[ $ACTION == "up" ]]; then
     echo "| Running Docker compose..."
-    docker compose -f docker-compose.$COMPOSE_PROFILES --env-file $ENV_FILE --profile $COMPOSE_PROFILES up $BUILD $DEMONIZE
+    docker compose -f docker-compose.yaml --env-file "$ENV_FILE" --profile $COMPOSE_PROFILES up $BUILD $DEMONIZE
+    if [[ $DEMONIZE == "-d" ]]; then
+      echo "| Cleaning unsued Docker images and containers"
+      docker system pruce -a --force
+    fi
   fi
   echo "======================= Done =========================="
 fi

@@ -1,5 +1,4 @@
 import React from "react";
-import "./sale.css";
 
 const SalePage = () => {
   return (

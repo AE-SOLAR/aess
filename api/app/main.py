@@ -3,14 +3,13 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import goods, root, user
 
-
 app = FastAPI(root_path="/api/v1")
 
 origins = [
-    "https://devshop.ae-solar.com/",
-    "https://shop.ae-solar.com/",
-    "http://localhost/",
-    "http://localhost:3000/",
+    "https://devshop.ae-solar.com",
+    "https://shop.ae-solar.com",
+    "http://localhost",
+    "http://localhost:3000",
 ]
 app.add_middleware(
     CORSMiddleware,
