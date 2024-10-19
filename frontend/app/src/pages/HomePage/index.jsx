@@ -234,7 +234,6 @@ export default function HomePage() {
             color: 'white',
             height: '100vh',
  }}>
-         
            <div className={style.DownBlock}>
             <p>Subscribe to our newsletter</p>
             <h1>Be always</h1>

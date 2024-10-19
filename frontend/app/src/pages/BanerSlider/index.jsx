@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Fade } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
-import style from "./index.module.css"; // Ensure this CSS module exists
+import style from "./index.module.css"; 
 
 const slideImages = [
   {
